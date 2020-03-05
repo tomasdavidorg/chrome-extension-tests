@@ -1,0 +1,8 @@
+{
+  "name": "chrome-extension-tests",
+  "version": "1.0.0",
+  "description": "Kogito Google Chrome extension tests",
+  "keywords": ["kogito"],
+  "author": "Tomas David",
+  "license": "Apache-2.0"
+}
