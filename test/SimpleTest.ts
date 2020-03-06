@@ -27,7 +27,7 @@ describe("Simple test", () => {
     });
 */
 
-    it("should test", async () => {
+    it("should test", () => {
         const chromeExtensionPath = process.env.CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
             throw new Error("Please set CHROME_EXTENSION_PATH variable to unziped chrome extension directory.");
@@ -36,22 +36,22 @@ describe("Simple test", () => {
         let chromeOptions = new Options();
         chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
 
-        let driver = await new Builder()
+        let driver =  new Builder()
             .setChromeOptions(chromeOptions)
             .forBrowser(Browser.CHROME)
             .withCapabilities(Capabilities.chrome())
             .build();
 
-            await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
-            await driver.findElement(By.linkText("evaluation.bpmn")).click();
+             driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
+             driver.findElement(By.linkText("evaluation.bpmn")).click();
 
-        let kogitoFrame =  await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
-        await driver.switchTo().frame(kogitoFrame);
+        let kogitoFrame =   driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
+         driver.switchTo().frame(kogitoFrame);
 
-        await  driver.wait(until.elementLocated(By.className("fa-eye")), 30000);
+          driver.wait(until.elementLocated(By.className("fa-eye")), 30000);
 
-        await driver.switchTo().defaultContent();
-        await driver.quit();
+         driver.switchTo().defaultContent();
+         driver.quit();
 
     }).timeout(60000);
 /*
