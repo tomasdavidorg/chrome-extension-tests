@@ -7,17 +7,17 @@ describe("Simple test", () => {
     let driver: ThenableWebDriver;
 
     before(() => {
-        const chromeExtensionPath = process.env.CHROME_EXTENSION_PATH;
+      /*  const chromeExtensionPath = process.env.CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
             throw new Error("Please set CHROME_EXTENSION_PATH variable to unziped chrome extension directory.");
         }
 
         let chromeOptions = new Options();
         chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
-
+*/
         // initializing chrome driver
         driver = new Builder()
-            .setChromeOptions(chromeOptions)
+        //    .setChromeOptions(chromeOptions)
             .forBrowser(Browser.CHROME)
             .withCapabilities(Capabilities.chrome())
             .build();
