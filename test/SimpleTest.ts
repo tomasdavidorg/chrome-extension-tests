@@ -41,11 +41,11 @@ describe("Simple test", () => {
         await driver.switchTo().defaultContent();
     }).timeout(100000);
 
-    after(async () => {
-        await driver.takeScreenshot().then((image) => {
+    after(() => {
+        driver.takeScreenshot().then((image) => {
             fs.writeFileSync("screenshot.png", image, "base64")
         })
 
-        await driver.quit();
-    })
+        driver.quit();
+    });
 })
