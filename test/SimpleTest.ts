@@ -27,10 +27,10 @@ describe("Simple test", () => {
 */
 
     it("should test", async () => {
-        const chromeExtensionPath = process.env.CHROME_EXTENSION_PATH;
-        if (!chromeExtensionPath) {
-            throw new Error("Please set CHROME_EXTENSION_PATH variable to unziped chrome extension directory.");
-        }
+     //   const chromeExtensionPath = process.env.CHROME_EXTENSION_PATH;
+     //   if (!chromeExtensionPath) {
+     //       throw new Error("Please set CHROME_EXTENSION_PATH variable to unziped chrome extension directory.");
+     //  }
 
        // let chromeOptions = new Options();
        // chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox", "--disable-dev-shm-usage")
