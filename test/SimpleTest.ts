@@ -1,10 +1,10 @@
-import { ThenableWebDriver, Browser, Builder, Capabilities, By, until, WebElement } from 'selenium-webdriver';
+import { WebDriver, Browser, Builder, Capabilities, By, until, WebElement } from 'selenium-webdriver';
 import { Options } from "selenium-webdriver/chrome";
 import * as fs from "fs";
 
 describe("Simple test", () => {
 
-    let driver: ThenableWebDriver;
+    let driver: WebDriver;
 
     before(async() => {
         // get path to unzipped extension
@@ -18,7 +18,7 @@ describe("Simple test", () => {
         chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
 
         // initializing chrome driver
-        driver = new Builder()
+        driver = await new Builder()
             .setChromeOptions(chromeOptions)
             .forBrowser(Browser.CHROME)
             .withCapabilities(Capabilities.chrome())
