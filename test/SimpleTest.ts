@@ -6,7 +6,7 @@ describe("Simple test", () => {
 
     let driver: ThenableWebDriver;
 
-    before(() => {
+    before(async() => {
         // get path to unzipped extension
         const chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
@@ -25,7 +25,7 @@ describe("Simple test", () => {
             .build();
 
         // maximizing chrome browser
-        driver.manage().window().maximize();
+        await driver.manage().window().maximize();
     });
 
 
@@ -41,11 +41,11 @@ describe("Simple test", () => {
         await driver.switchTo().defaultContent();
     }).timeout(100000);
 
-    after(() => {
-        driver.takeScreenshot().then((image) => {
+    after(async() => {
+        await driver.takeScreenshot().then((image) => {
             fs.writeFileSync("screenshot.png", image, "base64")
         })
 
-        driver.quit();
+        await driver.quit();
     });
 })
