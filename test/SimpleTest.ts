@@ -27,16 +27,15 @@ describe("Simple test", () => {
 */
 
     it("should test", async () => {
-     //   const chromeExtensionPath = process.env.CHROME_EXTENSION_PATH;
-     //   if (!chromeExtensionPath) {
-     //       throw new Error("Please set CHROME_EXTENSION_PATH variable to unziped chrome extension directory.");
-     //  }
+        const chromeExtensionPath = process.env.CHROME_EXTENSION_PATH;
+        if (!chromeExtensionPath) {
+            throw new Error("Please set CHROME_EXTENSION_PATH variable to unziped chrome extension directory.");
+       }
 
-       // let chromeOptions = new Options();
-       // chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox", "--disable-dev-shm-usage")
-        try {
+        let chromeOptions = new Options();
+        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
         let driver = await new Builder()
-        //    .setChromeOptions(chromeOptions)
+            .setChromeOptions(chromeOptions)
             .forBrowser(Browser.CHROME)
             .withCapabilities(Capabilities.chrome())
             .build();
@@ -51,9 +50,6 @@ describe("Simple test", () => {
 
         await driver.switchTo().defaultContent();
         await driver.quit();
-        } catch (err) {
-            console.error('Something went wrong!\n', err.stack, '\n');
-        }
 
     }).timeout(60000);
 /*
