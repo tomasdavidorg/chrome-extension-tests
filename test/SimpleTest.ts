@@ -36,7 +36,7 @@ describe("Simple test", () => {
         let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
         await driver.switchTo().frame(kogitoFrame);
 
-        await driver.wait(until.elementLocated(By.className("fa-eye")), 2);
+        await driver.wait(until.elementLocated(By.className("fa-eye")), 50000);
 
         await driver.switchTo().defaultContent();
     })
