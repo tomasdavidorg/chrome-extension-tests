@@ -1,7 +1,6 @@
 import { ThenableWebDriver, Browser, Builder, Capabilities, By, until, WebElement } from 'selenium-webdriver';
 import { Options } from "selenium-webdriver/chrome";
 import * as fs from "fs";
-import * as neco from "buffer"
 
 describe("Simple test", () => {
 

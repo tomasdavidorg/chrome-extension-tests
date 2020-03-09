@@ -1,2 +1,5 @@
 package-lock.json
 node_modules
+screenshot.png
+dist
+tmp
