@@ -28,7 +28,7 @@ jobs:
       - name: Run tests
         env:
           DISPLAY: ":99.0"
-          UNZIPPED_CHROME_EXTENSION_PATH: "dist"
+          UNZIPPED_CHROME_EXTENSION_PATH: "${{ github.workspace }}/dist"
         run: npm test
 
       - name: Archive png screenshot
