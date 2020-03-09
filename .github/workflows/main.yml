@@ -28,7 +28,7 @@ jobs:
       - name: Test
         env:
           UNZIPPED_CHROME_EXTENSION_PATH: "${{ github.workspace }}/dist"
-        run: echo "${{ github.workspace }}/dist"
+        run: echo ${{ github.workspace }}+/dist
 
       - name: Run tests
         env:
