@@ -33,7 +33,7 @@ describe("Simple test", () => {
         }
 
         let chromeOptions = new Options();
-        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox")
+        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox", "--disable-dev-shm-usage")
         
         let driver = await new Builder()
             .setChromeOptions(chromeOptions)
