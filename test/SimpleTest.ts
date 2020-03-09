@@ -39,7 +39,7 @@ describe("Simple test", () => {
         await driver.wait(until.elementLocated(By.className("fa-eye")), 50000);
 
         await driver.switchTo().defaultContent();
-    }).timeout(100000);
+    })
 
     after(async() => {
         await driver.takeScreenshot().then((image) => {
