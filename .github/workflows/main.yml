@@ -13,9 +13,6 @@ jobs:
 
       - name: Unzip extension
         run: unzip tmp/chrome_extension_kogito_kie_editors_0.2.8.zip
-        
-      - name: Test env prop
-        run: chromedriver
 
       - name: Start Xvfb
         run: /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
