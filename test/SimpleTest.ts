@@ -51,7 +51,7 @@ describe("Simple test", () => {
         await driver.switchTo().defaultContent();
         await driver.quit();
 
-    }).timeout(60000);
+    }).timeout(100000);
 /*
     after(() => {
         if (driver != undefined) {
