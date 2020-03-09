@@ -32,11 +32,11 @@ describe("Simple test", () => {
             throw new Error("Please set CHROME_EXTENSION_PATH variable to unziped chrome extension directory.");
         }
 
-        let chromeOptions = new Options();
-        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox", "--disable-dev-shm-usage")
+       // let chromeOptions = new Options();
+       // chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox", "--disable-dev-shm-usage")
         
         let driver = await new Builder()
-            .setChromeOptions(chromeOptions)
+        //    .setChromeOptions(chromeOptions)
             .forBrowser(Browser.CHROME)
             .withCapabilities(Capabilities.chrome())
             .build();
