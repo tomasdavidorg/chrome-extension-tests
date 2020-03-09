@@ -34,7 +34,7 @@ describe("Simple test", () => {
 
        // let chromeOptions = new Options();
        // chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox", "--disable-dev-shm-usage")
-        
+        try {
         let driver = await new Builder()
         //    .setChromeOptions(chromeOptions)
             .forBrowser(Browser.CHROME)
@@ -51,6 +51,9 @@ describe("Simple test", () => {
 
         await driver.switchTo().defaultContent();
         await driver.quit();
+        } catch (err) {
+            console.error('Something went wrong!\n', err.stack, '\n');
+        }
 
     }).timeout(60000);
 /*
