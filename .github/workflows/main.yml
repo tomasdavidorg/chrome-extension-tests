@@ -32,6 +32,7 @@ jobs:
         run: npm test
 
       - name: Archive png screenshot
+        if: always()
         uses: actions/upload-artifact@v1
         with:
           name: screenshots-${{ matrix.os }}
