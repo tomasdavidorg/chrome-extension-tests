@@ -33,7 +33,7 @@ describe("Simple test", () => {
        }
 
         let chromeOptions = new Options();
-        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--remote-debugging-port=9222")
+        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--remote-debugging-port=9515")
         let driver = await new Builder()
             .setChromeOptions(chromeOptions)
             .forBrowser(Browser.CHROME)
