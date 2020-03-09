@@ -28,5 +28,4 @@ jobs:
       - name: Run tests
         env:
           CHROME_EXTENSION_PATH: "dist"
-          SELENIUM_PROMISE_MANAGER: "0"
         run: npm test

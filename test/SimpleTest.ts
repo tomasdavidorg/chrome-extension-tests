@@ -1,7 +1,6 @@
 import { ThenableWebDriver, Browser, Builder, Capabilities, By, until, WebElement } from 'selenium-webdriver';
 import { Options } from "selenium-webdriver/chrome";
 
-
 describe("Simple test", () => {
 
  /*   let driver: ThenableWebDriver;
@@ -34,7 +33,7 @@ describe("Simple test", () => {
         }
 
         let chromeOptions = new Options();
-        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
+        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath, "--no-sandbox")
         
         let driver = await new Builder()
             .setChromeOptions(chromeOptions)
