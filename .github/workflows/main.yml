@@ -30,3 +30,9 @@ jobs:
           DISPLAY: ":99.0"
           UNZIPPED_CHROME_EXTENSION_PATH: "dist"
         run: npm test
+
+      - name: Archive png screenshot
+        uses: actions/upload-artifact@v1
+        with:
+          name: screenshots-${{ matrix.os }}
+          path: target/screenshot.png

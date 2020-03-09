@@ -1,5 +1,7 @@
 import { ThenableWebDriver, Browser, Builder, Capabilities, By, until, WebElement } from 'selenium-webdriver';
 import { Options } from "selenium-webdriver/chrome";
+import * as fs from "fs";
+import * as neco from "buffer"
 
 describe("Simple test", () => {
 
@@ -38,14 +40,13 @@ describe("Simple test", () => {
         await driver.wait(until.elementLocated(By.className("fa-eye")), 30000);
 
         await driver.switchTo().defaultContent();
-        await driver.quit();
-
     }).timeout(100000);
 
-    after(() => {
-        if (driver != undefined) {
-            driver.quit();
-        }
-    });
+    after(async () => {
+        await driver.takeScreenshot().then((image) => {
+            fs.writeFileSync("screenshot.png", image, "base64")
+        })
 
+        await driver.quit();
+    })
 })
