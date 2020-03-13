@@ -20,7 +20,6 @@ describe("Simple test", () => {
         // initializing chrome driver
         driver = await new Builder()
             .setChromeOptions(chromeOptions)
-            .forBrowser(Browser.CHROME)
             .withCapabilities(Capabilities.chrome())
             .build();
 
