@@ -43,6 +43,8 @@ describe("Simple test", () => {
     })
 
     after(async() => {
+        await driver.switchTo().defaultContent();
+
         if (!fs.existsSync("screenshots")) {
             fs.mkdirSync("screenshots");
         }
