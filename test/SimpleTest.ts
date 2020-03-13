@@ -43,6 +43,7 @@ describe("Simple test", () => {
     })
 
     after(async() => {
+        fs.mkdirSync("screenshots");
         let pageSource = await driver.getPageSource()
         fs.writeFileSync("screenshots/screenshot.html", pageSource, "utf8");
 
