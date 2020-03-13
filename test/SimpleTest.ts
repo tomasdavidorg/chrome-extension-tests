@@ -43,8 +43,11 @@ describe("Simple test", () => {
     })
 
     after(async() => {
+        let pageSource = await driver.getPageSource()
+        fs.writeFileSync("screenshots/screenshot.html", pageSource, "utf8");
+
         await driver.takeScreenshot().then((image) => {
-            fs.writeFileSync("screenshot.png", image, "base64")
+            fs.writeFileSync("screenshots/screenshot.png", image, "base64");
         })
 
         await driver.quit();
