@@ -33,6 +33,8 @@ describe("Simple test", () => {
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
         let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
+        await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
+
         await driver.switchTo().frame(kogitoFrame);
 
         await driver.wait(until.elementLocated(By.className("fa-eye")), 50000);
