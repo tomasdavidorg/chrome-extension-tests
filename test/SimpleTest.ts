@@ -43,7 +43,9 @@ describe("Simple test", () => {
     })
 
     after(async() => {
-        fs.mkdirSync("screenshots");
+        if (!fs.existsSync("screenshots")) {
+            fs.mkdirSync("screenshots");
+        }
         let pageSource = await driver.getPageSource()
         fs.writeFileSync("screenshots/screenshot.html", pageSource, "utf8");
 
