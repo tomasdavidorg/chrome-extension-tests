@@ -1,6 +1,7 @@
 import { WebDriver, Browser, Builder, Capabilities, By, until, WebElement } from 'selenium-webdriver';
 import { Options } from "selenium-webdriver/chrome";
 import * as fs from "fs";
+import { performance } from 'perf_hooks';
 
 describe("Simple test", () => {
 
@@ -40,7 +41,10 @@ describe("Simple test", () => {
 
         await driver.switchTo().frame(kogitoFrame);
 
-        await driver.wait(until.elementLocated(By.className("fa-eye")), 200000);
+        let startTime = performance.now();
+        await driver.wait(until.elementLocated(By.className("fa-eye")), 300000);
+        let endTime = performance.now();
+        console.log("Plugin was loaded in " + (endTime - startTime));
 
         await driver.switchTo().defaultContent();
     })
