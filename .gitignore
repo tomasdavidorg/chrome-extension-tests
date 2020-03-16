@@ -2,3 +2,5 @@ package-lock.json
 node_modules
 screenshots
 dist
+chrome-extension.crx
+key.pem

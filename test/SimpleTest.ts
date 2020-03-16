@@ -8,14 +8,17 @@ describe("Simple test", () => {
 
     before(async() => {
         // get path to unzipped extension
-        const chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
+        const chromeExtensionPath = process.env.CHROME_EXTENSION_CRX;
         if (!chromeExtensionPath) {
             throw new Error("Please set UNZIPPED_CHROME_EXTENSION_PATH variable to unziped Chrome extension directory.");
         }
 
         // init chrome options
         let chromeOptions = new Options();
-        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
+        //chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
+        let chromeExtensionFile = fs.readFileSync(chromeExtensionPath);
+        
+        chromeOptions.addExtensions(new Buffer(chromeExtensionFile).toString("base64"));
 
         // initializing chrome driver
         driver = await new Builder()
