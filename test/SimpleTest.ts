@@ -22,7 +22,7 @@ describe("Simple test", () => {
 
         // initializing chrome driver
         driver = await new Builder()
-            .withCapabilities(Capabilities.chrome())7
+            .withCapabilities(Capabilities.chrome())
             .setChromeOptions(chromeOptions)
             .build();
 
