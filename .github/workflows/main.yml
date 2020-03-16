@@ -29,7 +29,7 @@ jobs:
       - name: Run tests
         env:
           DISPLAY: ":99.0"
-          CHROME_EXTENSION_CRX: ${{ github.workspace }}/chrome-extension.crx
+          UNZIPPED_CHROME_EXTENSION_PATH: ${{ github.workspace }}/dist
         run: npm test
 
       - name: Archive png screenshot
