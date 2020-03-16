@@ -37,23 +37,23 @@ describe("Simple test", () => {
     it("should test", async () => {
         await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
 
-        await delay(2000);
-
         await driver.takeScreenshot().then((image) => {
             fs.writeFileSync("screenshots/screenshot-list.png", image, "base64");
         })
 
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
-        let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
+        let seeAsSourceButton = await driver.wait(until.elementLocated(By.xpath("//button[@data-testid='see-as-source-button']")), 2000);
 
-        await delay(2000);
+        await driver.wait(until.elementIsEnabled(seeAsSourceButton), 25000);
+
+        let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
 
         await driver.takeScreenshot().then((image) => {
             fs.writeFileSync("screenshots/screenshot-editor.png", image, "base64");
         })
 
-        await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
+        //await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
 
         await driver.switchTo().frame(kogitoFrame);
 
