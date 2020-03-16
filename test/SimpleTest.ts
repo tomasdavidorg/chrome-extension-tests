@@ -19,6 +19,7 @@ describe("Simple test", () => {
         let chromeExtensionFile = fs.readFileSync(chromeExtensionPath);
         
         chromeOptions.addExtensions(Buffer.from(chromeExtensionFile).toString("base64"));
+        chromeOptions.addArguments("--headless");
 
         // initializing chrome driver
         driver = await new Builder()
