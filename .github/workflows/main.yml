@@ -35,7 +35,7 @@ jobs:
         env:
       #    DISPLAY: ":99.0"
           CHROME_EXTENSION_CRX: ${{ github.workspace }}/chrome-extension.crx
-        run: npm test
+        run: xvfb-run --auto-servernum npm test
 
       - name: Archive png screenshot
         if: always()

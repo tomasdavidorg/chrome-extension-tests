@@ -11,7 +11,7 @@ describe("Simple test", () => {
         // get path to unzipped extension
         const chromeExtensionPath = process.env.CHROME_EXTENSION_CRX;
         if (!chromeExtensionPath) {
-            throw new Error("Please set UNZIPPED_CHROME_EXTENSION_PATH variable to unziped Chrome extension directory.");
+            throw new Error("Please set CHROME_EXTENSION_CRX variable to unziped Chrome extension directory.");
         }
 
         // init chrome options
