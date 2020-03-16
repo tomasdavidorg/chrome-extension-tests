@@ -18,7 +18,7 @@ describe("Simple test", () => {
         //chromeOptions.addArguments("--load-extension=" + chromeExtensionPath)
         let chromeExtensionFile = fs.readFileSync(chromeExtensionPath);
         
-        chromeOptions.addExtensions(new Buffer(chromeExtensionFile).toString("base64"));
+        chromeOptions.addExtensions(Buffer.from(chromeExtensionFile).toString("base64"));
 
         // initializing chrome driver
         driver = await new Builder()
