@@ -17,14 +17,8 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Install crx tool
-        run: npm install crx
-
       - name: Unzip extension
         run: unzip tmp/chrome_extension_kogito_kie_editors_0.2.9.zip
-
-      - name: Pack extension to crx
-        run: npx crx pack dist -o chrome-extension.crx
 
       - name: Start Xvfb
         run: /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
