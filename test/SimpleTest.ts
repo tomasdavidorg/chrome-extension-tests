@@ -27,6 +27,10 @@ describe("Simple test", () => {
 
         // maximizing chrome browser
          await driver.manage().window().maximize();
+
+        if (!fs.existsSync("screenshots")) {
+            fs.mkdirSync("screenshots");
+        }
     });
 
 
@@ -34,11 +38,20 @@ describe("Simple test", () => {
         await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
 
         await delay(2000);
+
+        await driver.takeScreenshot().then((image) => {
+            fs.writeFileSync("screenshots/screenshot-list.png", image, "base64");
+        })
+
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
         let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
 
         await delay(2000);
+
+        await driver.takeScreenshot().then((image) => {
+            fs.writeFileSync("screenshots/screenshot-editor.png", image, "base64");
+        })
 
         await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
 
@@ -55,9 +68,6 @@ describe("Simple test", () => {
     after(async() => {
         await driver.switchTo().defaultContent();
 
-        if (!fs.existsSync("screenshots")) {
-            fs.mkdirSync("screenshots");
-        }
         let pageSource = await driver.getPageSource()
         fs.writeFileSync("screenshots/screenshot.html", pageSource, "utf8");
 
