@@ -32,15 +32,20 @@ describe("Simple test", () => {
 
     it("should test", async () => {
         await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
+
+        await delay(2000);
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
         let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
+
+        await delay(2000);
+
         await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
 
         await driver.switchTo().frame(kogitoFrame);
 
         let startTime = performance.now();
-        await driver.wait(until.elementLocated(By.className("fa-eye")), 300000);
+        await driver.wait(until.elementLocated(By.className("fa-eye")), 25000);
         let endTime = performance.now();
         console.log("Plugin was loaded in " + (endTime - startTime));
 
@@ -62,4 +67,8 @@ describe("Simple test", () => {
 
         await driver.quit();
     });
+
+    function delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
 })
