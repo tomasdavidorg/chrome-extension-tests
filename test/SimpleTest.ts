@@ -20,12 +20,13 @@ describe("Simple test", () => {
 
         // initializing chrome driver
         driver = await new Builder()
-            .withCapabilities(Capabilities.chrome())
+            //.withCapabilities(Capabilities.chrome())
+            .forBrowser('chrome')
             .setChromeOptions(chromeOptions)
             .build();
 
         // maximizing chrome browser
-        // await driver.manage().window().maximize();
+         await driver.manage().window().maximize();
     });
 
 
