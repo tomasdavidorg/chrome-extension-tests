@@ -12,7 +12,7 @@
   "author": "Tomas David",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "mocha --timeout 300000 -r ts-node/register test/**/*.ts"
+    "test": "mocha --no-timeout -r ts-node/register test/**/*.ts"
   },
   "directories": {
     "test": "./test"
