@@ -53,7 +53,7 @@ describe("Simple test", () => {
             fs.writeFileSync("screenshots/screenshot-editor.png", image, "base64");
         })
 
-        //await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
+        await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
 
         await driver.switchTo().frame(kogitoFrame);
 
