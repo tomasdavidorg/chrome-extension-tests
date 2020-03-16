@@ -40,7 +40,7 @@ describe("Simple test", () => {
 
         await driver.switchTo().frame(kogitoFrame);
 
-        await driver.wait(until.elementLocated(By.className("fa-eye")), 100000);
+        await driver.wait(until.elementLocated(By.className("fa-eye")), 30000);
 
         await driver.switchTo().defaultContent();
     })
