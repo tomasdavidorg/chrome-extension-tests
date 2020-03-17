@@ -39,7 +39,7 @@ describe("Simple test", () => {
 // wait until editor is loaded
 console.log("Start:" + performance.now());
 
-await delay(60000);
+await delay(120000);
 console.log("End:" + performance.now());
         await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
@@ -62,8 +62,7 @@ console.log("End:" + performance.now());
         
 
         let startTime = performance.now();
-        let icon = await driver.wait(until.elementLocated(By.className("fa-eye")), 25000);
-        await icon.click();
+        await driver.wait(until.elementLocated(By.className("fa-eye")), 25000);
         let endTime = performance.now();
         console.log("Plugin was loaded in " + (endTime - startTime));
         delay(5000)
