@@ -26,7 +26,7 @@ describe("Simple test", () => {
             .build();
 
         // maximizing chrome browser
-         await driver.manage().window().maximize();
+        await driver.manage().window().maximize();
 
         if (!fs.existsSync("screenshots")) {
             fs.mkdirSync("screenshots");
@@ -36,6 +36,8 @@ describe("Simple test", () => {
 
     it("should test", async () => {
         await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
+
+        await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
         await driver.takeScreenshot().then((image) => {
             fs.writeFileSync("screenshots/screenshot-list.png", image, "base64");
