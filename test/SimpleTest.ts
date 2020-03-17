@@ -35,12 +35,13 @@ describe("Simple test", () => {
 
 
     it("should test", async () => {
-        await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
-// wait until editor is loaded
+        // wait until editor is loaded
 console.log("Start:" + performance.now());
-
 await delay(120000);
 console.log("End:" + performance.now());
+
+        await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
+
         await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
