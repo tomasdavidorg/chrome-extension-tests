@@ -40,10 +40,12 @@ describe("Simple test", () => {
         await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
+        // wait until editor is loaded
+        await delay(60000);
 
         let seeAsSourceButton = await driver.wait(until.elementLocated(By.xpath("//button[@data-testid='see-as-source-button']")), 2000);
-        // wait until editor is loadeded
-        await delay(25000);
+  
+   
 
         await driver.wait(until.elementIsEnabled(seeAsSourceButton), 25000);
 
