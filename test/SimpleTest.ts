@@ -42,8 +42,9 @@ describe("Simple test", () => {
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
         let seeAsSourceButton = await driver.wait(until.elementLocated(By.xpath("//button[@data-testid='see-as-source-button']")), 2000);
+        // wait until editor is loadeded
+        await delay(25000);
 
-        // wait until editor is loaded
         await driver.wait(until.elementIsEnabled(seeAsSourceButton), 25000);
 
         let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 5000);
