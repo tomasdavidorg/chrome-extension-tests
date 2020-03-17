@@ -62,7 +62,8 @@ console.log("End:" + performance.now());
         
 
         let startTime = performance.now();
-        await driver.wait(until.elementLocated(By.className("fa-eye")), 25000);
+        let icon = await driver.wait(until.elementLocated(By.className("fa-eye")), 25000);
+        await icon.click();
         let endTime = performance.now();
         console.log("Plugin was loaded in " + (endTime - startTime));
         delay(5000)
