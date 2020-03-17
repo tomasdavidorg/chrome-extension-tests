@@ -39,31 +39,28 @@ describe("Simple test", () => {
 
         await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
-        await driver.takeScreenshot().then((image) => {
-            fs.writeFileSync("screenshots/screenshot-list.png", image, "base64");
-        })
-
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
         let seeAsSourceButton = await driver.wait(until.elementLocated(By.xpath("//button[@data-testid='see-as-source-button']")), 2000);
 
+        // wait until editor is loaded
         await driver.wait(until.elementIsEnabled(seeAsSourceButton), 25000);
 
-        let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 2000);
-
-        await driver.takeScreenshot().then((image) => {
-            fs.writeFileSync("screenshots/screenshot-editor.png", image, "base64");
-        })
+        let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 5000);
 
        // await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
 
         await driver.switchTo().frame(kogitoFrame);
 
+        let pageSource = await driver.getPageSource()
+        
+
         let startTime = performance.now();
         await driver.wait(until.elementLocated(By.className("fa-eye")), 25000);
         let endTime = performance.now();
         console.log("Plugin was loaded in " + (endTime - startTime));
-
+        delay(5000)
+        fs.writeFileSync("screenshots/screenshot-frame.html", pageSource, "utf8");
         await driver.switchTo().defaultContent();
     })
 
