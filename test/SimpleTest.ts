@@ -55,7 +55,7 @@ console.log("End:" + performance.now());
 
         let kogitoFrame = await driver.wait(until.elementLocated(By.className("kogito-iframe")), 5000);
 
-       // await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
+        await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
 
         await driver.switchTo().frame(kogitoFrame);
 
