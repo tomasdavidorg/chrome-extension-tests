@@ -7,7 +7,7 @@ describe("Simple test", () => {
 
     let driver: WebDriver;
 
-    before(async() => {
+    beforeEach(async() => {
         // get path to unzipped extension
         const chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
@@ -71,7 +71,7 @@ console.log("End:" + performance.now());
         await driver.switchTo().defaultContent();
     })
 
-    after(async() => {
+    afterEach(async() => {
         await driver.switchTo().defaultContent();
 
         let pageSource = await driver.getPageSource()
