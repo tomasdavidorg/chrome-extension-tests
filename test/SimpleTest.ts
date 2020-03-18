@@ -56,8 +56,6 @@ describe("Simple test", () => {
 
         console.log("Plugin was loaded in " + (endTime - startTime));
 
-        delay(5000)
-        fs.writeFileSync("screenshots/screenshot-frame.html", pageSource, "utf8");
         await driver.switchTo().defaultContent();
     })
 
