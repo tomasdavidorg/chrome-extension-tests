@@ -1,4 +1,5 @@
 import { WebDriver, Builder, Capabilities, By, until } from 'selenium-webdriver';
+import { ServiceBuilder } from 'selenium-webdriver/chrome'
 import { Options } from "selenium-webdriver/chrome";
 import * as fs from "fs";
 import { performance } from 'perf_hooks';
@@ -19,9 +20,14 @@ describe("Simple test", () => {
         let chromeOptions = new Options();
         chromeOptions.addArguments("--load-extension=" + chromeExtensionPath);
 
+        let chromeServiceBuilder = new ServiceBuilder();
+        
+        chromeServiceBuilder.loggingTo("chromedriver.log").enableVerboseLogging()
+
         // initializing chrome driver
         driver = await new Builder()
             .withCapabilities(Capabilities.chrome())
+            .setChromeService(chromeServiceBuilder)
             .forBrowser('chrome')
             .setChromeOptions(chromeOptions)
             .build();
