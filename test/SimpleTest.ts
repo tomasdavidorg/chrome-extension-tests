@@ -3,10 +3,12 @@ import { ServiceBuilder } from 'selenium-webdriver/chrome'
 import { Options } from "selenium-webdriver/chrome";
 import * as fs from "fs";
 import { performance } from 'perf_hooks';
+import { Screenshots } from "./Screenshots"
 
 describe("Simple test", () => {
 
     let driver: WebDriver;
+    let screenshots: Screenshots
 
     beforeEach(async () => {
         // get path to unzipped extension
@@ -31,6 +33,8 @@ describe("Simple test", () => {
             .forBrowser('chrome')
             .setChromeOptions(chromeOptions)
             .build();
+
+            screenshots = new Screenshots(driver, "screenshots");
 
         // maximizing chrome browser
         await driver.manage().window().maximize();
@@ -66,18 +70,9 @@ describe("Simple test", () => {
     })
 
     afterEach(async () => {
-        if (!fs.existsSync("screenshots")) {
-            fs.mkdirSync("screenshots");
-        }
-
         await driver.switchTo().defaultContent();
-
-        let pageSource = await driver.getPageSource()
-        fs.writeFileSync("screenshots/screenshot.html", pageSource, "utf8");
-
-        await driver.takeScreenshot().then((image) => {
-            fs.writeFileSync("screenshots/screenshot.png", image, "base64");
-        })
+        await screenshots.takeHtml("screenshot_after_test");
+        await screenshots.takePng("screenshot_after_test");
 
         await driver.quit();
     });
