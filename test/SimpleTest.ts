@@ -1,14 +1,15 @@
 import { WebDriver, Builder, Capabilities, By, until } from 'selenium-webdriver';
 import { ServiceBuilder } from 'selenium-webdriver/chrome'
 import { Options } from "selenium-webdriver/chrome";
-import * as fs from "fs";
 import { performance } from 'perf_hooks';
-import { Screenshots } from "./Screenshots"
+import { Screenshots } from "./tools/Screenshots"
+import { Wait } from "./tools/Wait"
 
 describe("Simple test", () => {
 
     let driver: WebDriver;
-    let screenshots: Screenshots
+    let screenshots: Screenshots;
+    let wait: Wait;
 
     beforeEach(async () => {
         // get path to unzipped extension
@@ -23,7 +24,7 @@ describe("Simple test", () => {
         chromeOptions.addArguments("--load-extension=" + chromeExtensionPath);
 
         let chromeServiceBuilder = new ServiceBuilder();
-        
+
         chromeServiceBuilder.loggingTo("chromedriver.log").enableVerboseLogging()
 
         // initializing chrome driver
@@ -34,7 +35,9 @@ describe("Simple test", () => {
             .setChromeOptions(chromeOptions)
             .build();
 
-            screenshots = new Screenshots(driver, "screenshots");
+        screenshots = new Screenshots(driver, "screenshots");
+
+        wait = new Wait(driver);
 
         // maximizing chrome browser
         await driver.manage().window().maximize();
@@ -67,6 +70,8 @@ describe("Simple test", () => {
         console.log("Plugin was loaded in " + (endTime - startTime));
 
         await driver.switchTo().defaultContent();
+
+        await wait.pause(5000);
     })
 
     afterEach(async () => {
@@ -76,8 +81,4 @@ describe("Simple test", () => {
 
         await driver.quit();
     });
-
-    function delay(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 })
