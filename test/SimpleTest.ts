@@ -1,9 +1,10 @@
-import { WebDriver, Builder, Capabilities, By, until } from 'selenium-webdriver';
+import { WebDriver, Builder, Capabilities, By, until, Browser } from 'selenium-webdriver';
 import { ServiceBuilder } from 'selenium-webdriver/chrome'
 import { Options } from "selenium-webdriver/chrome";
 import { performance } from 'perf_hooks';
 import { Screenshots } from "./tools/Screenshots"
 import { Wait } from "./tools/Wait"
+import { expect } from "chai";
 
 describe("Simple test", () => {
 
@@ -31,7 +32,7 @@ describe("Simple test", () => {
         driver = await new Builder()
             .withCapabilities(Capabilities.chrome())
             .setChromeService(chromeServiceBuilder)
-            .forBrowser('chrome')
+            .forBrowser(Browser.CHROME)
             .setChromeOptions(chromeOptions)
             .build();
 
@@ -47,7 +48,10 @@ describe("Simple test", () => {
     it("should test", async () => {
         await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
 
-        await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
+        let linkToOnlineEditr = await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
+
+        let linkText = await linkToOnlineEditr.getAttribute("href"); 
+        expect(linkText).contain("/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn")
 
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
@@ -60,8 +64,6 @@ describe("Simple test", () => {
         await driver.executeScript("arguments[0].scrollIntoView(true)", kogitoFrame)
 
         await driver.switchTo().frame(kogitoFrame);
-
-        let pageSource = await driver.getPageSource()
 
         let startTime = performance.now();
         await driver.wait(until.elementLocated(By.className("fa-eye")), 25000);
