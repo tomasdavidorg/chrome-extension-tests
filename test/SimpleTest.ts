@@ -12,7 +12,7 @@ describe("Simple test", () => {
     let screenshots: Screenshots;
     let wait: Wait;
 
-    beforeEach(async () => {
+    before(async () => {
         // get path to unzipped extension
         const chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
@@ -76,11 +76,13 @@ describe("Simple test", () => {
         await wait.pause(5000);
     })
 
-    afterEach(async () => {
+    afterEach(async ()=> {
         await driver.switchTo().defaultContent();
         await screenshots.takeHtml("screenshot_after_test");
         await screenshots.takePng("screenshot_after_test");
+    });
 
+    after(async () => {
         await driver.quit();
     });
 })
