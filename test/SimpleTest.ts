@@ -1,10 +1,11 @@
-import { WebDriver, Builder, Capabilities, By, until, Browser } from 'selenium-webdriver';
+import { WebDriver, Builder, Capabilities, By, until, Browser, WebElement, Key} from 'selenium-webdriver';
 import { ServiceBuilder } from 'selenium-webdriver/chrome'
 import { Options } from "selenium-webdriver/chrome";
 import { performance } from 'perf_hooks';
 import { Screenshots } from "./tools/Screenshots"
 import { Wait } from "./tools/Wait"
 import { expect } from "chai";
+import { Tool } from "./tools/Tool" 
 
 describe("Simple test", () => {
 
@@ -46,12 +47,14 @@ describe("Simple test", () => {
 
 
     it("should test", async () => {
+        const EXPECTED_LINK = "/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn";
+
         await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
 
         let linkToOnlineEditr = await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
         let linkText = await linkToOnlineEditr.getAttribute("href"); 
-        expect(linkText).contain("/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn")
+        expect(linkText).contains(EXPECTED_LINK);
 
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
 
@@ -73,7 +76,10 @@ describe("Simple test", () => {
 
         await driver.switchTo().defaultContent();
 
-        await wait.pause(5000);
+        await driver.findElement(By.xpath("//button[@data-testid='copy-link-button']")).click();
+        let clipboadText = await new Tool(driver).getClipboarContent()
+
+        expect(clipboadText).contains(EXPECTED_LINK);
     })
 
     afterEach(async ()=> {
