@@ -1,6 +1,6 @@
 import { WebDriver } from "selenium-webdriver";
 
-export class Wait {
+export default class Wait {
 
     driver: WebDriver;
 

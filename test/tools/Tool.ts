@@ -1,6 +1,6 @@
 import { WebDriver, WebElement, Key } from "selenium-webdriver";
 
-export class Tool {
+export default class Tool {
 
     driver: WebDriver;
 

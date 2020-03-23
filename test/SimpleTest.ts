@@ -1,11 +1,11 @@
-import { WebDriver, Builder, Capabilities, By, until, Browser, WebElement, Key} from 'selenium-webdriver';
+import { WebDriver, Builder, Capabilities, By, until, Browser } from 'selenium-webdriver';
 import { ServiceBuilder } from 'selenium-webdriver/chrome'
 import { Options } from "selenium-webdriver/chrome";
 import { performance } from 'perf_hooks';
-import { Screenshots } from "./tools/Screenshots"
-import { Wait } from "./tools/Wait"
 import { expect } from "chai";
-import { Tool } from "./tools/Tool" 
+import Tool from "./tools/Tool"
+import Screenshots from "./tools/Screenshots"
+import Wait from "./tools/Wait"
 
 describe("Simple test", () => {
 
@@ -53,7 +53,7 @@ describe("Simple test", () => {
 
         let linkToOnlineEditr = await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
-        let linkText = await linkToOnlineEditr.getAttribute("href"); 
+        let linkText = await linkToOnlineEditr.getAttribute("href");
         expect(linkText).contains(EXPECTED_LINK);
 
         await driver.findElement(By.linkText("evaluation.bpmn")).click();
@@ -82,7 +82,7 @@ describe("Simple test", () => {
         expect(clipboadText).contains(EXPECTED_LINK);
     })
 
-    afterEach(async ()=> {
+    afterEach(async () => {
         await driver.switchTo().defaultContent();
         await screenshots.takeHtml("screenshot_after_test");
         await screenshots.takePng("screenshot_after_test");

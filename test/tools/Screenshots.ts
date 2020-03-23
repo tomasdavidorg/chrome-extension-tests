@@ -1,8 +1,8 @@
-import { WebDriver} from "selenium-webdriver"
+import { WebDriver } from "selenium-webdriver"
 import * as fs from "fs";
 import * as path from "path"
 
-export class Screenshots {
+export default class Screenshots {
 
     driver: WebDriver;
     screenshotsDir: string;
@@ -21,7 +21,7 @@ export class Screenshots {
         await this.driver.takeScreenshot().then((image) => {
             fs.writeFileSync(pngPath, image, "base64");
         })
-    } 
+    }
 
     async takeHtml(fileName: string) {
         let pageSource = await this.driver.getPageSource();
