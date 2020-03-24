@@ -1,4 +1,4 @@
-import { WebDriver } from "selenium-webdriver";
+import { until, By, WebDriver, WebElementPromise } from "selenium-webdriver";
 
 export default class Wait {
 
@@ -8,7 +8,11 @@ export default class Wait {
         this.driver = driver;
     }
 
-    async pause(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    pause(timeout: number): Promise<unknown> {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+
+    untilElementIsPresent(by: By, timeout: number): WebElementPromise {
+        return this.driver.wait(until.elementLocated(by), timeout);
     }
 }

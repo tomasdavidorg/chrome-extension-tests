@@ -1,55 +1,29 @@
-import { WebDriver, Builder, Capabilities, By, until, Browser } from 'selenium-webdriver';
-import { ServiceBuilder } from 'selenium-webdriver/chrome'
-import { Options } from "selenium-webdriver/chrome";
+import { WebDriver, By, until } from 'selenium-webdriver';
 import { performance } from 'perf_hooks';
 import { expect } from "chai";
 import Tool from "./tools/Tool"
-import Screenshots from "./tools/Screenshots"
-import Wait from "./tools/Wait"
+import Driver from "./tools/Driver"
+import Tools from './tools/Tools';
 
 describe("Simple test", () => {
 
     let driver: WebDriver;
-    let screenshots: Screenshots;
-    let wait: Wait;
+    let tools: Tools;
+    let testName: string;
 
-    before(async () => {
-        // get path to unzipped extension
-        const chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
-        if (!chromeExtensionPath) {
-            throw new Error("Please set UNZIPPED_CHROME_EXTENSION_PATH variable to unziped Chrome extension directory." +
-                "For example: export UNZIPPED_CHROME_EXTENSION_PATH=dist");
-        }
-
-        // init chrome options
-        let chromeOptions = new Options();
-        chromeOptions.addArguments("--load-extension=" + chromeExtensionPath);
-
-        let chromeServiceBuilder = new ServiceBuilder();
-
-        chromeServiceBuilder.loggingTo("chromedriver.log").enableVerboseLogging()
-
-        // initializing chrome driver
-        driver = await new Builder()
-            .withCapabilities(Capabilities.chrome())
-            .setChromeService(chromeServiceBuilder)
-            .forBrowser(Browser.CHROME)
-            .setChromeOptions(chromeOptions)
-            .build();
-
-        screenshots = new Screenshots(driver, "screenshots");
-
-        wait = new Wait(driver);
-
-        // maximizing chrome browser
-        await driver.manage().window().maximize();
+    beforeEach(async () => {
+        driver = await Driver.init();
+        tools = new Tools(driver);
     });
 
 
-    it("should test", async () => {
-        const EXPECTED_LINK = "/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn";
+    it("just test", async () => {
 
         await driver.get("https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/");
+        
+
+        const EXPECTED_LINK = "/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn";
+
 
         let linkToOnlineEditr = await driver.wait(until.elementLocated(By.xpath("//a[@title='Open in Online Editor']")), 2000);
 
@@ -80,15 +54,14 @@ describe("Simple test", () => {
         let clipboadText = await new Tool(driver).getClipboarContent()
 
         expect(clipboadText).contains(EXPECTED_LINK);
+        
     })
 
     afterEach(async () => {
         await driver.switchTo().defaultContent();
-        await screenshots.takeHtml("screenshot_after_test");
-        await screenshots.takePng("screenshot_after_test");
-    });
-
-    after(async () => {
+        let screenshot = tools.screenshot()
+        await screenshot.takeHtml("screenshot_after_test");
+        await screenshot.takePng("screenshot_after_test");
         await driver.quit();
     });
 })
