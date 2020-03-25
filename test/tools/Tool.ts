@@ -21,4 +21,7 @@ export default class Tool {
         return await this.driver.executeScript(GET_TEXT_FROM_INPUT_CML);
     }
 
+    //await this.tools.driver.executeScript("arguments[0].style.backgroundColor = '#ff0000';", await this.parent.findElement(By.xpath(".//a")))  
+    //await this.tools.wait.pause(2000)
+
 }
