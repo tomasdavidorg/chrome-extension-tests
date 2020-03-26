@@ -1,4 +1,4 @@
-import Tools from "../tools/Tools";
+import Tools from "../utils/Tools";
 
 export default class Page {
 

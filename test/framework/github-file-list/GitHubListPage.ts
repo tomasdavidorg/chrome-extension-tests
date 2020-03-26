@@ -1,12 +1,11 @@
-
 import { WebElement, By } from "selenium-webdriver";
-import Page from "../../tools/Page";
+import Page from "../Page";
 import GitHubListItem from "./GitHubListItem";
 
-export default class GitHubList extends Page {
+export default class GitHubListPage extends Page {
 
-    public async getFile(name: string) {
+    public async getFile(name: string): Promise<GitHubListItem> {
         let parent: WebElement = await this.tools.find(By.xpath(`//tr[*//a[text()='${name}']]`)).present();
-        return this.tools.pageFragment(GitHubListItem, parent);
+        return this.tools.createPageFragment(GitHubListItem, parent);
     }
 }

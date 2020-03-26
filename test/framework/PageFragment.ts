@@ -1,5 +1,5 @@
 import Page from "./Page";
-import Tools from "../tools/Tools";
+import Tools from "../utils/Tools";
 import { WebElement } from "selenium-webdriver"
 
 export default class PageFragment extends Page {

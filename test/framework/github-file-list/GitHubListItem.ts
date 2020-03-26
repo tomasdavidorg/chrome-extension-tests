@@ -1,4 +1,4 @@
-import PageFragment from "../../tools/PageFragment";
+import PageFragment from "../PageFragment";
 import { By } from "selenium-webdriver";
 
 export default class GitHubListItem extends PageFragment {
@@ -11,6 +11,6 @@ export default class GitHubListItem extends PageFragment {
     }
 
     public async getLinkToOnlineEditor(): Promise<string> {
-        return (await this.tools.take(this.parent).withTimeout(2000).find(this.LINK_TO_ONLINE_EDITOR)).getAttribute("href");
+        return (await this.tools.take(this.parent).withTimeout(3000).find(this.LINK_TO_ONLINE_EDITOR)).getAttribute("href");
     }
 }
