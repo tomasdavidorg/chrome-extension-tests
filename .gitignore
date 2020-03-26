@@ -4,4 +4,4 @@ screenshots
 dist
 chrome-extension.crx
 key.pem
-chromedriver.log
+logs
