@@ -1,9 +1,10 @@
-import { WebDriver, WebElement, By, until } from "selenium-webdriver";
+import { WebDriver, WebElement, By, until, error} from "selenium-webdriver";
+
 
 export default class FindOperation {
     private readonly driver: WebDriver;
     private readonly by: By;
-    private timeout: number = 0;
+    private timeout: number = 100;
 
     constructor(driver: WebDriver, by: By) {
         this.driver = driver;

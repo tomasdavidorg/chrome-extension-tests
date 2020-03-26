@@ -1,10 +1,10 @@
-import { WebDriver, WebElement, By, until } from "selenium-webdriver"
+import { WebDriver, WebElement, By, until, error } from "selenium-webdriver"
 
 export default class WebElementOperation {
 
     private driver: WebDriver;
     private webElement: WebElement;
-    private timeout: number = 0; 
+    private timeout: number = 100;
 
     constructor(driver: WebDriver, webElement: WebElement) {
         this.driver = driver;
@@ -23,6 +23,23 @@ export default class WebElementOperation {
 
     async enabled(): Promise<void> {
         await this.driver.wait(until.elementIsEnabled(this.webElement), this.timeout);
+    }
+
+    async visible(): Promise<void> {
+        await this.driver.wait(until.elementIsVisible(this.webElement), this.timeout);
+    }
+
+    async isVisible(): Promise<boolean> {
+        try {
+            await this.visible();
+            return true;
+        } catch (err) {
+            if (err instanceof error.TimeoutError) {
+                return false;
+            } else {
+                throw err;
+            }
+        }
     }
 
     async scroll(): Promise<void> {

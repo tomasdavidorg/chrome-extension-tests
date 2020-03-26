@@ -33,6 +33,13 @@ describe("Simple test", () => {
         let editor: Editor = await gitHubEditorPage.getEditor();
         await editor.wait();
 
+        // open and check source editor
+        expect(await gitHubEditorPage.isSourceDisplayed()).false;
+        gitHubEditorPage.seeAsSource();
+        expect(await gitHubEditorPage.isSourceDisplayed()).true;
+        gitHubEditorPage.seeAsDiagram();
+        expect(await gitHubEditorPage.isSourceDisplayed()).false;
+
         // check link to online editor from clipboard
         await gitHubEditorPage.copyLinkToOnlineEditor()
         let clipboadText = await tools.clipboard.getContent();
