@@ -31,9 +31,7 @@ describe("Simple test", () => {
         // wait for editor
         let gitHubEditorPage = tools.createPage(GitHubEditorPage);
         let editor: Editor = await gitHubEditorPage.getEditor();
-        await editor.enter();
         await editor.wait();
-        await editor.leave();
 
         // check link to online editor from clipboard
         await gitHubEditorPage.copyLinkToOnlineEditor()

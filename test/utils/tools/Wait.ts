@@ -1,6 +1,4 @@
-import { WebDriver, WebElement } from "selenium-webdriver";
-import WebElementOperation from "./WebElementOperation";
-
+import { WebDriver } from "selenium-webdriver";
 export default class Wait {
 
     private readonly driver: WebDriver;

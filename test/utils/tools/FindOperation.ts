@@ -1,4 +1,3 @@
-
 import { WebDriver, WebElement, By, until } from "selenium-webdriver";
 
 export default class FindOperation {
