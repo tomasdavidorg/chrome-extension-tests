@@ -14,7 +14,7 @@ export default class Clipboard {
             "return document.getElementsByTagName('body')[0].appendChild(input)";
         const GET_TEXT_FROM_INPUT_CMD: string = "input=document.getElementById('copyPaste');" +
             "text=document.getElementById('copyPaste').value;" +
-            "input.remove();" +
+           // "input.remove();" +
             "return text;"
         const GET_PLATFORM_CMD: string = "return window.navigator.platform;"
 
@@ -27,6 +27,8 @@ export default class Clipboard {
 
         // paste content of clipboard to the input
         if (platform.includes("Mac")) {
+            console.log("running cmd+v");
+            
             await input.sendKeys(Key.COMMAND + "v");
         } else {
             await input.sendKeys(Key.CONTROL + "v");
