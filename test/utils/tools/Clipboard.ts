@@ -16,12 +16,21 @@ export default class Clipboard {
             "text=document.getElementById('copyPaste').value;" +
             "input.remove();" +
             "return text;"
+        const GET_PLATFORM_CMD: string = "window.navigator.platform;"
 
         // add hepler input to document
         const input: WebElement = await this.driver.executeScript(ADD_HELPER_INPUT_CMD);
 
+        // get os platform
+        const platform: string = await this.driver.executeScript(GET_PLATFORM_CMD);
+        console.log("Platform is: " + platform);
+
         // paste content of clipboard to the input
-        await input.sendKeys(Key.CONTROL + "v");
+        if (platform.includes("Mac")) {
+            await input.sendKeys(Key.COMMAND + "v");
+        } else {
+            await input.sendKeys(Key.CONTROL + "v");
+        }
 
         // get text from input
         return await this.driver.executeScript(GET_TEXT_FROM_INPUT_CMD);
