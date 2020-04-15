@@ -21,7 +21,7 @@ export default class GitHubEditorPage extends Page {
             .withTimeout(2000)
             .present();
 
-        this.tools.take(seeAsSourceButton).withTimeout(5000).enabled();
+        await this.tools.take(seeAsSourceButton).withTimeout(5000).enabled();
         await seeAsSourceButton.click();
     }
 

@@ -31,7 +31,7 @@ describe("Simple test", () => {
         // wait for editor
         let gitHubEditorPage = tools.createPage(GitHubEditorPage);
         let editor: Editor = await gitHubEditorPage.getEditor();
-        await editor.wait();
+        await editor.load();
 
         // open and check source editor
         expect(await gitHubEditorPage.isSourceDisplayed()).false;
