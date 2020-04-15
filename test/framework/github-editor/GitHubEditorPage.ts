@@ -39,4 +39,9 @@ export default class GitHubEditorPage extends Page {
         let sourceWebEl: WebElement = await this.tools.find(this.SOURCE_VIEW_LOCATOR).present();
         return this.tools.take(sourceWebEl).withTimeout(1000).isVisible();
     }
+
+    async openOnlineEditor(): Promise<void> {
+        let onlineEditorButton: WebElement = await this.tools.find(this.ONLINE_EDITOR_BUTTON_LOCATOR).present();
+        onlineEditorButton.click()
+    }
 }

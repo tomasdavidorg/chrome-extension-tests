@@ -45,6 +45,11 @@ describe("Simple test", () => {
         let clipboadText = await tools.clipboard.getContent();
         expect(clipboadText).contains(EXPECTED_LINK);
 
+        await gitHubEditorPage.openOnlineEditor();
+        await tools.wait.pause(5000);
+
+        expect((await tools.driver.getAllWindowHandles()).length).equals(2);
+
     })
 
     afterEach(async () => {
