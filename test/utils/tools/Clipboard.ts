@@ -29,7 +29,7 @@ export default class Clipboard {
         if (platform.includes("Mac")) {
             console.log("running cmd+v");
             
-            await input.sendKeys(Key.COMMAND + "v");
+            await input.sendKeys(Key.META + "v");
         } else {
             await input.sendKeys(Key.CONTROL + "v");
         }
