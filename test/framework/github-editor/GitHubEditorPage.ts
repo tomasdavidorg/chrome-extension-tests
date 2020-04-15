@@ -36,7 +36,7 @@ export default class GitHubEditorPage extends Page {
     }
 
     async isSourceDisplayed(): Promise<boolean> {
-        let sourceWebEl: WebElement = await this.tools.find(this.SOURCE_VIEW_LOCATOR).withTimeout(1000).present();
-        return this.tools.take(sourceWebEl).isVisible();
+        let sourceWebEl: WebElement = await this.tools.find(this.SOURCE_VIEW_LOCATOR).present();
+        return this.tools.take(sourceWebEl).withTimeout(1000).isVisible();
     }
 }
