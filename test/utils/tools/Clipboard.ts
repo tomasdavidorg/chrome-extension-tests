@@ -23,13 +23,9 @@ export default class Clipboard {
 
         // get os platform
         const platform: string = await this.driver.executeScript(GET_PLATFORM_CMD);
-        console.log("Platform is: " + platform);
 
         // paste content of clipboard to the input
-        if (platform.includes("Mac")) {
-            console.log("running cmd+v");
-            await input.click()
-            
+        if (platform.includes("Mac")) {            
             await input.sendKeys(Key.SHIFT + Key.INSERT);
         } else {
             await input.sendKeys(Key.CONTROL + "v");
