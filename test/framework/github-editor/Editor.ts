@@ -14,7 +14,7 @@ export default class Editor extends PageFragment {
         await this.tools.driver.switchTo().defaultContent();
     }
 
-    async wait(): Promise<void> {
+    async load(): Promise<void> {
         await this.enter();
 
         let startTime = performance.now();
