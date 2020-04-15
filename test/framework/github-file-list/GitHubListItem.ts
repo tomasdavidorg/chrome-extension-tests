@@ -7,10 +7,10 @@ export default class GitHubListItem extends PageFragment {
     private readonly LINK_TO_ONLINE_EDITOR: By = By.xpath(".//a[@title='Open in Online Editor']");
 
     public async open(): Promise<void> {
-        (await this.tools.take(this.parent).find(this.LINK_LOCATOR)).click();
+        (await this.tools.take(this.root).find(this.LINK_LOCATOR)).click();
     }
 
     public async getLinkToOnlineEditor(): Promise<string> {
-        return (await this.tools.take(this.parent).withTimeout(3000).find(this.LINK_TO_ONLINE_EDITOR)).getAttribute("href");
+        return (await this.tools.take(this.root).withTimeout(3000).find(this.LINK_TO_ONLINE_EDITOR)).getAttribute("href");
     }
 }

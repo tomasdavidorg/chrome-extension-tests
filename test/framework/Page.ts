@@ -4,7 +4,7 @@ export default class Page {
 
     protected tools: Tools;
 
-    constructor(tools: Tools) {
+    public constructor(tools: Tools) {
         this.tools = tools;
     }
 }
