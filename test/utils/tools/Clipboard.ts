@@ -16,7 +16,7 @@ export default class Clipboard {
             "text=document.getElementById('copyPaste').value;" +
             "input.remove();" +
             "return text;"
-        const GET_PLATFORM_CMD: string = "window.navigator.platform;"
+        const GET_PLATFORM_CMD: string = "return window.navigator.platform;"
 
         // add hepler input to document
         const input: WebElement = await this.driver.executeScript(ADD_HELPER_INPUT_CMD);
