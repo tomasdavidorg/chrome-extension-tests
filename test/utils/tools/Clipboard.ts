@@ -28,8 +28,9 @@ export default class Clipboard {
         // paste content of clipboard to the input
         if (platform.includes("Mac")) {
             console.log("running cmd+v");
+            await input.click()
             
-            await input.sendKeys(Key.META + "v");
+            await input.sendKeys(Key.SHIFT + Key.INSERT);
         } else {
             await input.sendKeys(Key.CONTROL + "v");
         }
