@@ -1,5 +1,4 @@
-import { WebDriver, WebElement, By, until, error} from "selenium-webdriver";
-
+import { WebDriver, WebElement, By, until, error } from "selenium-webdriver";
 
 export default class FindOperation {
     private readonly driver: WebDriver;
@@ -18,5 +17,18 @@ export default class FindOperation {
 
     present(): Promise<WebElement> {
         return this.driver.wait(until.elementLocated(this.by), this.timeout);
+    }
+
+    public async isPresent(): Promise<boolean> {
+        try {
+            await this.present();
+            return true;
+        } catch (err) {
+            if (err instanceof error.TimeoutError) {
+                return false;
+            } else {
+                throw err;
+            }
+        }
     }
 }

@@ -6,11 +6,11 @@ export default class Editor extends PageFragment {
 
     private readonly TOOLS_LOCATOR: By = By.className("fa-eye");
 
-    public async enter(): Promise<void> {
+    private async enter(): Promise<void> {
         await this.tools.driver.switchTo().frame(this.root);
     }
 
-    public async leave(): Promise<void> {
+    private async leave(): Promise<void> {
         await this.tools.driver.switchTo().defaultContent();
     }
 

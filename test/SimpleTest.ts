@@ -26,10 +26,9 @@ describe("Simple test", () => {
         let linkText = await gitHubFile.getLinkToOnlineEditor();
         expect(linkText).contains(EXPECTED_LINK);
 
-        await gitHubFile.open();
+        let gitHubEditorPage = await gitHubFile.open();
 
         // wait for editor
-        let gitHubEditorPage = tools.createPage(GitHubEditorPage);
         let editor: Editor = await gitHubEditorPage.getEditor();
         await editor.load();
 
@@ -48,10 +47,9 @@ describe("Simple test", () => {
         let clipboadText = await tools.clipboard.getContent();
         expect(clipboadText).contains(EXPECTED_LINK);
 
-        await gitHubEditorPage.openOnlineEditor();
-        await tools.wait.pause(5000);
-
-        expect((await tools.driver.getAllWindowHandles()).length).equals(2);
+        let onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
+        let onlineEditor = await onlineEditorPage.getEditor();
+        await onlineEditor.load()
 
     })
 
