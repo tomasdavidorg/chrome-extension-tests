@@ -3,6 +3,9 @@ import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
 import * as fs from "fs";
 
 export default class Driver {
+
+    private constructor() { }
+
     public static async init(): Promise<WebDriver> {
         // get path to unzipped extension
         const chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
@@ -21,7 +24,7 @@ export default class Driver {
             fs.mkdirSync(LOGS_DIR);
         }
         let chromeServiceBuilder = new ServiceBuilder();
-        chromeServiceBuilder.loggingTo(LOGS_DIR +"/chromedriver.log").enableVerboseLogging();
+        chromeServiceBuilder.loggingTo(LOGS_DIR + "/chromedriver.log").enableVerboseLogging();
 
         // init chrome driver
         let driver: WebDriver = await new Builder()

@@ -34,11 +34,14 @@ describe("Simple test", () => {
         await editor.load();
 
         // open and check source editor
-        expect(await gitHubEditorPage.isSourceDisplayed()).false;
+        expect(await gitHubEditorPage.isSourceVisible()).false;
+        expect(await gitHubEditorPage.isEditorVisible()).true;
         gitHubEditorPage.seeAsSource();
-        expect(await gitHubEditorPage.isSourceDisplayed()).true;
+        expect(await gitHubEditorPage.isSourceVisible()).true;
+        expect(await gitHubEditorPage.isEditorVisible()).false;
         gitHubEditorPage.seeAsDiagram();
-        expect(await gitHubEditorPage.isSourceDisplayed()).false;
+        expect(await gitHubEditorPage.isSourceVisible()).false;
+        expect(await gitHubEditorPage.isEditorVisible()).true;
 
         // check link to online editor from clipboard
         await gitHubEditorPage.copyLinkToOnlineEditor()

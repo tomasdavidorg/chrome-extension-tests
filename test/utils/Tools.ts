@@ -35,7 +35,7 @@ export default class Tools {
         return new FindOperation(this.driver, by);
     }
 
-    public take(webElement: WebElement) {
+    public take(webElement: WebElement): WebElementOperation {
         return new WebElementOperation(this.driver, webElement);
     }
 

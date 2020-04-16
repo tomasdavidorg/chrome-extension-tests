@@ -11,6 +11,7 @@ export default class GitHubEditorPage extends Page {
     private readonly FULL_SCREEN_BUTTON_LOCATOR = By.xpath("//button[@data-testid='go-fullscreen-button']");
     private readonly KOGITO_EDITOR_LOCATOR = By.className("kogito-iframe");
     private readonly SOURCE_VIEW_LOCATOR = By.xpath("//div[@itemprop='text']");
+    private readonly KOGITO_CONTAINER_LOCATOR = By.className("kogito-iframe-container");
 
     async copyLinkToOnlineEditor(): Promise<void> {
         (await this.tools.find(this.COPY_LINK_BUTTON_LOCATOR).present()).click();
@@ -35,9 +36,14 @@ export default class GitHubEditorPage extends Page {
         return this.tools.createPageFragment(Editor, editor);
     }
 
-    async isSourceDisplayed(): Promise<boolean> {
+    async isSourceVisible(): Promise<boolean> {
         let sourceWebEl: WebElement = await this.tools.find(this.SOURCE_VIEW_LOCATOR).present();
         return this.tools.take(sourceWebEl).withTimeout(1000).isVisible();
+    }
+
+    async isEditorVisible(): Promise<boolean> {
+        let editorContainer: WebElement = await this.tools.find(this.KOGITO_CONTAINER_LOCATOR).present();
+        return this.tools.take(editorContainer).withTimeout(1000).isVisible();
     }
 
     async openOnlineEditor(): Promise<void> {
