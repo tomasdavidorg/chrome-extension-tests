@@ -1,4 +1,5 @@
 import { WebDriver, WebElement, Key } from "selenium-webdriver";
+import * as os from 'os';
 
 export default class Clipboard {
 
@@ -16,16 +17,12 @@ export default class Clipboard {
             "text=document.getElementById('copyPaste').value;" +
            // "input.remove();" +
             "return text;"
-        const GET_PLATFORM_CMD: string = "return window.navigator.platform;"
 
         // add hepler input to document
         const input: WebElement = await this.driver.executeScript(ADD_HELPER_INPUT_CMD);
 
-        // get os platform
-        const platform: string = await this.driver.executeScript(GET_PLATFORM_CMD);
-
         // paste content of clipboard to the input
-        if (platform.includes("Mac")) {            
+        if (os.platform() == "darwin") {   // MacOS          
             await input.sendKeys(Key.SHIFT + Key.INSERT);
         } else {
             await input.sendKeys(Key.CONTROL + "v");
