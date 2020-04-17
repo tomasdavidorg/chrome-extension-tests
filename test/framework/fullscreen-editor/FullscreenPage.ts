@@ -8,7 +8,7 @@ export default class FullscreenPage extends EditorPage {
     private readonly EXIT_FULLSCREEN_BUTTON_LOCATOR = By.xpath("//a[@data-testid='exit-fullscreen-button']");
 
     public async exitFullscreen(): Promise<GitHubEditorPage> {
-        let exitFullscreenButton = await this.tools.by(this.EXIT_FULLSCREEN_BUTTON_LOCATOR).present();
+        let exitFullscreenButton = await this.tools.by(this.EXIT_FULLSCREEN_BUTTON_LOCATOR).withTimeout(1000).present();
 
         // regular click does not work
         // await exitFullscreenButton.click();
