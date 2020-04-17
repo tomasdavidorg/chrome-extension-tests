@@ -1,7 +1,7 @@
 import { By, WebElement, until } from "selenium-webdriver";
 import Page from "../Page";
 import OnlineEditorPage from "../online-editor/OnlineEditorPage"
-import FullScreenPage from "../fullscreen-editor/FullScreenPage"
+import FullscreenPage from "../fullscreen-editor/FullscreenPage"
 import EditorPage from "../editor/EditorPage";
 
 export default class GitHubEditorPage extends EditorPage {
@@ -42,7 +42,7 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async openOnlineEditor(): Promise<OnlineEditorPage> {
-        let onlineEditorButton: WebElement = await this.tools.by(this.ONLINE_EDITOR_BUTTON_LOCATOR).present();
+        let onlineEditorButton: WebElement = await this.tools.by(this.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).present();
         onlineEditorButton.click();
 
         await this.tools.driver.wait(async () => {
@@ -57,9 +57,9 @@ export default class GitHubEditorPage extends EditorPage {
         return this.tools.createPage(OnlineEditorPage);
     }
 
-    async fullScreen(): Promise<FullScreenPage> {
+    async fullScreen(): Promise<FullscreenPage> {
         let fullScreenButton: WebElement = await this.tools.by(this.FULL_SCREEN_BUTTON_LOCATOR).present();
         await fullScreenButton.click();
-        return this.tools.createPage(FullScreenPage);
+        return this.tools.createPage(FullscreenPage);
     }
 }

@@ -46,6 +46,11 @@ describe("Simple test", () => {
         let clipboadText = await tools.clipboard.getContent();
         expect(clipboadText).contains(EXPECTED_LINK);
 
+        let fullScreenPage = await gitHubEditorPage.fullScreen();
+        let fullScreenEditor = await fullScreenPage.getEditor();
+        await fullScreenEditor.load();
+        gitHubEditorPage = await fullScreenPage.exitFullscreen();
+
         let onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
         let onlineEditor = await onlineEditorPage.getEditor();
         await onlineEditor.load()
