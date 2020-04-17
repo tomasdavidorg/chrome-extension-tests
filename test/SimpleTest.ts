@@ -47,8 +47,8 @@ describe("Simple test", () => {
         expect(clipboadText).contains(EXPECTED_LINK);
 
         let onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
-        //let onlineEditor = await onlineEditorPage.getEditor();
-       // await onlineEditor.load()
+        let onlineEditor = await onlineEditorPage.getEditor();
+        await onlineEditor.load()
 
     })
 
