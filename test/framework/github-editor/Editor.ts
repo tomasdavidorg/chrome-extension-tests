@@ -18,7 +18,7 @@ export default class Editor extends PageFragment {
         await this.enter();
 
         let startTime = performance.now();
-        await this.tools.find(this.TOOLS_LOCATOR).withTimeout(25000).present();
+        await this.tools.by(this.TOOLS_LOCATOR).withTimeout(25000).present();
         let endTime = performance.now();
         console.log("Plugin was loaded in " + (endTime - startTime));
         

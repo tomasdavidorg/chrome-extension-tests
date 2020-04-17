@@ -1,6 +1,6 @@
 import { WebDriver, WebElement, By, until, error } from "selenium-webdriver";
 
-export default class FindOperation {
+export default class ByOperation {
     private readonly driver: WebDriver;
     private readonly by: By;
     private timeout: number = 100;
@@ -10,7 +10,7 @@ export default class FindOperation {
         this.by = by;
     }
 
-    withTimeout(timeout: number): FindOperation {
+    withTimeout(timeout: number): ByOperation {
         this.timeout = timeout;
         return this;
     }

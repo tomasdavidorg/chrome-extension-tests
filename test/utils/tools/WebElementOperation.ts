@@ -21,12 +21,12 @@ export default class WebElementOperation {
         return await this.webElement.findElement(by);
     }
 
-    async enabled(): Promise<void> {
-        await this.driver.wait(until.elementIsEnabled(this.webElement), this.timeout);
+    async enabled(): Promise<WebElement> {
+        return await this.driver.wait(until.elementIsEnabled(this.webElement), this.timeout);
     }
 
-    async visible(): Promise<void> {
-        await this.driver.wait(until.elementIsVisible(this.webElement), this.timeout);
+    async visible(): Promise<WebElement> {
+        return await this.driver.wait(until.elementIsVisible(this.webElement), this.timeout);
     }
 
     async isVisible(): Promise<boolean> {

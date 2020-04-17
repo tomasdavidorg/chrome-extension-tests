@@ -1,7 +1,7 @@
 import { WebDriver, By, WebElement } from "selenium-webdriver"
 import Wait from "./tools/Wait"
 import Screenshot from "./tools/ScreenShot"
-import FindOperation from "./tools/FindOperation";
+import ByOperation from "./tools/ByOperation";
 import Page from "../framework/Page"
 import PageFragment from "../framework/PageFragment";
 import WebElementOperation from "./tools/WebElementOperation"
@@ -31,11 +31,11 @@ export default class Tools {
         return new Tools(await Driver.init());
     }
 
-    public find(by: By) {
-        return new FindOperation(this.driver, by);
+    public by(by: By) {
+        return new ByOperation(this.driver, by);
     }
 
-    public take(webElement: WebElement): WebElementOperation {
+    public webElement(webElement: WebElement): WebElementOperation {
         return new WebElementOperation(this.driver, webElement);
     }
 
