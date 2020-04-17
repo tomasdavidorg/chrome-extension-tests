@@ -1,5 +1,5 @@
-import PageFragment from "../PageFragment";
 import { By } from "selenium-webdriver";
+import PageFragment from "../PageFragment";
 import { performance } from "perf_hooks";
 
 export default class Editor extends PageFragment {
@@ -21,7 +21,7 @@ export default class Editor extends PageFragment {
         await this.tools.by(this.TOOLS_LOCATOR).withTimeout(25000).present();
         let endTime = performance.now();
         console.log("Plugin was loaded in " + (endTime - startTime));
-        
+
         await this.leave();
     }
 }

@@ -17,7 +17,7 @@ export default class WebElementOperation {
     }
 
     async find(by: By): Promise<WebElement> {
-        this.driver.wait(async () => (await this.webElement.findElements(by)).length == 1, this.timeout);
+        await this.driver.wait(async () => (await this.webElement.findElements(by)).length == 1, this.timeout);
         return await this.webElement.findElement(by);
     }
 

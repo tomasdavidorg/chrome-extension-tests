@@ -2,8 +2,7 @@ import { expect } from "chai";
 import Tools from './utils/Tools';
 import GitHubListPage from "./framework/github-file-list/GitHubListPage";
 import GitHubListItem from './framework/github-file-list/GitHubListItem';
-import GitHubEditorPage from "./framework/github-editor/GitHubEditorPage";
-import Editor from './framework/github-editor/Editor';
+import Editor from "./framework/editor/Editor";
 
 describe("Simple test", () => {
 
@@ -48,8 +47,8 @@ describe("Simple test", () => {
         expect(clipboadText).contains(EXPECTED_LINK);
 
         let onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
-        let onlineEditor = await onlineEditorPage.getEditor();
-        await onlineEditor.load()
+        //let onlineEditor = await onlineEditorPage.getEditor();
+       // await onlineEditor.load()
 
     })
 
