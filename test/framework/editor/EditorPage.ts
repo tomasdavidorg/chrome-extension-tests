@@ -6,7 +6,7 @@ export default abstract class EditorPage extends Page {
     private readonly KOGITO_EDITOR_FRAME_LOCATOR = By.xpath("//iframe[contains(@class,'kogito-iframe') or contains(@id,'kogito-iframe')]");
 
     public async getEditor(): Promise<Editor> {
-        let editor: WebElement = await this.tools.by(this.KOGITO_EDITOR_FRAME_LOCATOR).withTimeout(2000).present();
+        let editor: WebElement = await this.tools.by(this.KOGITO_EDITOR_FRAME_LOCATOR).withTimeout(2000).getWebElement();
         await this.tools.webElement(editor).scroll();
         return this.tools.createPageFragment(Editor, editor);
     }

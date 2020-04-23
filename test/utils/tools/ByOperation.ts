@@ -1,12 +1,12 @@
 import { WebDriver, WebElement, By, until, error } from "selenium-webdriver";
+import DriverTool from "./DriverTool";
 
-export default class ByOperation {
-    private readonly driver: WebDriver;
+export default class ByOperation extends DriverTool {
     private readonly by: By;
     private timeout: number = 100;
 
     constructor(driver: WebDriver, by: By) {
-        this.driver = driver;
+        super(driver)
         this.by = by;
     }
 
@@ -15,11 +15,15 @@ export default class ByOperation {
         return this;
     }
 
-    present(): Promise<WebElement> {
+    getWebElement(): Promise<WebElement> {
         return this.driver.wait(until.elementLocated(this.by), this.timeout);
     }
 
-    public async isPresent(): Promise<boolean> {
+    async present(): Promise<void> {
+        await this.getWebElement();
+    }
+
+    async isPresent(): Promise<boolean> {
         try {
             await this.present();
             return true;

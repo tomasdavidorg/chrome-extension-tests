@@ -15,34 +15,34 @@ export default class GitHubEditorPage extends EditorPage {
     private readonly KOGITO_CONTAINER_LOCATOR = By.className("kogito-iframe-container");
 
     async copyLinkToOnlineEditor(): Promise<void> {
-        (await this.tools.by(this.COPY_LINK_BUTTON_LOCATOR).present()).click();
+        (await this.tools.by(this.COPY_LINK_BUTTON_LOCATOR).getWebElement()).click();
     }
 
     async seeAsSource(): Promise<void> {
         let seeAsSourceButton = await this.tools.by(this.SEE_AS_SOURCE_BUTTON_LOCATOR)
             .withTimeout(2000)
-            .present();
+            .getWebElement();
 
         await this.tools.webElement(seeAsSourceButton).withTimeout(5000).enabled();
         await seeAsSourceButton.click();
     }
 
     async seeAsDiagram() {
-        await (await this.tools.by(this.SEE_AS_DIAGRAM_BUTTON_LOCATOR).present()).click();
+        await (await this.tools.by(this.SEE_AS_DIAGRAM_BUTTON_LOCATOR).getWebElement()).click();
     }
 
     async isSourceVisible(): Promise<boolean> {
-        let sourceWebEl: WebElement = await this.tools.by(this.SOURCE_VIEW_LOCATOR).present();
+        let sourceWebEl: WebElement = await this.tools.by(this.SOURCE_VIEW_LOCATOR).getWebElement();
         return this.tools.webElement(sourceWebEl).withTimeout(1000).isVisible();
     }
 
     async isEditorVisible(): Promise<boolean> {
-        let editorContainer: WebElement = await this.tools.by(this.KOGITO_CONTAINER_LOCATOR).present();
+        let editorContainer: WebElement = await this.tools.by(this.KOGITO_CONTAINER_LOCATOR).getWebElement();
         return this.tools.webElement(editorContainer).withTimeout(1000).isVisible();
     }
 
     async openOnlineEditor(): Promise<OnlineEditorPage> {
-        let onlineEditorButton: WebElement = await this.tools.by(this.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).present();
+        let onlineEditorButton: WebElement = await this.tools.by(this.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).getWebElement();
         onlineEditorButton.click();
 
         await this.tools.driver.wait(async () => {
@@ -58,7 +58,7 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async fullScreen(): Promise<FullscreenPage> {
-        let fullScreenButton: WebElement = await this.tools.by(this.FULL_SCREEN_BUTTON_LOCATOR).present();
+        let fullScreenButton: WebElement = await this.tools.by(this.FULL_SCREEN_BUTTON_LOCATOR).getWebElement();
         await fullScreenButton.click();
         return this.tools.createPage(FullscreenPage);
     }

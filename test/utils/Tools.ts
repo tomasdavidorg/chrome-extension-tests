@@ -1,5 +1,4 @@
 import { WebDriver, By, WebElement } from "selenium-webdriver"
-import Wait from "./tools/Wait"
 import Screenshot from "./tools/ScreenShot"
 import ByOperation from "./tools/ByOperation";
 import Page from "../framework/Page"
@@ -14,36 +13,37 @@ export default class Tools {
 
     readonly driver: WebDriver;
 
-    readonly wait: Wait;
-
     readonly screenShot: Screenshot;
 
     readonly clipboard: Clipboard;
 
     private constructor(driver: WebDriver) {
         this.driver = driver;
-        this.wait = new Wait(this.driver);
         this.screenShot = new Screenshot(this.driver, Tools.SCREENSHOTS_DIR);
         this.clipboard = new Clipboard(this.driver);
     }
 
-    public static async init(): Promise<Tools> {
+    static async init(): Promise<Tools> {
         return new Tools(await Driver.init());
     }
 
-    public by(by: By) {
+    pause(timeout: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+
+    by(by: By): ByOperation {
         return new ByOperation(this.driver, by);
     }
 
-    public webElement(webElement: WebElement): WebElementOperation {
+    webElement(webElement: WebElement): WebElementOperation {
         return new WebElementOperation(this.driver, webElement);
     }
 
-    public createPage<T extends Page>(type: { new(tools: Tools): T }) {
+    createPage<T extends Page>(type: { new(tools: Tools): T }) {
         return new type(this);
     }
 
-    public createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: WebElement): T }, parent: WebElement) {
+    createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: WebElement): T }, parent: WebElement) {
         return new type(this, parent);
     }
 }

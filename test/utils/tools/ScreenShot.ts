@@ -1,14 +1,14 @@
 import { WebDriver } from "selenium-webdriver"
 import * as fs from "fs";
 import * as path from "path"
+import DriverTool from "./DriverTool";
 
-export default class Screenshots {
-
-    driver: WebDriver;
-    screenshotsDir: string;
+export default class Screenshots extends DriverTool {
+    
+    private screenshotsDir: string;
 
     constructor(driver: WebDriver, screenshotsDir: string) {
-        this.driver = driver;
+        super(driver);
         this.screenshotsDir = screenshotsDir;
 
         if (!fs.existsSync(screenshotsDir)) {

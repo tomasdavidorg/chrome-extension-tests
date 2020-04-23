@@ -1,13 +1,13 @@
 import { WebDriver, WebElement, By, until, error } from "selenium-webdriver"
+import DriverTool from "./DriverTool";
 
-export default class WebElementOperation {
+export default class WebElementOperation extends DriverTool {
 
-    private driver: WebDriver;
     private webElement: WebElement;
     private timeout: number = 100;
 
     constructor(driver: WebDriver, webElement: WebElement) {
-        this.driver = driver;
+        super(driver);
         this.webElement = webElement;
     }
 
@@ -21,12 +21,12 @@ export default class WebElementOperation {
         return await this.webElement.findElement(by);
     }
 
-    async enabled(): Promise<WebElement> {
-        return await this.driver.wait(until.elementIsEnabled(this.webElement), this.timeout);
+    async enabled(): Promise<void> {
+        await this.driver.wait(until.elementIsEnabled(this.webElement), this.timeout);
     }
 
-    async visible(): Promise<WebElement> {
-        return await this.driver.wait(until.elementIsVisible(this.webElement), this.timeout);
+    async visible(): Promise<void> {
+        await this.driver.wait(until.elementIsVisible(this.webElement), this.timeout);
     }
 
     async isVisible(): Promise<boolean> {
