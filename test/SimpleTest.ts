@@ -34,11 +34,19 @@ describe("Simple test", () => {
 
         editor.enter();
         let sideBar = await editor.getSideBar();
+
+        let properties = await sideBar.openProperties();
+        expect(await properties.getProcessNameFromInput()).equals("Evaluation");
+        
         let explorer = await sideBar.openExplorer()
 
         expect((await explorer.getNodeNames())).to.have.members(PROCESS_NODES_NAMES);
         expect(await explorer.getProcessName()).equals("Evaluation");
         await explorer.selectNode("PM Evaluation");
+
+        properties = await sideBar.openProperties();
+        expect(await properties.getNameFromTextArea()).equals("PM Evaluation");
+
 
         editor.leave();
 
