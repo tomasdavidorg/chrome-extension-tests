@@ -16,6 +16,7 @@ describe("Simple test", () => {
         const WEB_PAGE = "https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/";
         const EXPECTED_LINK = "/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn";
         const FILE_NAME = "evaluation.bpmn";
+        const PROCESS_NODES_NAMES = ["Start", "Self Evaluation", "PM Evaluation", "HR Evaluation", "Parallel", "Parallel", "End Terminate"];
 
         await tools.driver.get(WEB_PAGE);
 
@@ -30,6 +31,16 @@ describe("Simple test", () => {
         // wait for editor
         let editor: Editor = await gitHubEditorPage.getEditor();
         await editor.load();
+
+        editor.enter();
+        let sideBar = await editor.getSideBar();
+        let explorer = await sideBar.openExplorer()
+
+        expect((await explorer.getNodeNames())).to.have.members(PROCESS_NODES_NAMES);
+        expect(await explorer.getProcessName()).equals("Evaluation");
+        await explorer.selectNode("PM Evaluation");
+
+        editor.leave();
 
         // open and check source editor
         expect(await gitHubEditorPage.isSourceVisible()).false;

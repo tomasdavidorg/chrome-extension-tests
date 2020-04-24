@@ -1,16 +1,18 @@
 import { By } from "selenium-webdriver";
 import PageFragment from "../PageFragment";
+import SideBar from "./SideBar"
 import { performance } from "perf_hooks";
 
 export default class Editor extends PageFragment {
 
     private readonly TOOLS_LOCATOR: By = By.className("fa-eye");
+    private readonly SIDE_BAR_LOCATOR: By = By.className("qe-docks-bar-E");
 
-    private async enter(): Promise<void> {
+    async enter(): Promise<void> {
         await this.tools.driver.switchTo().frame(this.root);
     }
 
-    private async leave(): Promise<void> {
+    async leave(): Promise<void> {
         await this.tools.driver.switchTo().defaultContent();
     }
 
@@ -25,5 +27,8 @@ export default class Editor extends PageFragment {
         await this.leave();
     }
 
-    // TODO add some functions
+    async getSideBar(): Promise<SideBar> {
+        let sideBar = await this.tools.by(this.SIDE_BAR_LOCATOR).withTimeout(1000).getWebElement();
+        return this.tools.createPageFragment(SideBar, sideBar);
+    }
 }

@@ -19,6 +19,10 @@ export default class ByOperation extends DriverTool {
         return await this.driver.wait(until.elementLocated(this.by), this.timeout);
     }
 
+    async getWebElements(): Promise<WebElement[]> {
+        return await this.driver.wait(until.elementsLocated(this.by), this.timeout);
+    }
+
     async present(): Promise<void> {
         await this.getWebElement();
     }
