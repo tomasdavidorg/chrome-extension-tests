@@ -15,4 +15,8 @@ export default class FullscreenPage extends EditorPage {
         await this.tools.driver.executeScript("arguments[0].click();", exitFullscreenButton);
         return this.tools.createPage(GitHubEditorPage);
     }
+
+    public async scrollToTop() {
+        await this.tools.driver.executeScript("window.scrollTo(0, 0);");
+    }
 }

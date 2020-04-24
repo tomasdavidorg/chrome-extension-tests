@@ -40,7 +40,7 @@ describe("Simple test", () => {
         
         let explorer = await sideBar.openExplorer()
 
-        expect((await explorer.getNodeNames())).to.have.members(PROCESS_NODES_NAMES);
+        expect(await explorer.getNodeNames()).to.have.members(PROCESS_NODES_NAMES);
         expect(await explorer.getProcessName()).equals("Evaluation");
         await explorer.selectNode("PM Evaluation");
 
@@ -68,6 +68,7 @@ describe("Simple test", () => {
         let fullScreenPage = await gitHubEditorPage.fullScreen();
         let fullScreenEditor = await fullScreenPage.getEditor();
         await fullScreenEditor.load();
+        await fullScreenPage.scrollToTop();
         gitHubEditorPage = await fullScreenPage.exitFullscreen();
 
         let onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
