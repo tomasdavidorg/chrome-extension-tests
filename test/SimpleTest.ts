@@ -32,7 +32,8 @@ describe("Simple test", () => {
         let editor: Editor = await gitHubEditorPage.getEditor();
         await editor.load();
 
-        editor.enter();
+        await editor.enter();
+        await editor.dragAndDropStartEventToCanvas();
         let sideBar = await editor.getSideBar();
 
         let properties = await sideBar.openProperties();
@@ -40,7 +41,7 @@ describe("Simple test", () => {
         
         let explorer = await sideBar.openExplorer()
 
-        expect(await explorer.getNodeNames()).to.have.members(PROCESS_NODES_NAMES);
+        expect(await explorer.getNodeNames()).to.have.members(PROCESS_NODES_NAMES.concat("Start"));
         expect(await explorer.getProcessName()).equals("Evaluation");
         await explorer.selectNode("PM Evaluation");
 
@@ -48,7 +49,7 @@ describe("Simple test", () => {
         expect(await properties.getNameFromTextArea()).equals("PM Evaluation");
 
 
-        editor.leave();
+        await editor.leave();
 
         // open and check source editor
         expect(await gitHubEditorPage.isSourceVisible()).false;
