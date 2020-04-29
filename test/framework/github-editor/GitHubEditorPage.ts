@@ -1,48 +1,51 @@
-import { By, WebElement, until } from "selenium-webdriver";
-import Page from "../Page";
-import OnlineEditorPage from "../online-editor/OnlineEditorPage"
-import FullscreenPage from "../fullscreen-editor/FullscreenPage"
+import { By, WebElement } from "selenium-webdriver";
+import OnlineEditorPage from "../online-editor/OnlineEditorPage";
+import FullscreenPage from "../fullscreen-editor/FullscreenPage";
 import EditorPage from "../editor/EditorPage";
 
 export default class GitHubEditorPage extends EditorPage {
 
-    private readonly SEE_AS_SOURCE_BUTTON_LOCATOR = By.xpath("//button[@data-testid='see-as-source-button']");
-    private readonly ONLINE_EDITOR_BUTTON_LOCATOR = By.xpath("//button[@data-testid='open-ext-editor-button']");
-    private readonly COPY_LINK_BUTTON_LOCATOR = By.xpath("//button[@data-testid='copy-link-button']");
-    private readonly SEE_AS_DIAGRAM_BUTTON_LOCATOR = By.xpath("//button[@data-testid='see-as-diagram-button']");
-    private readonly FULL_SCREEN_BUTTON_LOCATOR = By.xpath("//button[@data-testid='go-fullscreen-button']");
-    private readonly SOURCE_VIEW_LOCATOR = By.xpath("//div[@itemprop='text']");
-    private readonly KOGITO_CONTAINER_LOCATOR = By.className("kogito-iframe-container");
+    private static readonly SEE_AS_SOURCE_BUTTON_LOCATOR = By.xpath("//button[@data-testid='see-as-source-button']");
+    private static readonly ONLINE_EDITOR_BUTTON_LOCATOR = By.xpath("//button[@data-testid='open-ext-editor-button']");
+    private static readonly COPY_LINK_BUTTON_LOCATOR = By.xpath("//button[@data-testid='copy-link-button']");
+    private static readonly SEE_AS_DIAGRAM_BUTTON_LOCATOR = By.xpath("//button[@data-testid='see-as-diagram-button']");
+    private static readonly FULL_SCREEN_BUTTON_LOCATOR = By.xpath("//button[@data-testid='go-fullscreen-button']");
+    private static readonly SOURCE_VIEW_LOCATOR = By.xpath("//div[@itemprop='text']");
+    private static readonly KOGITO_CONTAINER_LOCATOR = By.className("kogito-iframe-container");
+    private static readonly KOGITO_TOOLBAR_LOCATOR = By.className("kogito-toolbar-container");
+
+    public async load(): Promise<void> {
+        await this.tools.by(GitHubEditorPage.KOGITO_TOOLBAR_LOCATOR)
+            .withTimeout(2000)
+            .present();
+    }
 
     async copyLinkToOnlineEditor(): Promise<void> {
-        (await this.tools.by(this.COPY_LINK_BUTTON_LOCATOR).getWebElement()).click();
+        (await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).getWebElement()).click();
     }
 
     async seeAsSource(): Promise<void> {
-        let seeAsSourceButton = await this.tools.by(this.SEE_AS_SOURCE_BUTTON_LOCATOR)
-            .withTimeout(2000)
+        let seeAsSourceButton = await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR)
             .getWebElement();
-
-        await this.tools.webElement(seeAsSourceButton).withTimeout(5000).enabled();
         await seeAsSourceButton.click();
     }
 
     async seeAsDiagram() {
-        await (await this.tools.by(this.SEE_AS_DIAGRAM_BUTTON_LOCATOR).getWebElement()).click();
+        await (await this.tools.by(GitHubEditorPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).getWebElement()).click();
     }
 
     async isSourceVisible(): Promise<boolean> {
-        let sourceWebEl: WebElement = await this.tools.by(this.SOURCE_VIEW_LOCATOR).getWebElement();
+        let sourceWebEl: WebElement = await this.tools.by(GitHubEditorPage.SOURCE_VIEW_LOCATOR).getWebElement();
         return this.tools.webElement(sourceWebEl).withTimeout(1000).isVisible();
     }
 
     async isEditorVisible(): Promise<boolean> {
-        let editorContainer: WebElement = await this.tools.by(this.KOGITO_CONTAINER_LOCATOR).getWebElement();
+        let editorContainer: WebElement = await this.tools.by(GitHubEditorPage.KOGITO_CONTAINER_LOCATOR).getWebElement();
         return this.tools.webElement(editorContainer).withTimeout(1000).isVisible();
     }
 
     async openOnlineEditor(): Promise<OnlineEditorPage> {
-        let onlineEditorButton: WebElement = await this.tools.by(this.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).getWebElement();
+        let onlineEditorButton: WebElement = await this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).getWebElement();
         onlineEditorButton.click();
 
         await this.tools.driver.wait(async () => {
@@ -58,7 +61,7 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async fullScreen(): Promise<FullscreenPage> {
-        let fullScreenButton: WebElement = await this.tools.by(this.FULL_SCREEN_BUTTON_LOCATOR).getWebElement();
+        let fullScreenButton: WebElement = await this.tools.by(GitHubEditorPage.FULL_SCREEN_BUTTON_LOCATOR).getWebElement();
         await fullScreenButton.click();
         return this.tools.createPage(FullscreenPage);
     }

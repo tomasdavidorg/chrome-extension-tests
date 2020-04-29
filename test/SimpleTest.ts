@@ -21,16 +21,14 @@ describe("Simple test", () => {
         await tools.driver.get(WEB_PAGE);
 
         // check link to online editor in file list
-        let gitHubListPage: GitHubListPage = tools.createPage(GitHubListPage);
+        let gitHubListPage: GitHubListPage = await tools.createPage(GitHubListPage);
         let gitHubFile: GitHubListItem = await gitHubListPage.getFile(FILE_NAME)
         let linkText = await gitHubFile.getLinkToOnlineEditor();
         expect(linkText).contains(EXPECTED_LINK);
 
         let gitHubEditorPage = await gitHubFile.open();
 
-        // wait for editor
         let editor: Editor = await gitHubEditorPage.getEditor();
-        await editor.load();
 
         await editor.enter();
         await editor.dragAndDropStartEventToCanvas();
@@ -47,7 +45,6 @@ describe("Simple test", () => {
 
         properties = await sideBar.openProperties();
         expect(await properties.getNameFromTextArea()).equals("PM Evaluation");
-
 
         await editor.leave();
 
@@ -67,15 +64,12 @@ describe("Simple test", () => {
         expect(clipboadText).contains(EXPECTED_LINK);
 
         let fullScreenPage = await gitHubEditorPage.fullScreen();
-        let fullScreenEditor = await fullScreenPage.getEditor();
-        await fullScreenEditor.load();
+        await fullScreenPage.getEditor();
         await fullScreenPage.scrollToTop();
         gitHubEditorPage = await fullScreenPage.exitFullscreen();
 
         let onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
-        let onlineEditor = await onlineEditorPage.getEditor();
-        await onlineEditor.load()
-
+        await onlineEditorPage.getEditor();
     })
 
     afterEach(async () => {

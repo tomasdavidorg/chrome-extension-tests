@@ -39,11 +39,15 @@ export default class Tools {
         return new WebElementOperation(this.driver, webElement);
     }
 
-    createPage<T extends Page>(type: { new(tools: Tools): T }) {
-        return new type(this);
+    async createPage<T extends Page>(type: { new(tools: Tools): T }): Promise<T> {
+        const page: T = new type(this);
+        await page.load();
+        return page;
     }
 
-    createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: WebElement): T }, parent: WebElement) {
-        return new type(this, parent);
+    async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: WebElement): T }, parent: WebElement): Promise<T> {
+        const pageFragment = new type(this, parent);
+        await pageFragment.load();
+        return pageFragment;
     }
 }

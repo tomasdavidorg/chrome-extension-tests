@@ -3,10 +3,15 @@ import { By, WebElement } from "selenium-webdriver";
 
 export default class Explorer extends PageFragment {
 
-    private readonly ITEM_LOCATOR = By.className("gwt-Anchor");
+    private static readonly PANEL_LOCATOR = By.xpath("//div[@data-field='explorerPanelBody']");
+    private static readonly ITEM_LOCATOR = By.className("gwt-Anchor");
+
+    public async load(): Promise<void> {
+        this.tools.by(Explorer.PANEL_LOCATOR).withTimeout(1000).present();
+    }
 
     private async getItems(): Promise<WebElement[]> {
-        return await this.tools.by(this.ITEM_LOCATOR).getWebElements();
+        return await this.tools.by(Explorer.ITEM_LOCATOR).getWebElements();
     }
 
     private async getNodes(): Promise<WebElement[]> {

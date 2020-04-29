@@ -1,10 +1,12 @@
 import Tools from "../utils/Tools";
 
-export default class Page {
+export default abstract class Page {
 
-    protected tools: Tools;
+    protected readonly tools: Tools;
 
     public constructor(tools: Tools) {
         this.tools = tools;
     }
+
+    public abstract async load(): Promise<void>;
 }
