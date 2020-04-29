@@ -44,7 +44,7 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async isEditorVisible(): Promise<boolean> {
-        let editorContainer: WebElement = await this.tools.by(GitHubEditorPage.KOGITO_CONTAINER_LOCATOR).getWebElement();
+        const editorContainer: WebElement = await this.tools.by(GitHubEditorPage.KOGITO_CONTAINER_LOCATOR).getWebElement();
         return this.tools.webElement(editorContainer).withTimeout(1000).isVisible();
     }
 

@@ -21,30 +21,30 @@ describe("Simple test", () => {
         await tools.driver.get(WEB_PAGE);
 
         // check link to online editor in file list
-        let gitHubListPage: GitHubListPage = await tools.createPage(GitHubListPage);
-        let gitHubFile: GitHubListItem = await gitHubListPage.getFile(FILE_NAME)
-        let linkText = await gitHubFile.getLinkToOnlineEditor();
+        const gitHubListPage: GitHubListPage = await tools.createPage(GitHubListPage);
+        const gitHubFile: GitHubListItem = await gitHubListPage.getFile(FILE_NAME)
+        const linkText = await gitHubFile.getLinkToOnlineEditor();
         expect(linkText).contains(EXPECTED_LINK);
 
         let gitHubEditorPage = await gitHubFile.open();
 
-        let editor: Editor = await gitHubEditorPage.getEditor();
+        const editor: Editor = await gitHubEditorPage.getEditor();
 
         await editor.enter();
         await editor.dragAndDropStartEventToCanvas();
-        let sideBar = await editor.getSideBar();
+        const sideBar = await editor.getSideBar();
 
-        let properties = await sideBar.openProperties();
-        expect(await properties.getProcessNameFromInput()).equals("Evaluation");
+        const processProps = await sideBar.openProperties();
+        expect(await processProps.getProcessNameFromInput()).equals("Evaluation");
         
-        let explorer = await sideBar.openExplorer()
+        const explorer = await sideBar.openExplorer()
 
         expect(await explorer.getNodeNames()).to.have.members(PROCESS_NODES_NAMES.concat("Start"));
         expect(await explorer.getProcessName()).equals("Evaluation");
         await explorer.selectNode("PM Evaluation");
 
-        properties = await sideBar.openProperties();
-        expect(await properties.getNameFromTextArea()).equals("PM Evaluation");
+        const nodeProps = await sideBar.openProperties();
+        expect(await nodeProps.getNameFromTextArea()).equals("PM Evaluation");
 
         await editor.leave();
 
@@ -60,15 +60,15 @@ describe("Simple test", () => {
 
         // check link to online editor from clipboard
         await gitHubEditorPage.copyLinkToOnlineEditor()
-        let clipboadText = await tools.clipboard.getContent();
+        const clipboadText = await tools.clipboard.getContent();
         expect(clipboadText).contains(EXPECTED_LINK);
 
-        let fullScreenPage = await gitHubEditorPage.fullScreen();
+        const fullScreenPage = await gitHubEditorPage.fullScreen();
         await fullScreenPage.getEditor();
         await fullScreenPage.scrollToTop();
         gitHubEditorPage = await fullScreenPage.exitFullscreen();
 
-        let onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
+        const onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
         await onlineEditorPage.getEditor();
     })
 
