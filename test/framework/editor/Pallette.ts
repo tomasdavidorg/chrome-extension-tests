@@ -18,7 +18,7 @@ export default class Pallette extends PageFragment {
         // move to canvas
         // no other way of drag and drop does not work
         const actions = await this.tools.driver.actions();
-        await actions.move({ x: 1000, y: 200 }).perform();
+        await actions.move({origin: startEvent, x: 200, y: 0 }).perform();
         await actions.click().perform();
         await webElement.click();
 
