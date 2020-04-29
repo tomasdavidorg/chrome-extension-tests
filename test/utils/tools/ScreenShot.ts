@@ -16,14 +16,14 @@ export default class Screenshots extends DriverTool {
         }
     }
 
-    async takePng(fileName: string) {
+    public async takePng(fileName: string) {
         const pngPath = path.join(this.screenshotsDir, fileName + ".png");
         await this.driver.takeScreenshot().then((image) => {
             fs.writeFileSync(pngPath, image, "base64");
         })
     }
 
-    async takeHtml(fileName: string) {
+    public async takeHtml(fileName: string) {
         const pageSource = await this.driver.getPageSource();
         const htmlPath = path.join(this.screenshotsDir, fileName + ".html");
         fs.writeFileSync(htmlPath, pageSource, "utf8");

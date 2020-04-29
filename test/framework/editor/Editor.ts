@@ -23,20 +23,20 @@ export default class Editor extends PageFragment {
         await this.leave();
     }
 
-    async enter(): Promise<void> {
+    public async enter(): Promise<void> {
         await this.tools.driver.switchTo().frame(this.root);
     }
 
-    async leave(): Promise<void> {
+    public async leave(): Promise<void> {
         await this.tools.driver.switchTo().defaultContent();
     }
 
-    async getSideBar(): Promise<SideBar> {
+    public async getSideBar(): Promise<SideBar> {
         const sideBar = await this.tools.by(Editor.SIDE_BAR_LOCATOR).withTimeout(1000).getWebElement();
         return this.tools.createPageFragment(SideBar, sideBar);
     }
 
-    async dragAndDropStartEventToCanvas() {
+    public async dragAndDropStartEventToCanvas() {
         const palletteElement = await this.tools.by(Editor.PALLETTE_LOCATOR).getWebElement();
         const pallette = await this.tools.createPageFragment(Pallette, palletteElement);
         await pallette.dragAndDropStartEventToCanvas();

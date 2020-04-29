@@ -11,11 +11,11 @@ export default class Tools {
 
     private static readonly SCREENSHOTS_DIR: string = "screenshots";
 
-    readonly driver: WebDriver;
+    public readonly driver: WebDriver;
 
-    readonly screenShot: Screenshot;
+    public readonly screenShot: Screenshot;
 
-    readonly clipboard: Clipboard;
+    public readonly clipboard: Clipboard;
 
     private constructor(driver: WebDriver) {
         this.driver = driver;
@@ -23,29 +23,29 @@ export default class Tools {
         this.clipboard = new Clipboard(this.driver);
     }
 
-    static async init(): Promise<Tools> {
+    public static async init(): Promise<Tools> {
         return new Tools(await Driver.init());
     }
 
-    pause(timeout: number): Promise<void> {
+    public pause(timeout: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, timeout));
     }
 
-    by(by: By): ByOperation {
+    public by(by: By): ByOperation {
         return new ByOperation(this.driver, by);
     }
 
-    webElement(webElement: WebElement): WebElementOperation {
+    public webElement(webElement: WebElement): WebElementOperation {
         return new WebElementOperation(this.driver, webElement);
     }
 
-    async createPage<T extends Page>(type: { new(tools: Tools): T }): Promise<T> {
+    public async createPage<T extends Page>(type: { new(tools: Tools): T }): Promise<T> {
         const page: T = new type(this);
         await page.load();
         return page;
     }
 
-    async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: WebElement): T }, parent: WebElement): Promise<T> {
+    public async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: WebElement): T }, parent: WebElement): Promise<T> {
         const pageFragment = new type(this, parent);
         await pageFragment.load();
         return pageFragment;

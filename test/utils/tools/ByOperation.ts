@@ -10,24 +10,24 @@ export default class ByOperation extends DriverTool {
         this.by = by;
     }
 
-    withTimeout(timeout: number): ByOperation {
+    public withTimeout(timeout: number): ByOperation {
         this.timeout = timeout;
         return this;
     }
 
-    async getWebElement(): Promise<WebElement> {
+    public async getWebElement(): Promise<WebElement> {
         return await this.driver.wait(until.elementLocated(this.by), this.timeout);
     }
 
-    async getWebElements(): Promise<WebElement[]> {
+    public async getWebElements(): Promise<WebElement[]> {
         return await this.driver.wait(until.elementsLocated(this.by), this.timeout);
     }
 
-    async present(): Promise<void> {
+    public async present(): Promise<void> {
         await this.getWebElement();
     }
 
-    async isPresent(): Promise<boolean> {
+    public async isPresent(): Promise<boolean> {
         try {
             await this.present();
             return true;
@@ -40,11 +40,11 @@ export default class ByOperation extends DriverTool {
         }
     }
 
-    async absent(): Promise<void> {
+    public async absent(): Promise<void> {
         await this.driver.wait(async () => (await this.driver.findElements(this.by)).length == 0, this.timeout);
     }
 
-    async isAbsent(): Promise<boolean> {
+    public async isAbsent(): Promise<boolean> {
         try {
             await this.absent();
             return true;

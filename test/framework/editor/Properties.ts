@@ -20,11 +20,11 @@ export default class Properties extends PageFrament {
         return await property.getAttribute("value");
     }
 
-    async getNameFromTextArea(): Promise<string> {
+    public async getNameFromTextArea(): Promise<string> {
         return await this.getValue("textarea", ".general.name");
     }
 
-    async getProcessNameFromInput(): Promise<string> {
+    public async getProcessNameFromInput(): Promise<string> {
         return await this.getValue("input", "diagramSet.name");
     }
 }

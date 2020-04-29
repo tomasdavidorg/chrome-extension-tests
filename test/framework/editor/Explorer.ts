@@ -29,17 +29,17 @@ export default class Explorer extends PageFragment {
         throw new Error("Node '" + name + "' was not found.")
     }
 
-    async getProcessName(): Promise<string> {
+    public async getProcessName(): Promise<string> {
         const items: WebElement[] = await this.getItems();
         return await items[0].getText();
     }
 
-    async getNodeNames(): Promise<string[]> {
+    public async getNodeNames(): Promise<string[]> {
         const nodes: WebElement[] = await this.getNodes();
         return Promise.all(nodes.map(node => node.getText()));
     }
 
-    async selectNode(name: string): Promise<void> {
+    public async selectNode(name: string): Promise<void> {
         const node: WebElement = await this.getNode(name);
         await node.click();
     }

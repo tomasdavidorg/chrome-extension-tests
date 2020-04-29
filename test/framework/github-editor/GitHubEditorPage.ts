@@ -21,34 +21,34 @@ export default class GitHubEditorPage extends EditorPage {
             .present();
     }
 
-    async copyLinkToOnlineEditor(): Promise<void> {
+    public async copyLinkToOnlineEditor(): Promise<void> {
         const copyLinkButton: WebElement = await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).getWebElement();
         await copyLinkButton.click();
         await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).withTimeout(1000).present();
         await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).withTimeout(5000).absent();        
     }
 
-    async seeAsSource(): Promise<void> {
+    public async seeAsSource(): Promise<void> {
         const seeAsSourceButton = await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR)
             .getWebElement();
         await seeAsSourceButton.click();
     }
 
-    async seeAsDiagram() {
+    public async seeAsDiagram() {
         await (await this.tools.by(GitHubEditorPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).getWebElement()).click();
     }
 
-    async isSourceVisible(): Promise<boolean> {
+    public async isSourceVisible(): Promise<boolean> {
         const sourceWebEl: WebElement = await this.tools.by(GitHubEditorPage.SOURCE_VIEW_LOCATOR).getWebElement();
         return this.tools.webElement(sourceWebEl).withTimeout(1000).isVisible();
     }
 
-    async isEditorVisible(): Promise<boolean> {
+    public async isEditorVisible(): Promise<boolean> {
         const editorContainer: WebElement = await this.tools.by(GitHubEditorPage.KOGITO_CONTAINER_LOCATOR).getWebElement();
         return this.tools.webElement(editorContainer).withTimeout(1000).isVisible();
     }
 
-    async openOnlineEditor(): Promise<OnlineEditorPage> {
+    public async openOnlineEditor(): Promise<OnlineEditorPage> {
         const onlineEditorButton: WebElement = await this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).getWebElement();
         onlineEditorButton.click();
 
@@ -64,7 +64,7 @@ export default class GitHubEditorPage extends EditorPage {
         return this.tools.createPage(OnlineEditorPage);
     }
 
-    async fullScreen(): Promise<FullscreenPage> {
+    public async fullScreen(): Promise<FullscreenPage> {
         const fullScreenButton: WebElement = await this.tools.by(GitHubEditorPage.FULL_SCREEN_BUTTON_LOCATOR).getWebElement();
         await this.tools.driver.executeScript("arguments[0].click();", fullScreenButton);
         // sometimes button cannot be pushed

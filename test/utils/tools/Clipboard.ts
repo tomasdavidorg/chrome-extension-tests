@@ -4,7 +4,7 @@ import DriverTool from "./DriverTool";
 
 export default class Clipboard extends DriverTool {
 
-    async getContent(): Promise<string> {
+    public async getContent(): Promise<string> {
         const ADD_HELPER_INPUT_CMD: string = "input=document.createElement('input');" +
             "input.setAttribute('id','copyPaste');" +
             "return document.getElementsByTagName('body')[0].appendChild(input)";

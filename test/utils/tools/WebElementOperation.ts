@@ -6,34 +6,34 @@ export default class WebElementOperation extends DriverTool {
     private webElement: WebElement;
     private timeout: number = 100;
 
-    constructor(driver: WebDriver, webElement: WebElement) {
+    public constructor(driver: WebDriver, webElement: WebElement) {
         super(driver);
         this.webElement = webElement;
     }
 
-    withTimeout(timeout: number): WebElementOperation {
+    public withTimeout(timeout: number): WebElementOperation {
         this.timeout = timeout;
         return this;
     }
 
-    async find(by: By): Promise<WebElement> {
+    public async find(by: By): Promise<WebElement> {
         await this.driver.wait(async () => (await this.webElement.findElements(by)).length == 1, this.timeout);
         return await this.webElement.findElement(by);
     }
 
-    async enabled(): Promise<void> {
+    public async enabled(): Promise<void> {
         await this.driver.wait(until.elementIsEnabled(this.webElement), this.timeout);
     }
 
-    async visible(): Promise<void> {
+    public async visible(): Promise<void> {
         await this.driver.wait(until.elementIsVisible(this.webElement), this.timeout);
     }
 
-    async hasValue(): Promise<void> {
+    public async hasValue(): Promise<void> {
         await this.driver.wait(async () => (await this.webElement.getAttribute("value")) !== "", this.timeout)
     }
 
-    async isVisible(): Promise<boolean> {
+    public async isVisible(): Promise<boolean> {
         try {
             await this.visible();
             return true;
@@ -46,7 +46,7 @@ export default class WebElementOperation extends DriverTool {
         }
     }
 
-    async scroll(): Promise<void> {
+    public async scroll(): Promise<void> {
         await this.driver.executeScript("arguments[0].scrollIntoView(true);", this.webElement);
     }
 }

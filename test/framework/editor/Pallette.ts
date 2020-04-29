@@ -12,7 +12,7 @@ export default class Pallette extends PageFragment {
         await this.tools.by(Pallette.LOCATOR).withTimeout(1000).present();
     }
 
-    async dragAndDropStartEventToCanvas() {
+    public async dragAndDropStartEventToCanvas() {
         // open start events
         const startEvent = await this.tools.by(Pallette.START_EVENTS_LOCATOR).getWebElement();
         await startEvent.click();
@@ -29,6 +29,5 @@ export default class Pallette extends PageFragment {
 
         // close start events pallette
         await (await this.tools.by(Pallette.CLOSE_LOCATOR).getWebElement()).click();
-
     }
 }
