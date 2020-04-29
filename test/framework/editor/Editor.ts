@@ -38,7 +38,8 @@ export default class Editor extends PageFragment {
     async dragAndDropStartEventToCanvas() {
         const palletteElement = await this.tools.by(this.PALLETTE_LOCATOR).getWebElement();
         const pallette = await this.tools.createPageFragment(Pallette, palletteElement);
+        await pallette.dragAndDropStartEventToCanvas();
         const canvas = await this.tools.by(this.CANVAS_LOCATOR).getWebElement();
-        await pallette.dragAndDropStarEventTo(canvas);
+        await canvas.click();
     }
 }
