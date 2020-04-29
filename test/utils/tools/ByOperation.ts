@@ -6,7 +6,7 @@ export default class ByOperation extends DriverTool {
     private timeout: number = 100;
 
     constructor(driver: WebDriver, by: By) {
-        super(driver)
+        super(driver);
         this.by = by;
     }
 

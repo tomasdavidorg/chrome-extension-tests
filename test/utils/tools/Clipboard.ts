@@ -28,6 +28,6 @@ export default class Clipboard extends DriverTool {
     }
 
     //await this.tools.driver.executeScript("arguments[0].style.backgroundColor = '#ff0000';", await this.parent.findElement(By.xpath(".//a")))  
-    //await this.tools.wait.pause(2000)
+    //await this.tools.wait.pause(2000);
 
 }

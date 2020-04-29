@@ -26,7 +26,7 @@ export default class Explorer extends PageFragment {
                 return node;
             }
         }
-        throw new Error("Node '" + name + "' was not found.")
+        throw new Error("Node '" + name + "' was not found.");
     }
 
     public async getProcessName(): Promise<string> {

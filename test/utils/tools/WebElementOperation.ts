@@ -30,7 +30,7 @@ export default class WebElementOperation extends DriverTool {
     }
 
     public async hasValue(): Promise<void> {
-        await this.driver.wait(async () => (await this.webElement.getAttribute("value")) !== "", this.timeout)
+        await this.driver.wait(async () => (await this.webElement.getAttribute("value")) !== "", this.timeout);
     }
 
     public async isVisible(): Promise<boolean> {

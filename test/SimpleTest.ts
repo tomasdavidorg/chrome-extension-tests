@@ -22,7 +22,7 @@ describe("Simple test", () => {
 
         // check link to online editor in file list
         const gitHubListPage: GitHubListPage = await tools.createPage(GitHubListPage);
-        const gitHubFile: GitHubListItem = await gitHubListPage.getFile(FILE_NAME)
+        const gitHubFile: GitHubListItem = await gitHubListPage.getFile(FILE_NAME);
         const linkText = await gitHubFile.getLinkToOnlineEditor();
         expect(linkText).contains(EXPECTED_LINK);
 
@@ -37,7 +37,7 @@ describe("Simple test", () => {
         const processProps = await sideBar.openProperties();
         expect(await processProps.getProcessNameFromInput()).equals("Evaluation");
         
-        const explorer = await sideBar.openExplorer()
+        const explorer = await sideBar.openExplorer();
 
         expect(await explorer.getNodeNames()).to.have.members(PROCESS_NODES_NAMES.concat("Start"));
         expect(await explorer.getProcessName()).equals("Evaluation");
@@ -59,7 +59,7 @@ describe("Simple test", () => {
         expect(await gitHubEditorPage.isEditorVisible()).true;
 
         // check link to online editor from clipboard
-        await gitHubEditorPage.copyLinkToOnlineEditor()
+        await gitHubEditorPage.copyLinkToOnlineEditor();
         const clipboadText = await tools.clipboard.getContent();
         expect(clipboadText).contains(EXPECTED_LINK);
 
@@ -70,7 +70,7 @@ describe("Simple test", () => {
 
         const onlineEditorPage = await gitHubEditorPage.openOnlineEditor();
         await onlineEditorPage.getEditor();
-    })
+    });
 
     afterEach(async () => {
         await tools.driver.switchTo().defaultContent();
@@ -78,4 +78,4 @@ describe("Simple test", () => {
         await tools.screenShot.takePng("screenshot_after_test");
         await tools.driver.quit();
     });
-})
+});
