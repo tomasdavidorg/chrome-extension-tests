@@ -39,4 +39,21 @@ export default class ByOperation extends DriverTool {
             }
         }
     }
+
+    async absent(): Promise<void> {
+        await this.driver.wait(async () => (await this.driver.findElements(this.by)).length == 0, this.timeout);
+    }
+
+    async isAbsent(): Promise<boolean> {
+        try {
+            await this.absent();
+            return true;
+        } catch (err) {
+            if (err instanceof error.TimeoutError) {
+                return false;
+            } else {
+                throw err;
+            }
+        }
+    }
 }

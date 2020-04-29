@@ -8,6 +8,7 @@ export default class GitHubEditorPage extends EditorPage {
     private static readonly SEE_AS_SOURCE_BUTTON_LOCATOR = By.xpath("//button[@data-testid='see-as-source-button']");
     private static readonly ONLINE_EDITOR_BUTTON_LOCATOR = By.xpath("//button[@data-testid='open-ext-editor-button']");
     private static readonly COPY_LINK_BUTTON_LOCATOR = By.xpath("//button[@data-testid='copy-link-button']");
+    private static readonly COPY_LINK_ALERT_LOCATOR = By.xpath("//div[@data-testid='link-copied-alert']");
     private static readonly SEE_AS_DIAGRAM_BUTTON_LOCATOR = By.xpath("//button[@data-testid='see-as-diagram-button']");
     private static readonly FULL_SCREEN_BUTTON_LOCATOR = By.xpath("//button[@data-testid='go-fullscreen-button']");
     private static readonly SOURCE_VIEW_LOCATOR = By.xpath("//div[@itemprop='text']");
@@ -21,11 +22,14 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async copyLinkToOnlineEditor(): Promise<void> {
-        (await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).getWebElement()).click();
+        const copyLinkButton: WebElement = await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).getWebElement();
+        await copyLinkButton.click();
+        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).withTimeout(1000).present();
+        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).withTimeout(5000).absent();        
     }
 
     async seeAsSource(): Promise<void> {
-        let seeAsSourceButton = await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR)
+        const seeAsSourceButton = await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR)
             .getWebElement();
         await seeAsSourceButton.click();
     }
@@ -35,7 +39,7 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async isSourceVisible(): Promise<boolean> {
-        let sourceWebEl: WebElement = await this.tools.by(GitHubEditorPage.SOURCE_VIEW_LOCATOR).getWebElement();
+        const sourceWebEl: WebElement = await this.tools.by(GitHubEditorPage.SOURCE_VIEW_LOCATOR).getWebElement();
         return this.tools.webElement(sourceWebEl).withTimeout(1000).isVisible();
     }
 
