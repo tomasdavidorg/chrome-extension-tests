@@ -49,15 +49,15 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async openOnlineEditor(): Promise<OnlineEditorPage> {
-        let onlineEditorButton: WebElement = await this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).getWebElement();
+        const onlineEditorButton: WebElement = await this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).getWebElement();
         onlineEditorButton.click();
 
         await this.tools.driver.wait(async () => {
-            let windowHandles = await this.tools.driver.getAllWindowHandles();
+            const windowHandles = await this.tools.driver.getAllWindowHandles();
             return (windowHandles.length > 1);
         }, 5000);
 
-        let windowHandles = await this.tools.driver.getAllWindowHandles();
+        const windowHandles = await this.tools.driver.getAllWindowHandles();
 
         await this.tools.driver.switchTo().window(windowHandles[1]);
 
@@ -65,8 +65,10 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     async fullScreen(): Promise<FullscreenPage> {
-        let fullScreenButton: WebElement = await this.tools.by(GitHubEditorPage.FULL_SCREEN_BUTTON_LOCATOR).getWebElement();
-        await fullScreenButton.click();
+        const fullScreenButton: WebElement = await this.tools.by(GitHubEditorPage.FULL_SCREEN_BUTTON_LOCATOR).getWebElement();
+        await this.tools.driver.executeScript("arguments[0].click();", fullScreenButton);
+        // sometimes button cannot be pushed
+        // await fullScreenButton.click();
         return this.tools.createPage(FullscreenPage);
     }
 }

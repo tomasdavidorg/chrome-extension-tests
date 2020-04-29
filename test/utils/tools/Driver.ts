@@ -15,7 +15,7 @@ export default class Driver {
         }
 
         // init chrome options
-        let chromeOptions = new Options();
+        const chromeOptions = new Options();
         chromeOptions.addArguments("--load-extension=" + chromeExtensionPath);
 
         // init chrome driver log
@@ -23,11 +23,11 @@ export default class Driver {
         if (!fs.existsSync(LOGS_DIR)) {
             fs.mkdirSync(LOGS_DIR);
         }
-        let chromeServiceBuilder = new ServiceBuilder();
+        const chromeServiceBuilder = new ServiceBuilder();
         chromeServiceBuilder.loggingTo(LOGS_DIR + "/chromedriver.log").enableVerboseLogging();
 
         // init chrome driver
-        let driver: WebDriver = await new Builder()
+        const driver: WebDriver = await new Builder()
             .withCapabilities(Capabilities.chrome())
             .setChromeService(chromeServiceBuilder)
             .forBrowser(Browser.CHROME)

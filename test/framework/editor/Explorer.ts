@@ -15,13 +15,13 @@ export default class Explorer extends PageFragment {
     }
 
     private async getNodes(): Promise<WebElement[]> {
-        let items: WebElement[] = await this.getItems();
+        const items: WebElement[] = await this.getItems();
         items.shift();
         return items;
     }
 
     private async getNode(name: string): Promise<WebElement> {
-        for (let node of await this.getNodes()) {
+        for (const node of await this.getNodes()) {
             if (await node.getText() === name) {
                 return node;
             }
@@ -30,17 +30,17 @@ export default class Explorer extends PageFragment {
     }
 
     async getProcessName(): Promise<string> {
-        let items: WebElement[] = await this.getItems();
+        const items: WebElement[] = await this.getItems();
         return await items[0].getText();
     }
 
     async getNodeNames(): Promise<string[]> {
-        let nodes: WebElement[] = await this.getNodes();
+        const nodes: WebElement[] = await this.getNodes();
         return Promise.all(nodes.map(node => node.getText()));
     }
 
     async selectNode(name: string): Promise<void> {
-        let node: WebElement = await this.getNode(name);
+        const node: WebElement = await this.getNode(name);
         await node.click();
     }
 }
