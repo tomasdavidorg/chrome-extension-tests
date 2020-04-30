@@ -10,7 +10,7 @@ export default class SideBar extends PageFragment {
     private static readonly EXPANDED_BAR_LOCATOR = By.className("qe-docks-bar-expanded-E");
 
     public async load(): Promise<void> {
-        this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).withTimeout(1000).present();
+        await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).withTimeout(1000).present();
     }
 
     private async openSideBar(byIcon: WebElement): Promise<WebElement> {
@@ -22,6 +22,11 @@ export default class SideBar extends PageFragment {
         const diagramButton: WebElement = await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).getWebElement();
         const sideBar = await this.openSideBar(diagramButton);
         return this.tools.createPageFragment(Explorer, sideBar);
+    }
+
+    public async closeActiveSideBar(): Promise<void> {
+        const activeSideBar: WebElement = await this.tools.webElement(this.root).withTimeout(1000).find(By.xpath("active"));
+        await activeSideBar.click();
     }
 
     public async openProperties(): Promise<Properties> {

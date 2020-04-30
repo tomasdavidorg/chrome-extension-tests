@@ -27,10 +27,11 @@ export default class Tools {
         return new Tools(await Driver.init());
     }
 
-    public async finish(): Promise<void> {
+    public async finish(testName: string): Promise<void> {
+        const screenShotName: string = testName + "_screenshot_after_test";
         await this.driver.switchTo().defaultContent();
-        await this.screenShot.takeHtml("screenshot_after_test");
-        await this.screenShot.takePng("screenshot_after_test");
+        await this.screenShot.takeHtml(screenShotName);
+        await this.screenShot.takePng(screenShotName);
         await this.driver.quit();
     }
 
@@ -44,6 +45,11 @@ export default class Tools {
 
     public webElement(webElement: WebElement): WebElementOperation {
         return new WebElementOperation(this.driver, webElement);
+    }
+
+    public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {
+        await this.driver.get(url);
+        return await this.createPage(type);
     }
 
     public async createPage<T extends Page>(type: { new(tools: Tools): T }): Promise<T> {

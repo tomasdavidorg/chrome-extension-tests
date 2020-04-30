@@ -27,4 +27,8 @@ export default class Properties extends PageFrament {
     public async getProcessNameFromInput(): Promise<string> {
         return await this.getValue("input", "diagramSet.name");
     }
+
+    public async getDmnNameFromInput(): Promise<string> {
+        return await this.getValue("input", ".definitions.nameHolder")
+    }
 }
