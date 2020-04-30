@@ -4,7 +4,7 @@ import GitHubListPage from "./framework/github-file-list/GitHubListPage";
 import GitHubListItem from './framework/github-file-list/GitHubListItem';
 import Editor from "./framework/editor/Editor";
 
-describe("Simple test", () => {
+describe("BPMN test", () => {
 
     let tools: Tools;
 
@@ -12,7 +12,7 @@ describe("Simple test", () => {
         tools = await Tools.init();
     });
 
-    it("just test", async () => {
+    it("", async () => {
         const WEB_PAGE = "https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/";
         const EXPECTED_LINK = "/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn";
         const FILE_NAME = "evaluation.bpmn";
@@ -73,9 +73,6 @@ describe("Simple test", () => {
     });
 
     afterEach(async () => {
-        await tools.driver.switchTo().defaultContent();
-        await tools.screenShot.takeHtml("screenshot_after_test");
-        await tools.screenShot.takePng("screenshot_after_test");
-        await tools.driver.quit();
+        await tools.finish();
     });
 });

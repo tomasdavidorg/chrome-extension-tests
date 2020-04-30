@@ -27,6 +27,13 @@ export default class Tools {
         return new Tools(await Driver.init());
     }
 
+    public async finish(): Promise<void> {
+        await this.driver.switchTo().defaultContent();
+        await this.screenShot.takeHtml("screenshot_after_test");
+        await this.screenShot.takePng("screenshot_after_test");
+        await this.driver.quit();
+    }
+
     public pause(timeout: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, timeout));
     }
