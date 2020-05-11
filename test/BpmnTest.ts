@@ -32,7 +32,6 @@ describe("BPMN test", () => {
         // drag and drop startEvent to canvas
         await bpmnEditor.enter();
         await bpmnEditor.dragAndDropStartEventToCanvas();
-        await bpmnEditor.clickToCanvas();
 
         // check process properties
         const sideBar = await bpmnEditor.getSideBar();

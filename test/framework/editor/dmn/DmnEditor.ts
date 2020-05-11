@@ -1,5 +1,6 @@
 import Editor from "../Editor";
 import DmnPalette from "./DmnPallette"
+import DmnSideBar from "./DmnSideBar"
 import { By, WebElement } from "selenium-webdriver";
 import { performance } from "perf_hooks";
 
@@ -22,5 +23,10 @@ export default class DmnEditor extends Editor {
         console.debug("Plugin was loaded in " + (endTime - startTime));
 
         await this.leave();
+    }
+
+    public async getSideBar(): Promise<DmnSideBar> {
+        const sideBar = await this.tools.by(Editor.SIDE_BAR_LOCATOR).withTimeout(1000).getWebElement();
+        return this.tools.createPageFragment(DmnSideBar, sideBar);
     }
 }

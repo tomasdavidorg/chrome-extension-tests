@@ -4,7 +4,7 @@ import SideBar from "./SideBar"
 
 export default abstract class Editor extends PageFragment {
 
-    private static readonly SIDE_BAR_LOCATOR: By = By.className("qe-docks-bar-E");
+    protected static readonly SIDE_BAR_LOCATOR: By = By.className("qe-docks-bar-E");
     private static readonly CANVAS_LOCATOR: By = By.className("canvas-panel");
     private static readonly PALLETTE_LOCATOR: By = By.className("kie-palette");
 
@@ -25,7 +25,7 @@ export default abstract class Editor extends PageFragment {
         return await this.tools.by(Editor.PALLETTE_LOCATOR).getWebElement();
     }
 
-    public async clickToCanvas(): Promise<void> {
+    protected async clickToCanvas(): Promise<void> {
         const canvas = await this.tools.by(Editor.CANVAS_LOCATOR).getWebElement();
         await canvas.click();
     }

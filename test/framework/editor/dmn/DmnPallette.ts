@@ -16,5 +16,9 @@ export default class DmnPallette extends Pallette {
         const actions = await this.tools.driver.actions();
         await actions.move({ origin: annotation, x: 200, y: 0 }).perform();
         await actions.click().perform();
+
+        // click to canvas
+        await actions.move({ origin: annotation, x: 100, y: 0 }).perform();
+        await actions.click().perform();
     }
 }

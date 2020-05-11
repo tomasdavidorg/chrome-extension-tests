@@ -29,6 +29,6 @@ export default class Properties extends PageFrament {
     }
 
     public async getDmnNameFromInput(): Promise<string> {
-        return await this.getValue("input", ".definitions.nameHolder")
+        return await this.getValue("input", ".nameHolder")
     }
 }

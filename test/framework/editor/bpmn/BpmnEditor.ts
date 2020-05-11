@@ -23,6 +23,7 @@ export default class BpmnEditor extends Editor {
     public async dragAndDropStartEventToCanvas() {
         const bpmnPalette: BpmnPalette = await this.getBpmnPalette()
         await bpmnPalette.dragAndDropStartEventToCanvas();
+        await this.clickToCanvas();
     }
 
     private async getBpmnPalette(): Promise<BpmnPalette> {
