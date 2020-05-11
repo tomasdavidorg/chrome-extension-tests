@@ -3,7 +3,7 @@ import { By } from "selenium-webdriver";
 
 export default class DmnPallette extends Pallette {
 
-    private static readonly ANNOTATION_LOCATOR = By.xpath("//button[@title='DMN Text Annotation']");
+    private static readonly ANNOTATION_LOCATOR: By = By.xpath("//button[@title='DMN Text Annotation']");
 
     public async dragAndDropAnnotationToCanvas(): Promise<void> {
 
