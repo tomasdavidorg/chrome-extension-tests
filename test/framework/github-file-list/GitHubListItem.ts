@@ -4,7 +4,7 @@ import GitHubEditorPage from "../github-editor/GitHubEditorPage";
 
 export default class GitHubListItem extends PageFragment {
 
-    private static readonly LINK_LOCATOR: By = By.xpath(".//a[@class='js-navigation-open ']");
+    private static readonly LINK_LOCATOR: By = By.className("js-navigation-open");
     private static readonly LINK_TO_ONLINE_EDITOR: By = By.xpath(".//a[@title='Open in Online Editor']");
 
     public async load(): Promise<void> {
