@@ -18,7 +18,7 @@ jobs:
           node-version: '12.16.1'
 
       - name: Unzip extension
-        run: unzip tmp/chrome_extension_kogito_kie_editors_0.4.0.zip
+        run: unzip tmp/chrome_extension_kogito_kie_editors_0.4.2.zip
 
       - name: Start Xvfb
         if: matrix.os == 'ubuntu-latest'
