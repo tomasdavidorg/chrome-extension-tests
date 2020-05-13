@@ -1,13 +1,13 @@
 import { WebDriver, WebElement, By, until, error } from "selenium-webdriver"
-import DriverTool from "./DriverTool";
 
-export default class WebElementOperation extends DriverTool {
+export default class WebElementOperation {
 
-    private webElement: WebElement;
+    private readonly driver: WebDriver;
+    private readonly webElement: WebElement;
     private timeout: number = 100;
 
     public constructor(driver: WebDriver, webElement: WebElement) {
-        super(driver);
+        this.driver = driver;
         this.webElement = webElement;
     }
 

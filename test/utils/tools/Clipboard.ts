@@ -1,8 +1,13 @@
 import { WebDriver, WebElement, Key } from "selenium-webdriver";
 import * as os from 'os';
-import DriverTool from "./DriverTool";
 
-export default class Clipboard extends DriverTool {
+export default class Clipboard {
+
+    private readonly driver: WebDriver;
+
+    public constructor(driver: WebDriver) {
+        this.driver = driver;
+    }
 
     public async getContent(): Promise<string> {
         const ADD_HELPER_INPUT_CMD: string = "input=document.createElement('input');" +
