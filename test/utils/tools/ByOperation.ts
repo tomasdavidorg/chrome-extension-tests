@@ -57,4 +57,8 @@ export default class ByOperation {
             }
         }
     }
+
+    public async clickJs(): Promise<void> {
+        await this.driver.executeScript("arguments[0].click();", await  this.getWebElement());
+    }
 }
