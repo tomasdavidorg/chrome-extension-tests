@@ -10,7 +10,7 @@ export default class SideBar extends PageFragment {
     private static readonly EXPANDED_BAR_LOCATOR = By.className("qe-docks-bar-expanded-E");
 
     public async load(): Promise<void> {
-        await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).withTimeout(1000).present();
+        await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).wait(1000).untilPresent();
     }
 
     protected async openSideBar(byIcon: WebElement): Promise<WebElement> {

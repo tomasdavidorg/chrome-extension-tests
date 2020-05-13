@@ -7,7 +7,7 @@ export default class Explorer extends PageFragment {
     private static readonly ITEM_LOCATOR = By.className("gwt-Anchor");
 
     public async load(): Promise<void> {
-        this.tools.by(Explorer.PANEL_LOCATOR).withTimeout(1000).present();
+        this.tools.by(Explorer.PANEL_LOCATOR).wait(1000).untilPresent();
     }
 
     private async getItems(): Promise<WebElement[]> {

@@ -16,16 +16,14 @@ export default class GitHubEditorPage extends EditorPage {
     private static readonly KOGITO_TOOLBAR_LOCATOR = By.className("kogito-toolbar-container");
 
     public async load(): Promise<void> {
-        await this.tools.by(GitHubEditorPage.KOGITO_TOOLBAR_LOCATOR)
-            .withTimeout(2000)
-            .present();
+        await this.tools.by(GitHubEditorPage.KOGITO_TOOLBAR_LOCATOR).wait(2000).untilPresent();
     }
 
     public async copyLinkToOnlineEditor(): Promise<void> {
         const copyLinkButton: WebElement = await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).getWebElement();
         await copyLinkButton.click();
-        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).withTimeout(1000).present();
-        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).withTimeout(5000).absent();        
+        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).wait(1000).untilPresent();
+        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).wait(5000).untilAbsent();        
     }
 
     public async seeAsSource(): Promise<void> {

@@ -17,7 +17,7 @@ export default class DmnEditor extends Editor {
         await this.enter();
 
         const startTime = performance.now();
-        await this.tools.by(DmnEditor.NAV_BAR_LOCATOR).withTimeout(10000).present();
+        await this.tools.by(DmnEditor.NAV_BAR_LOCATOR).wait(10000).untilPresent();
         const endTime = performance.now();
 
         console.debug("Plugin was loaded in " + (endTime - startTime));

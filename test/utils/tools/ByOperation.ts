@@ -1,4 +1,5 @@
 import { WebDriver, WebElement, By, until, error } from "selenium-webdriver";
+import WaitOperation from "./WaitOperation";
 
 export default class ByOperation {
 
@@ -9,6 +10,10 @@ export default class ByOperation {
     constructor(driver: WebDriver, by: By) {
         this.driver = driver;
         this.by = by;
+    }
+
+    public wait(timeout?: number) {
+        return new WaitOperation(this.driver, this.by, timeout);
     }
 
     public withTimeout(timeout: number): ByOperation {
@@ -22,40 +27,6 @@ export default class ByOperation {
 
     public async getWebElements(): Promise<WebElement[]> {
         return await this.driver.wait(until.elementsLocated(this.by), this.timeout);
-    }
-
-    public async present(): Promise<void> {
-        await this.getWebElement();
-    }
-
-    public async isPresent(): Promise<boolean> {
-        try {
-            await this.present();
-            return true;
-        } catch (err) {
-            if (err instanceof error.TimeoutError) {
-                return false;
-            } else {
-                throw err;
-            }
-        }
-    }
-
-    public async absent(): Promise<void> {
-        await this.driver.wait(async () => (await this.driver.findElements(this.by)).length == 0, this.timeout);
-    }
-
-    public async isAbsent(): Promise<boolean> {
-        try {
-            await this.absent();
-            return true;
-        } catch (err) {
-            if (err instanceof error.TimeoutError) {
-                return false;
-            } else {
-                throw err;
-            }
-        }
     }
 
     public async clickJs(): Promise<void> {

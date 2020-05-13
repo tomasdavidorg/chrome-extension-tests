@@ -18,6 +18,6 @@ export default class FullscreenPage extends EditorPage {
     }
 
     public async load():Promise<void> {
-        await this.tools.by(FullscreenPage.EXIT_BUTTON_LOCATOR).withTimeout(10000).present();
+        await this.tools.by(FullscreenPage.EXIT_BUTTON_LOCATOR).wait(10000).untilPresent();
     }
 }

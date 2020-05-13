@@ -8,7 +8,7 @@ export default class GitHubListItem extends PageFragment {
     private static readonly LINK_TO_ONLINE_EDITOR: By = By.xpath(".//a[@title='Open in Online Editor']");
 
     public async load(): Promise<void> {
-        await this.tools.by(GitHubListItem.LINK_TO_ONLINE_EDITOR).withTimeout(5000).present();
+        await this.tools.by(GitHubListItem.LINK_TO_ONLINE_EDITOR).wait(5000).untilPresent();
     }
 
     public async open(): Promise<GitHubEditorPage> {
