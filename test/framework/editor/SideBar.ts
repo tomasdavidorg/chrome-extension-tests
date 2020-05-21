@@ -2,6 +2,7 @@ import PageFragment from "../PageFragment";
 import Explorer from "./Explorer";
 import Properties from "./Properties";
 import { By, WebElement } from "selenium-webdriver";
+import Element from "../Element";
 
 export default class SideBar extends PageFragment {
 
@@ -13,24 +14,26 @@ export default class SideBar extends PageFragment {
         await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).wait(1000).untilPresent();
     }
 
-    protected async openSideBar(byIcon: WebElement): Promise<WebElement> {
+    protected async openSideBar(byIcon: Element): Promise<Element> {
         await byIcon.click();
-        return await this.tools.by(SideBar.EXPANDED_BAR_LOCATOR).withTimeout(2000).getWebElement();
+        const expandedBar = this.tools.by(SideBar.EXPANDED_BAR_LOCATOR)
+        await expandedBar.wait(2000).untilPresent();
+        return await expandedBar.getElement()
     }
 
     public async openExplorer(): Promise<Explorer> {
-        const diagramButton: WebElement = await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).getWebElement();
+        const diagramButton: Element = await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).getElement();
         const sideBar = await this.openSideBar(diagramButton);
         return this.tools.createPageFragment(Explorer, sideBar);
     }
 
     public async closeActiveSideBar(): Promise<void> {
-        const activeSideBar: WebElement = await this.tools.webElement(this.root).withTimeout(1000).find(By.className("active"));
+        const activeSideBar: WebElement = await this.tools.webElement(this.root.getWebElement()).withTimeout(1000).find(By.className("active"));
         await activeSideBar.click();
     }
 
     public async openProperties(): Promise<Properties> {
-        const propButton = await this.tools.by(SideBar.PROP_BUTTON_LOCATOR).getWebElement();
+        const propButton = await this.tools.by(SideBar.PROP_BUTTON_LOCATOR).getElement();
         const sideBar = await this.openSideBar(propButton);
         return this.tools.createPageFragment(Properties, sideBar);
     }

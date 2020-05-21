@@ -6,6 +6,7 @@ import PageFragment from "../framework/PageFragment";
 import WebElementOperation from "./tools/WebElementOperation"
 import Clipboard from "./tools/Clipboard";
 import Driver from "./tools/Driver";
+import Element from "../framework/Element";
 
 export default class Tools {
 
@@ -58,7 +59,7 @@ export default class Tools {
         return page;
     }
 
-    public async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: WebElement): T }, parent: WebElement): Promise<T> {
+    public async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: Element): T }, parent: Element): Promise<T> {
         const pageFragment = new type(this, parent);
         await pageFragment.load();
         return pageFragment;

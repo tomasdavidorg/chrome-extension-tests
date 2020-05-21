@@ -20,35 +20,31 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     public async copyLinkToOnlineEditor(): Promise<void> {
-        const copyLinkButton: WebElement = await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).getWebElement();
-        await copyLinkButton.click();
+        await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).click();
         await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).wait(1000).untilPresent();
         await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).wait(5000).untilAbsent();        
     }
 
     public async seeAsSource(): Promise<void> {
-        const seeAsSourceButton = await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR)
-            .getWebElement();
-        await seeAsSourceButton.click();
+        await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR).click();
     }
 
     public async seeAsDiagram() {
-        await (await this.tools.by(GitHubEditorPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).getWebElement()).click();
+        await this.tools.by(GitHubEditorPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).click();
     }
 
     public async isSourceVisible(): Promise<boolean> {
-        const sourceWebEl: WebElement = await this.tools.by(GitHubEditorPage.SOURCE_VIEW_LOCATOR).getWebElement();
-        return this.tools.webElement(sourceWebEl).withTimeout(1000).isVisible();
+        return await this.tools.by(GitHubEditorPage.SOURCE_VIEW_LOCATOR).wait(1000).isVisible();
     }
 
     public async isEditorVisible(): Promise<boolean> {
-        const editorContainer: WebElement = await this.tools.by(GitHubEditorPage.KOGITO_CONTAINER_LOCATOR).getWebElement();
-        return this.tools.webElement(editorContainer).withTimeout(1000).isVisible();
+        return await this.tools.by(GitHubEditorPage.KOGITO_CONTAINER_LOCATOR).wait(1000).isVisible();
     }
 
     public async openOnlineEditor(): Promise<OnlineEditorPage> {
-        const onlineEditorButton: WebElement = await this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR).withTimeout(2000).getWebElement();
-        onlineEditorButton.click();
+        const onlineEditorButton = this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR);
+        await onlineEditorButton.wait(2000).untilPresent();
+        await onlineEditorButton.click();
 
         await this.tools.driver.wait(async () => {
             const windowHandles = await this.tools.driver.getAllWindowHandles();

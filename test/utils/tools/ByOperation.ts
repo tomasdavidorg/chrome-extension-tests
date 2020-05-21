@@ -1,5 +1,6 @@
 import { WebDriver, WebElement, By, until, error } from "selenium-webdriver";
 import WaitOperation from "./WaitOperation";
+import Element from "../../framework/Element";
 
 export default class ByOperation {
 
@@ -16,6 +17,11 @@ export default class ByOperation {
         return new WaitOperation(this.driver, this.by, timeout);
     }
 
+    public async getElement(): Promise<Element> {
+        const webElement: WebElement = await this.getWebElement();
+        return new Element(webElement);
+    }
+
     public withTimeout(timeout: number): ByOperation {
         this.timeout = timeout;
         return this;
@@ -29,7 +35,23 @@ export default class ByOperation {
         return await this.driver.wait(until.elementsLocated(this.by), this.timeout);
     }
 
+    public async click(): Promise<void> {
+        const element: Element = await this.getElement();
+        await element.click();
+    }
+
     public async clickJs(): Promise<void> {
-        await this.driver.executeScript("arguments[0].click();", await  this.getWebElement());
+        const element: Element = await this.getElement();
+        await element.clickJs();
+    }
+
+    public async scroll(): Promise<void> {
+        const element: Element = await this.getElement();
+        await element.scroll();
+    }
+
+    public async getAttribute(attributeName: string): Promise<string> {
+        const element: Element = await this.getElement();
+        return await element.getAttribute(attributeName);
     }
 }

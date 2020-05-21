@@ -31,7 +31,6 @@ export default class DecisionNavigator extends PageFragment {
     }
 
     public async selectNode(name: string): Promise<void> {
-        const node: WebElement = await this.tools.by(By.xpath(`//li[@data-field='item'][@title='${name}']/div`)).getWebElement();
-        await node.click();
+        await this.tools.by(By.xpath(`//li[@data-field='item'][@title='${name}']/div`)).click();
     }
 }

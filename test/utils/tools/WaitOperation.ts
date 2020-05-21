@@ -47,4 +47,27 @@ export default class WaitOperation {
             }
         }
     }
+
+    public async visible(): Promise<void> {
+        const webElement = await this.driver.findElement(this.by);
+        await this.driver.wait(until.elementIsVisible(webElement), this.timeout);
+    }
+
+    public async isVisible(): Promise<boolean> {
+        try {
+            await this.visible();
+            return true;
+        } catch (err) {
+            if (err instanceof error.TimeoutError) {
+                return false;
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    public async untilHasValue(): Promise<void> {
+        const webElement = await this.driver.findElement(this.by);
+        await this.driver.wait(async () => (await webElement.getAttribute("value")) !== "", this.timeout);
+    }
 }

@@ -1,6 +1,7 @@
 import { By, WebElement } from "selenium-webdriver";
 import PageFragment from "../PageFragment";
 import SideBar from "./SideBar"
+import Element from "../Element";
 
 export default abstract class Editor extends PageFragment {
 
@@ -9,7 +10,7 @@ export default abstract class Editor extends PageFragment {
     private static readonly PALLETTE_LOCATOR: By = By.className("kie-palette");
 
     public async enter(): Promise<void> {
-        await this.tools.driver.switchTo().frame(this.root);
+        await this.tools.driver.switchTo().frame(await this.root.getWebElement());
     }
 
     public async leave(): Promise<void> {
@@ -17,16 +18,16 @@ export default abstract class Editor extends PageFragment {
     }
 
     public async getSideBar(): Promise<SideBar> {
-        const sideBar = await this.tools.by(Editor.SIDE_BAR_LOCATOR).withTimeout(1000).getWebElement();
-        return this.tools.createPageFragment(SideBar, sideBar);
+        const sideBar = await this.tools.by(Editor.SIDE_BAR_LOCATOR);
+        await this.tools.by(Editor.SIDE_BAR_LOCATOR).wait(1000).untilPresent();
+        return this.tools.createPageFragment(SideBar, await sideBar.getElement());
     }
 
-    protected async getPalette(): Promise<WebElement> {
-        return await this.tools.by(Editor.PALLETTE_LOCATOR).getWebElement();
+    protected async getPalette(): Promise<Element> {
+        return await this.tools.by(Editor.PALLETTE_LOCATOR).getElement();
     }
 
     protected async clickToCanvas(): Promise<void> {
-        const canvas = await this.tools.by(Editor.CANVAS_LOCATOR).getWebElement();
-        await canvas.click();
+        await this.tools.by(Editor.CANVAS_LOCATOR).click();
     }
 }

@@ -1,5 +1,6 @@
 import PageFrament from "../PageFragment";
 import { WebElement, By } from "selenium-webdriver";
+import Element from "../Element";
 
 export default class Properties extends PageFrament {
 
@@ -9,14 +10,13 @@ export default class Properties extends PageFrament {
         this.tools.by(Properties.LABEL_LOCATOR).wait(1000).untilPresent();
     }
 
-    private async getProperty(type: string, nameAttributeSuffix: string): Promise<WebElement> {
-        const textAreaLocator = By.xpath(`//${type}[contains(@name, '${nameAttributeSuffix}')]`);
-        return await this.tools.by(textAreaLocator).getWebElement();
+    private getProperty(type: string, nameAttributeSuffix: string): By {
+       return By.xpath(`//${type}[contains(@name, '${nameAttributeSuffix}')]`);
     }
 
     private async getValue(type: string, nameAttributeSuffix: string): Promise<string> {
-        const property = await this.getProperty(type, nameAttributeSuffix);
-        await this.tools.webElement(property).withTimeout(2000).hasValue();
+        const property = this.tools.by(this.getProperty(type, nameAttributeSuffix));
+        await property.wait(2000).untilHasValue();
         return await property.getAttribute("value");
     }
 

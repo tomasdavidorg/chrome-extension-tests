@@ -2,6 +2,7 @@ import Editor from "../Editor";
 import BpmnPalette from "./BpmnPalette";
 import { By, WebElement } from "selenium-webdriver";
 import { performance } from "perf_hooks";
+import Element from "../../Element";
 
 export default class BpmnEditor extends Editor {
 
@@ -11,7 +12,7 @@ export default class BpmnEditor extends Editor {
         await this.enter();
 
         const startTime = performance.now();
-        await this.tools.by(BpmnEditor.EXPLORE_ICON_LOCATOR).withTimeout(10000).getWebElement();
+        await this.tools.by(BpmnEditor.EXPLORE_ICON_LOCATOR).wait(10000).untilPresent();
         const endTime = performance.now();
 
         console.debug("Plugin was loaded in " + (endTime - startTime));
@@ -26,7 +27,7 @@ export default class BpmnEditor extends Editor {
     }
 
     private async getBpmnPalette(): Promise<BpmnPalette> {
-        const palette: WebElement = await this.getPalette();
+        const palette: Element = await this.getPalette();
         return await this.tools.createPageFragment(BpmnPalette, palette);
     }
 }

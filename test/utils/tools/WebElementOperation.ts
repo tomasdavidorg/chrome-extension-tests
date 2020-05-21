@@ -25,27 +25,6 @@ export default class WebElementOperation {
         await this.driver.wait(until.elementIsEnabled(this.webElement), this.timeout);
     }
 
-    public async visible(): Promise<void> {
-        await this.driver.wait(until.elementIsVisible(this.webElement), this.timeout);
-    }
-
-    public async hasValue(): Promise<void> {
-        await this.driver.wait(async () => (await this.webElement.getAttribute("value")) !== "", this.timeout);
-    }
-
-    public async isVisible(): Promise<boolean> {
-        try {
-            await this.visible();
-            return true;
-        } catch (err) {
-            if (err instanceof error.TimeoutError) {
-                return false;
-            } else {
-                throw err;
-            }
-        }
-    }
-
     public async scroll(): Promise<void> {
         await this.driver.executeScript("arguments[0].scrollIntoView(true);", this.webElement);
     }

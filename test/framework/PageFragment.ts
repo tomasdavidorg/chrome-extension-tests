@@ -1,12 +1,12 @@
 import Page from "./Page";
 import Tools from "../utils/Tools";
-import { WebElement } from "selenium-webdriver"
+import Element from "./Element";
 
 export default abstract class PageFragment extends Page {
 
-    protected readonly root: WebElement;
+    protected readonly root: Element;
 
-    public constructor(tools: Tools, root: WebElement) {
+    public constructor(tools: Tools, root: Element) {
         super(tools);
         this.root = root;
     }

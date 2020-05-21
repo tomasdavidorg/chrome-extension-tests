@@ -3,13 +3,14 @@ import DmnPalette from "./DmnPallette"
 import DmnSideBar from "./DmnSideBar"
 import { By, WebElement } from "selenium-webdriver";
 import { performance } from "perf_hooks";
+import Element from "../../Element";
 
 export default class DmnEditor extends Editor {
 
     private static readonly NAV_BAR_LOCATOR: By = By.className("kie-palette");
 
     public async getDmnPalette(): Promise<DmnPalette> {
-        const pallette: WebElement = await this.getPalette();
+        const pallette: Element = await this.getPalette();
         return this.tools.createPageFragment(DmnPalette, pallette);
     }
 
@@ -26,7 +27,8 @@ export default class DmnEditor extends Editor {
     }
 
     public async getSideBar(): Promise<DmnSideBar> {
-        const sideBar = await this.tools.by(Editor.SIDE_BAR_LOCATOR).withTimeout(1000).getWebElement();
-        return this.tools.createPageFragment(DmnSideBar, sideBar);
+        const sideBar = this.tools.by(Editor.SIDE_BAR_LOCATOR)
+        await sideBar.wait(1000).untilPresent();
+        return this.tools.createPageFragment(DmnSideBar, await sideBar.getElement());
     }
 }

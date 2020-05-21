@@ -9,21 +9,20 @@ export default class BpmnPalette extends Pallette {
 
     public async dragAndDropStartEventToCanvas() {
         // open start events
-        const startEvent = await this.tools.by(BpmnPalette.START_EVENTS_LOCATOR).getWebElement();
+        const startEvent = this.tools.by(BpmnPalette.START_EVENTS_LOCATOR)
         await startEvent.click();
 
         // select start item
-        const startItem = await this.tools.by(BpmnPalette.START_ITEM_LOCATOR).getWebElement();
-        await startItem.click();
+        await this.tools.by(BpmnPalette.START_ITEM_LOCATOR).click();
 
         // move to canvas
         // no other way of drag and drop does not work
         const actions = await this.tools.driver.actions();
-        await actions.move({ origin: startEvent, x: 200, y: 0 }).perform();
+        await actions.move({ origin: await startEvent.getWebElement(), x: 200, y: 0 }).perform();
         await actions.click().perform();
 
         // close start events pallette
-        await (await this.tools.by(BpmnPalette.CLOSE_LOCATOR).getWebElement()).click();
+        await this.tools.by(BpmnPalette.CLOSE_LOCATOR).click();
     }
 
 }
