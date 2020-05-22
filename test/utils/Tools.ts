@@ -1,4 +1,4 @@
-import { WebDriver, By, WebElement } from "selenium-webdriver"
+import { WebDriver, By } from "selenium-webdriver"
 import Screenshot from "./tools/ScreenShot"
 import Locator from "./tools/Locator";
 import Page from "../framework/Page"
@@ -49,14 +49,10 @@ export default class Tools {
     }
 
     public async createPage<T extends Page>(type: { new(tools: Tools): T }): Promise<T> {
-        const page: T = new type(this);
-        await page.load();
-        return page;
+        return Page.create(type, this);
     }
 
-    public async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, parent: Element): T }, parent: Element): Promise<T> {
-        const pageFragment = new type(this, parent);
-        await pageFragment.load();
-        return pageFragment;
+    public async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, root: Element): T }, root: Element): Promise<T> {
+        return PageFragment.create(type, this, root)
     }
 }
