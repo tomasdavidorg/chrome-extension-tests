@@ -10,7 +10,7 @@ export default class SideBar extends PageFragment {
     private static readonly EXPLORER_BUTTON_LOCATOR = By.xpath(".//button[@data-title='Explore Diagram' or @data-title='Explore diagram']");
     private static readonly EXPANDED_BAR_LOCATOR = By.className("qe-docks-bar-expanded-E");
 
-    public async load(): Promise<void> {
+    public async waitUntilLoaded(): Promise<void> {
         await this.tools.by(SideBar.EXPLORER_BUTTON_LOCATOR).wait(1000).untilPresent();
     }
 

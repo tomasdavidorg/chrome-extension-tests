@@ -6,7 +6,7 @@ export default class Properties extends PageFrament {
 
     private static readonly LABEL_LOCATOR = By.xpath("//h3[text()='Properties']");
 
-    public async load(): Promise<void> {
+    public async waitUntilLoaded(): Promise<void> {
         this.tools.by(Properties.LABEL_LOCATOR).wait(1000).untilPresent();
     }
 

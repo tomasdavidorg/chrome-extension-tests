@@ -11,11 +11,11 @@ export default abstract class PageFragment {
         this.root = root;
     }
 
-    public abstract async load(): Promise<void>;
+    public abstract async waitUntilLoaded(): Promise<void>;
 
     public static async create<T extends PageFragment>(type: { new(tools: Tools, root: Element): T }, tools: Tools, root: Element): Promise<T> {
         const pageFragment = new type(tools, root);
-        await pageFragment.load();
+        await pageFragment.waitUntilLoaded();
         return pageFragment;
     }
 }

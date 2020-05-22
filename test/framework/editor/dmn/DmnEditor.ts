@@ -14,7 +14,7 @@ export default class DmnEditor extends Editor {
         return this.tools.createPageFragment(DmnPalette, pallette);
     }
 
-    public async load(): Promise<void> {
+    public async waitUntilLoaded(): Promise<void> {
         await this.enter();
 
         const startTime = performance.now();

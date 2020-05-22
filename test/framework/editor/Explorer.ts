@@ -7,7 +7,7 @@ export default class Explorer extends PageFragment {
     private static readonly PANEL_LOCATOR = By.xpath("//div[@data-field='explorerPanelBody']");
     private static readonly ITEM_LOCATOR = By.className("gwt-Anchor");
 
-    public async load(): Promise<void> {
+    public async waitUntilLoaded(): Promise<void> {
         this.tools.by(Explorer.PANEL_LOCATOR).wait(1000).untilPresent();
     }
 

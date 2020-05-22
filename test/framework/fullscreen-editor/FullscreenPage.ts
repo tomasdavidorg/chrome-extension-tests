@@ -17,7 +17,7 @@ export default class FullscreenPage extends EditorPage {
         await this.tools.driver.executeScript("window.scrollTo(0, 0);");
     }
 
-    public async load():Promise<void> {
+    public async waitUntilLoaded():Promise<void> {
         await this.tools.by(FullscreenPage.EXIT_BUTTON_LOCATOR).wait(10000).untilPresent();
     }
 }

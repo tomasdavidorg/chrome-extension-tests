@@ -7,7 +7,7 @@ export default class DecisionNavigator extends PageFragment {
     private static readonly DECISION_GRAPH_LOCATOR: By = By.id("decision-graphs-content");
     private static readonly ITEM_LOCATOR: By = By.xpath("//li[@data-field='item']");
 
-    public async load(): Promise<void> {
+    public async waitUntilLoaded(): Promise<void> {
         await this.tools.by(DecisionNavigator.DECISION_GRAPH_LOCATOR).wait(1000).untilPresent();
     }
 

@@ -8,7 +8,7 @@ export default class BpmnEditor extends Editor {
 
     private static readonly EXPLORE_ICON_LOCATOR: By = By.className("fa-eye");
 
-    public async load(): Promise<void> {
+    public async waitUntilLoaded(): Promise<void> {
         await this.enter();
 
         const startTime = performance.now();

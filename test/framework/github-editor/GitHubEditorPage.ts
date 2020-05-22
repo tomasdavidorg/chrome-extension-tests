@@ -15,7 +15,7 @@ export default class GitHubEditorPage extends EditorPage {
     private static readonly KOGITO_CONTAINER_LOCATOR = By.className("kogito-iframe-container");
     private static readonly KOGITO_TOOLBAR_LOCATOR = By.className("kogito-toolbar-container");
 
-    public async load(): Promise<void> {
+    public async waitUntilLoaded(): Promise<void> {
         await this.tools.by(GitHubEditorPage.KOGITO_TOOLBAR_LOCATOR).wait(2000).untilPresent();
     }
 
