@@ -1,6 +1,6 @@
 import { WebDriver, By } from "selenium-webdriver"
 import Screenshot from "./tools/ScreenShot"
-import Locator from "./tools/Locator";
+import Locator from "../framework/Locator";
 import Page from "../framework/Page"
 import PageFragment from "../framework/PageFragment";
 import Clipboard from "./tools/Clipboard";

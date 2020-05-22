@@ -1,4 +1,5 @@
 import { By, WebElement, WebDriver } from "selenium-webdriver";
+import ElementWaitOperation from "./ElementWaitOperation"
 
 export default class Element {
 
@@ -10,6 +11,10 @@ export default class Element {
 
     public getWebElement(): WebElement {
         return this.webElement;
+    }
+
+    public wait(timeout?: number): ElementWaitOperation {
+        return new ElementWaitOperation(this, timeout)
     }
 
     public async dragAndDrop(x: number, y: number) {

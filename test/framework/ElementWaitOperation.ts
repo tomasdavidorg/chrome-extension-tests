@@ -1,5 +1,4 @@
-import { WebDriver, WebElement, By, until, error } from "selenium-webdriver"
-import Element from "../../framework/Element";
+import Element from "./Element";
 
 export default class ElementWaitOperation {
 
@@ -11,4 +10,5 @@ export default class ElementWaitOperation {
         this.timeout = timeout === undefined ? 100 : timeout;
     }
 
+    // TODO hasChildElement, ...
 }
