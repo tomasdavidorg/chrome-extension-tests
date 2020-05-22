@@ -8,17 +8,12 @@ export default class DmnPallette extends Pallette {
     public async dragAndDropAnnotationToCanvas(): Promise<void> {
 
         // click annotation
-        const annotation = await this.tools.by(DmnPallette.ANNOTATION_LOCATOR);
-        await annotation.click();
+        const annotation = await this.tools.by(DmnPallette.ANNOTATION_LOCATOR).getElement();
 
         // move to canvas
-        // no other way of drag and drop does not work
-        const actions = await this.tools.driver.actions();
-        await actions.move({ origin: await annotation.getWebElement(), x: 200, y: 0 }).perform();
-        await actions.click().perform();
+        await annotation.dragAndDrop(200, 0);
 
         // click to canvas
-        await actions.move({ origin: await annotation.getWebElement(), x: 100, y: 0 }).perform();
-        await actions.click().perform();
+        await annotation.offsetClick(100, 0);
     }
 }

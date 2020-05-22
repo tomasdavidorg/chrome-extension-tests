@@ -1,4 +1,4 @@
-import { WebElement, WebDriver } from "selenium-webdriver";
+import { By, WebElement, WebDriver } from "selenium-webdriver";
 
 export default class Element {
 
@@ -12,6 +12,19 @@ export default class Element {
         return this.webElement;
     }
 
+    public async dragAndDrop(x: number, y: number) {
+        await this.click();
+
+        // no other way of drag and drop works
+        const actions = this.getDriver().actions();
+        await actions.move({ origin: await this.getWebElement(), x, y }).perform();
+        await actions.click().perform();
+    }
+
+    public async getText(): Promise<string> {
+        return this.webElement.getText();
+    }
+
     public async clickJs(): Promise<void> {
         await this.getDriver().executeScript("arguments[0].click();", await this.webElement);
     }
@@ -20,12 +33,27 @@ export default class Element {
         await this.webElement.click();
     }
 
+    public async offsetClick(x: number, y: number) {
+        const actions = this.getDriver().actions();
+        await actions.move({ origin: await this.webElement, x, y }).perform();
+        await actions.click().perform();
+    }
+
     public async scroll(): Promise<void> {
         await this.getDriver().executeScript("arguments[0].scrollIntoView(true);", this.webElement);
     }
 
     public async getAttribute(attributeName: string): Promise<string> {
         return await this.webElement.getAttribute(attributeName)
+    }
+
+    public async findElement(by: By): Promise<Element> {
+        return new Element(await this.webElement.findElement(by));
+    }
+
+    public async findElements(by: By): Promise<Element[]> {
+        const webElements = await this.webElement.findElements(by);
+        return webElements.map(webElement => new Element(webElement))
     }
 
     private getDriver(): WebDriver {

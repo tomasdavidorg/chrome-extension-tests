@@ -3,7 +3,6 @@ import Screenshot from "./tools/ScreenShot"
 import ByOperation from "./tools/ByOperation";
 import Page from "../framework/Page"
 import PageFragment from "../framework/PageFragment";
-import WebElementOperation from "./tools/WebElementOperation"
 import Clipboard from "./tools/Clipboard";
 import Driver from "./tools/Driver";
 import Element from "../framework/Element";
@@ -42,10 +41,6 @@ export default class Tools {
 
     public by(by: By): ByOperation {
         return new ByOperation(this.driver, by);
-    }
-
-    public webElement(webElement: WebElement): WebElementOperation {
-        return new WebElementOperation(this.driver, webElement);
     }
 
     public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {

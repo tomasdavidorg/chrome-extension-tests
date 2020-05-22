@@ -1,5 +1,6 @@
 import PageFragment from "../PageFragment";
 import { By, WebElement } from "selenium-webdriver";
+import Element from "../Element";
 
 export default class Explorer extends PageFragment {
 
@@ -10,17 +11,17 @@ export default class Explorer extends PageFragment {
         this.tools.by(Explorer.PANEL_LOCATOR).wait(1000).untilPresent();
     }
 
-    private async getItems(): Promise<WebElement[]> {
-        return await this.tools.by(Explorer.ITEM_LOCATOR).getWebElements();
+    private async getItems(): Promise<Element[]> {
+        return await this.tools.by(Explorer.ITEM_LOCATOR).getElements();
     }
 
-    private async getNodes(): Promise<WebElement[]> {
-        const items: WebElement[] = await this.getItems();
+    private async getNodes(): Promise<Element[]> {
+        const items: Element[] = await this.getItems();
         items.shift();
         return items;
     }
 
-    private async getNode(name: string): Promise<WebElement> {
+    private async getNode(name: string): Promise<Element> {
         for (const node of await this.getNodes()) {
             if (await node.getText() === name) {
                 return node;
@@ -30,17 +31,17 @@ export default class Explorer extends PageFragment {
     }
 
     public async getProcessName(): Promise<string> {
-        const items: WebElement[] = await this.getItems();
+        const items: Element[] = await this.getItems();
         return await items[0].getText();
     }
 
     public async getNodeNames(): Promise<string[]> {
-        const nodes: WebElement[] = await this.getNodes();
+        const nodes: Element[] = await this.getNodes();
         return Promise.all(nodes.map(node => node.getText()));
     }
 
     public async selectNode(name: string): Promise<void> {
-        const node: WebElement = await this.getNode(name);
+        const node: Element = await this.getNode(name);
         await node.click();
     }
 }

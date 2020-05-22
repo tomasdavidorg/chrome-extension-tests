@@ -18,21 +18,18 @@ export default class ByOperation {
     }
 
     public async getElement(): Promise<Element> {
-        const webElement: WebElement = await this.getWebElement();
+        const webElement: WebElement = await this.driver.wait(until.elementLocated(this.by), this.timeout);
         return new Element(webElement);
+    }
+
+    public async getElements(): Promise<Element[]> {
+        const webElements: WebElement[] = await this.driver.findElements(this.by);
+        return webElements.map(webElement => new Element(webElement));
     }
 
     public withTimeout(timeout: number): ByOperation {
         this.timeout = timeout;
         return this;
-    }
-
-    public async getWebElement(): Promise<WebElement> {
-        return await this.driver.wait(until.elementLocated(this.by), this.timeout);
-    }
-
-    public async getWebElements(): Promise<WebElement[]> {
-        return await this.driver.wait(until.elementsLocated(this.by), this.timeout);
     }
 
     public async click(): Promise<void> {

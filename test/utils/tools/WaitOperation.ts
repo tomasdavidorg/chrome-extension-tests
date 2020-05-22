@@ -48,14 +48,14 @@ export default class WaitOperation {
         }
     }
 
-    public async visible(): Promise<void> {
+    public async untilVisible(): Promise<void> {
         const webElement = await this.driver.findElement(this.by);
         await this.driver.wait(until.elementIsVisible(webElement), this.timeout);
     }
 
     public async isVisible(): Promise<boolean> {
         try {
-            await this.visible();
+            await this.untilVisible();
             return true;
         } catch (err) {
             if (err instanceof error.TimeoutError) {

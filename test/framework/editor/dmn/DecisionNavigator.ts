@@ -1,5 +1,6 @@
 import PageFragment from "../../PageFragment";
 import { By, WebElement } from "selenium-webdriver";
+import Element from "../../Element";
 
 export default class DecisionNavigator extends PageFragment {
 
@@ -10,23 +11,23 @@ export default class DecisionNavigator extends PageFragment {
         await this.tools.by(DecisionNavigator.DECISION_GRAPH_LOCATOR).wait(1000).untilPresent();
     }
 
-    private async getItems(): Promise<WebElement[]> {
-        return await this.tools.by(DecisionNavigator.ITEM_LOCATOR).getWebElements();
+    private async getItems(): Promise<Element[]> {
+        return await this.tools.by(DecisionNavigator.ITEM_LOCATOR).getElements();
     }
 
-    private async getNodes(): Promise<WebElement[]> {
-        const items: WebElement[] = await this.getItems();
+    private async getNodes(): Promise<Element[]> {
+        const items: Element[] = await this.getItems();
         items.shift(); // remove DMN name
         return items;
     }
 
     public async getDmnName(): Promise<string> {
-        const items: WebElement[] = await this.getItems();
+        const items: Element[] = await this.getItems();
         return await items[0].getAttribute("title");
     }
 
     public async getNodeNames(): Promise<string[]> {
-        const nodes: WebElement[] = await this.getNodes();
+        const nodes: Element[] = await this.getNodes();
         return Promise.all(nodes.map(node => node.getAttribute("title")));
     }
 

@@ -1,6 +1,7 @@
 import PageFragment from "../PageFragment";
-import { By, WebElement } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import GitHubEditorPage from "../github-editor/GitHubEditorPage";
+import Element from "../Element";
 
 export default class GitHubListItem extends PageFragment {
 
@@ -12,13 +13,13 @@ export default class GitHubListItem extends PageFragment {
     }
 
     public async open(): Promise<GitHubEditorPage> {
-        const link: WebElement = await this.tools.webElement(this.root.getWebElement()).find(GitHubListItem.LINK_LOCATOR);
+        const link: Element = await this.root.findElement(GitHubListItem.LINK_LOCATOR);
         await link.click();
         return this.tools.createPage(GitHubEditorPage);
     }
 
     public async getLinkToOnlineEditor(): Promise<string> {
-        const linkToOnlineEditor: WebElement = await this.tools.webElement(this.root.getWebElement()).find(GitHubListItem.LINK_TO_ONLINE_EDITOR);
+        const linkToOnlineEditor: Element = await this.root.findElement(GitHubListItem.LINK_TO_ONLINE_EDITOR);
         return linkToOnlineEditor.getAttribute("href");
     }
 }

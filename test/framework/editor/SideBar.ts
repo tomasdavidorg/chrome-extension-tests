@@ -28,7 +28,8 @@ export default class SideBar extends PageFragment {
     }
 
     public async closeActiveSideBar(): Promise<void> {
-        const activeSideBar: WebElement = await this.tools.webElement(this.root.getWebElement()).withTimeout(1000).find(By.className("active"));
+        const activeSideBar: Element = await this.root.findElement(By.className("active"));
+        //const activeSideBar: WebElement = await this.tools.webElement(this.root.getWebElement()).withTimeout(1000).find(By.className("active"));
         await activeSideBar.click();
     }
 
