@@ -1,6 +1,6 @@
 import { WebDriver, By, WebElement } from "selenium-webdriver"
 import Screenshot from "./tools/ScreenShot"
-import ByOperation from "./tools/ByOperation";
+import Locator from "./tools/Locator";
 import Page from "../framework/Page"
 import PageFragment from "../framework/PageFragment";
 import Clipboard from "./tools/Clipboard";
@@ -39,8 +39,8 @@ export default class Tools {
         return new Promise(resolve => setTimeout(resolve, timeout));
     }
 
-    public by(by: By): ByOperation {
-        return new ByOperation(this.driver, by);
+    public by(by: By): Locator {
+        return new Locator(this.driver, by);
     }
 
     public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {

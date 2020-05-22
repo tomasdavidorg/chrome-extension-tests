@@ -1,8 +1,8 @@
-import { WebDriver, WebElement, By, until, error } from "selenium-webdriver";
+import { WebDriver, WebElement, By, until } from "selenium-webdriver";
 import WaitOperation from "./WaitOperation";
 import Element from "../../framework/Element";
 
-export default class ByOperation {
+export default class Locator {
 
     private readonly driver: WebDriver
     private readonly by: By;
@@ -27,7 +27,7 @@ export default class ByOperation {
         return webElements.map(webElement => new Element(webElement));
     }
 
-    public withTimeout(timeout: number): ByOperation {
+    public withTimeout(timeout: number): Locator {
         this.timeout = timeout;
         return this;
     }
