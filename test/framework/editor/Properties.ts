@@ -1,6 +1,5 @@
 import PageFrament from "../PageFragment";
-import { WebElement, By } from "selenium-webdriver";
-import Element from "../Element";
+import { By } from "selenium-webdriver";
 
 export default class Properties extends PageFrament {
 

@@ -1,6 +1,6 @@
 import Page from "../Page";
 import DmnEditor from "./dmn/DmnEditor";
-import { By, WebElement } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import BpmnEditor from "./bpmn/BpmnEditor";
 import Element from "../Element";
 

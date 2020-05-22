@@ -1,4 +1,4 @@
-import { By, WebElement } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import OnlineEditorPage from "../online-editor/OnlineEditorPage";
 import FullscreenPage from "../fullscreen-editor/FullscreenPage";
 import EditorPage from "../editor/EditorPage";
@@ -29,7 +29,7 @@ export default class GitHubEditorPage extends EditorPage {
         await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR).click();
     }
 
-    public async seeAsDiagram() {
+    public async seeAsDiagram(): Promise<void> {
         await this.tools.by(GitHubEditorPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).click();
     }
 

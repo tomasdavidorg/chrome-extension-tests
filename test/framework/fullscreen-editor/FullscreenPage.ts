@@ -13,7 +13,7 @@ export default class FullscreenPage extends EditorPage {
         return this.tools.createPage(GitHubEditorPage);
     }
 
-    public async scrollToTop() {
+    public async scrollToTop(): Promise<void> {
         await this.tools.driver.executeScript("window.scrollTo(0, 0);");
     }
 

@@ -1,4 +1,4 @@
-import { By, WebElement } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import PageFragment from "../PageFragment";
 import SideBar from "./SideBar"
 import Element from "../Element";

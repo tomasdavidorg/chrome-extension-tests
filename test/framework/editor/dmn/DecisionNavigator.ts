@@ -1,5 +1,5 @@
 import PageFragment from "../../PageFragment";
-import { By, WebElement } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import Element from "../../Element";
 
 export default class DecisionNavigator extends PageFragment {

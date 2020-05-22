@@ -13,7 +13,7 @@ export default class Locator {
         this.by = by;
     }
 
-    public wait(timeout?: number) {
+    public wait(timeout?: number): WaitOperation {
         return new WaitOperation(this.driver, this.by, timeout);
     }
 
