@@ -1,4 +1,5 @@
 import { By, WebDriver, error, until } from "selenium-webdriver";
+import Element from "./Element";
 
 export default class WaitOperation {
 
@@ -31,8 +32,8 @@ export default class WaitOperation {
         }
     }
 
-    public async untilPresent(): Promise<void> {
-        await this.driver.wait(until.elementLocated(this.by), this.timeout)
+    public async untilPresent(): Promise<Element> {
+        return new Element(await this.driver.wait(until.elementLocated(this.by), this.timeout));
     }
 
     public async isPresent(): Promise<boolean> {
@@ -66,8 +67,9 @@ export default class WaitOperation {
         }
     }
 
-    public async untilHasValue(): Promise<void> {
+    public async untilHasValue(): Promise<Element> {
         const webElement = await this.driver.findElement(this.by);
         await this.driver.wait(async () => (await webElement.getAttribute("value")) !== "", this.timeout);
+        return new Element(webElement);
     }
 }

@@ -1,5 +1,6 @@
 import Pallette from "../Palette";
 import { By } from "selenium-webdriver";
+import Element from "../../Element";
 
 export default class BpmnPalette extends Pallette {
 
@@ -9,7 +10,7 @@ export default class BpmnPalette extends Pallette {
 
     public async dragAndDropStartEventToCanvas() {
         // open start events
-        const startEvents = this.tools.by(BpmnPalette.START_EVENTS_LOCATOR)
+        const startEvents: Element = await this.tools.by(BpmnPalette.START_EVENTS_LOCATOR).getElement()
         await startEvents.click();
 
         // select start item
@@ -19,7 +20,8 @@ export default class BpmnPalette extends Pallette {
         await startItem.dragAndDrop(200, 0);
 
         // close start events pallette
-        await this.tools.by(BpmnPalette.CLOSE_LOCATOR).click();
+        const closeButton: Element = await this.tools.by(BpmnPalette.CLOSE_LOCATOR).getElement();
+        await closeButton.click();
     }
 
 }

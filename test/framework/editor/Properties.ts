@@ -1,5 +1,6 @@
 import PageFrament from "../PageFragment";
 import { By } from "selenium-webdriver";
+import Element from "../Element";
 
 export default class Properties extends PageFrament {
 
@@ -10,12 +11,13 @@ export default class Properties extends PageFrament {
     }
 
     private getProperty(type: string, nameAttributeSuffix: string): By {
-       return By.xpath(`//${type}[contains(@name, '${nameAttributeSuffix}')]`);
+        return By.xpath(`//${type}[contains(@name, '${nameAttributeSuffix}')]`);
     }
 
     private async getValue(type: string, nameAttributeSuffix: string): Promise<string> {
-        const property = this.tools.by(this.getProperty(type, nameAttributeSuffix));
-        await property.wait(2000).untilHasValue();
+        const property: Element = await this.tools.by(this.getProperty(type, nameAttributeSuffix))
+            .wait(2000)
+            .untilHasValue();
         return await property.getAttribute("value");
     }
 

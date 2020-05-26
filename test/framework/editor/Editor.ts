@@ -28,6 +28,7 @@ export default abstract class Editor extends PageFragment {
     }
 
     protected async clickToCanvas(): Promise<void> {
-        await this.tools.by(Editor.CANVAS_LOCATOR).click();
+        const canvas: Element = await this.tools.by(Editor.CANVAS_LOCATOR).getElement();
+        await canvas.click();
     }
 }

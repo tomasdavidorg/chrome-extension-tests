@@ -2,6 +2,7 @@ import { By } from "selenium-webdriver";
 import OnlineEditorPage from "../online-editor/OnlineEditorPage";
 import FullscreenPage from "../fullscreen-editor/FullscreenPage";
 import EditorPage from "../editor/EditorPage";
+import Element from "../Element";
 
 export default class GitHubEditorPage extends EditorPage {
 
@@ -20,17 +21,20 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     public async copyLinkToOnlineEditor(): Promise<void> {
-        await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).click();
+        const copyLinkButton: Element = await this.tools.by(GitHubEditorPage.COPY_LINK_BUTTON_LOCATOR).getElement();
+        await copyLinkButton.click();
         await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).wait(1000).untilPresent();
-        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).wait(5000).untilAbsent();        
+        await this.tools.by(GitHubEditorPage.COPY_LINK_ALERT_LOCATOR).wait(5000).untilAbsent();
     }
 
     public async seeAsSource(): Promise<void> {
-        await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR).click();
+        const seeAsSourceButton: Element = await this.tools.by(GitHubEditorPage.SEE_AS_SOURCE_BUTTON_LOCATOR).getElement();
+        await seeAsSourceButton.click();
     }
 
     public async seeAsDiagram(): Promise<void> {
-        await this.tools.by(GitHubEditorPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).click();
+        const seeAsDiagramButton = await this.tools.by(GitHubEditorPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).getElement();
+        await seeAsDiagramButton.click();
     }
 
     public async isSourceVisible(): Promise<boolean> {
@@ -42,8 +46,9 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     public async openOnlineEditor(): Promise<OnlineEditorPage> {
-        const onlineEditorButton = this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR);
-        await onlineEditorButton.wait(2000).untilPresent();
+        const onlineEditorButton: Element = await this.tools.by(GitHubEditorPage.ONLINE_EDITOR_BUTTON_LOCATOR)
+            .wait(2000)
+            .untilPresent();
         await onlineEditorButton.click();
 
         await this.tools.driver.wait(async () => {
@@ -59,9 +64,9 @@ export default class GitHubEditorPage extends EditorPage {
     }
 
     public async fullScreen(): Promise<FullscreenPage> {
-        // sometimes button cannot be pushed by regural click
-        await this.tools.by(GitHubEditorPage.FULL_SCREEN_BUTTON_LOCATOR).clickJs()
-        
+        const fullScreenButton: Element = await this.tools.by(GitHubEditorPage.FULL_SCREEN_BUTTON_LOCATOR).getElement();
+        // button can not be sometimes pushed by regural click
+        await fullScreenButton.clickJs();
         return this.tools.createPage(FullscreenPage);
     }
 }

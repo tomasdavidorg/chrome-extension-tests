@@ -1,7 +1,7 @@
 import { By } from "selenium-webdriver";
 import Page from "../Page";
 import GitHubListItem from "./GitHubListItem";
-import Locator from "../Locator";
+import Element from "../Element";
 
 export default class GitHubListPage extends Page {
 
@@ -12,8 +12,9 @@ export default class GitHubListPage extends Page {
     }
 
     public async getFile(name: string): Promise<GitHubListItem> {
-        const item: Locator = await this.tools.by(By.xpath(`//tr[.//a[text()='${name}']]`));
-        await item.wait(5000).untilPresent();
-        return this.tools.createPageFragment(GitHubListItem, await item.getElement());
+        const item: Element = await this.tools.by(By.xpath(`//tr[.//a[text()='${name}']]`))
+            .wait(5000)
+            .untilPresent();
+        return this.tools.createPageFragment(GitHubListItem, item);
     }
 }
