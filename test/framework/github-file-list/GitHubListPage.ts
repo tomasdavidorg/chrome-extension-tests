@@ -1,7 +1,7 @@
 import { By } from "selenium-webdriver";
-import Page from "../Page";
-import GitHubListItem from "./GitHubListItem";
 import Element from "../Element";
+import GitHubListItem from "./GitHubListItem";
+import Page from "../Page";
 
 export default class GitHubListPage extends Page {
 

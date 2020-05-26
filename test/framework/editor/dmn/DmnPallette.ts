@@ -1,5 +1,5 @@
-import Pallette from "../Palette";
 import { By } from "selenium-webdriver";
+import Pallette from "../Palette";
 
 export default class DmnPallette extends Pallette {
 

@@ -1,9 +1,9 @@
-import Editor from "../Editor";
+import { By } from "selenium-webdriver";
 import DmnPalette from "./DmnPallette";
 import DmnSideBar from "./DmnSideBar";
-import { By } from "selenium-webdriver";
-import { performance } from "perf_hooks";
+import Editor from "../Editor";
 import Element from "../../Element";
+import { performance } from "perf_hooks";
 
 export default class DmnEditor extends Editor {
 

@@ -1,5 +1,5 @@
-import { WebDriver, WebElement, Key } from "selenium-webdriver";
 import * as os from "os";
+import { Key, WebDriver, WebElement } from "selenium-webdriver";
 
 export default class Clipboard {
 

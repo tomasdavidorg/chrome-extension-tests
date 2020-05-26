@@ -1,5 +1,5 @@
-import PageFragment from "../PageFragment";
 import { By } from "selenium-webdriver";
+import PageFragment from "../PageFragment";
 
 export default class Pallette extends PageFragment {
 

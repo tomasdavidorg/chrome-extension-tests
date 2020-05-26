@@ -1,6 +1,7 @@
-import { Builder, Capabilities, Browser, WebDriver } from "selenium-webdriver";
-import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
 import * as fs from "fs";
+import { Browser, Builder, Capabilities, WebDriver } from "selenium-webdriver";
+import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
+
 
 export default class Driver {
 

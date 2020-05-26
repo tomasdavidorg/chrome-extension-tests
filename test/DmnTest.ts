@@ -1,11 +1,10 @@
-import Tools from "./utils/Tools";
-import GitHubListPage from "./framework/github-file-list/GitHubListPage";
-import GitHubListItem from "./framework/github-file-list/GitHubListItem";
-import GitHubEditorPage from "./framework/github-editor/GitHubEditorPage";
 import DmnEditor from "./framework/editor/dmn/DmnEditor";
-
-import { expect } from "chai";
 import DmnPallette from "./framework/editor/dmn/DmnPallette";
+import GitHubEditorPage from "./framework/github-editor/GitHubEditorPage";
+import GitHubListItem from "./framework/github-file-list/GitHubListItem";
+import GitHubListPage from "./framework/github-file-list/GitHubListPage";
+import Tools from "./utils/Tools";
+import { expect } from "chai";
 
 describe("DMN test", () => {
 

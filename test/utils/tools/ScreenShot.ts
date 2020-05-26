@@ -1,6 +1,6 @@
-import { WebDriver } from "selenium-webdriver";
 import * as fs from "fs";
 import * as path from "path";
+import { WebDriver } from "selenium-webdriver";
 
 export default class Screenshots {
 

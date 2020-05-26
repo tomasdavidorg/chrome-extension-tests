@@ -1,8 +1,8 @@
 import { By } from "selenium-webdriver";
-import OnlineEditorPage from "../online-editor/OnlineEditorPage";
-import FullscreenPage from "../fullscreen-editor/FullscreenPage";
 import EditorPage from "../editor/EditorPage";
 import Element from "../Element";
+import FullscreenPage from "../fullscreen-editor/FullscreenPage";
+import OnlineEditorPage from "../online-editor/OnlineEditorPage";
 
 export default class GitHubEditorPage extends EditorPage {
 

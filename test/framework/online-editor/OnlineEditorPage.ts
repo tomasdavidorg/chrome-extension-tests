@@ -1,5 +1,5 @@
-import EditorPage from "../editor/EditorPage";
 import { By } from "selenium-webdriver";
+import EditorPage from "../editor/EditorPage";
 
 export default class OnlineEditorPage extends EditorPage {
     

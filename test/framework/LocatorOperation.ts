@@ -1,6 +1,6 @@
-import { WebDriver, WebElement, By } from "selenium-webdriver";
-import WaitOperation from "./WaitOperation";
+import { By, WebDriver, WebElement } from "selenium-webdriver";
 import Element from "./Element";
+import WaitOperation from "./WaitOperation";
 
 export default class LocatorOperation {
 

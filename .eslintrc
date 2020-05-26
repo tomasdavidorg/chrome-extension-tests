@@ -28,6 +28,9 @@
         "eol-last": [
             "error",
             "always"
+        ],
+        "sort-imports": [
+            "error"
         ]
     }
 }

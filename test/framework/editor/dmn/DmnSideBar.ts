@@ -1,6 +1,6 @@
-import SideBar from "../SideBar";
-import DecisionNavigator from "./DecisionNavigator";
 import { By } from "selenium-webdriver";
+import DecisionNavigator from "./DecisionNavigator";
+import SideBar from "../SideBar";
 
 export default class DmnSideBar extends SideBar {
 

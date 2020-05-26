@@ -1,5 +1,5 @@
-import Tools from "../utils/Tools";
 import Element from "./Element";
+import Tools from "../utils/Tools";
 
 export default abstract class PageFragment {
 

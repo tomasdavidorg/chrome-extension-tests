@@ -1,4 +1,4 @@
-import { By, WebElement, WebDriver } from "selenium-webdriver";
+import { By, WebDriver, WebElement, } from "selenium-webdriver";
 import ElementWaitOperation from "./ElementWaitOperation";
 
 export default class Element {

@@ -1,8 +1,8 @@
-import PageFragment from "../PageFragment";
-import Explorer from "./Explorer";
-import Properties from "./Properties";
 import { By } from "selenium-webdriver";
 import Element from "../Element";
+import Explorer from "./Explorer";
+import PageFragment from "../PageFragment";
+import Properties from "./Properties";
 
 export default class SideBar extends PageFragment {
 

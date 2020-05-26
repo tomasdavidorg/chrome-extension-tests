@@ -1,11 +1,12 @@
-import { WebDriver, By } from "selenium-webdriver";
-import Screenshot from "./tools/ScreenShot";
-import LocatorOperation from "../framework/LocatorOperation";
-import Page from "../framework/Page";
-import PageFragment from "../framework/PageFragment";
+import { By, WebDriver } from "selenium-webdriver";
 import Clipboard from "./tools/Clipboard";
 import Driver from "./tools/Driver";
 import Element from "../framework/Element";
+import LocatorOperation from "../framework/LocatorOperation";
+import Page from "../framework/Page";
+import PageFragment from "../framework/PageFragment";
+import Screenshot from "./tools/ScreenShot";
+
 import Window from "./tools/Window";
 
 export default class Tools {

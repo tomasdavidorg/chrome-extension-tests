@@ -1,8 +1,9 @@
-import Editor from "../Editor";
+
 import BpmnPalette from "./BpmnPalette";
 import { By } from "selenium-webdriver";
-import { performance } from "perf_hooks";
+import Editor from "../Editor";
 import Element from "../../Element";
+import { performance } from "perf_hooks";
 
 export default class BpmnEditor extends Editor {
 

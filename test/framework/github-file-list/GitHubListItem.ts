@@ -1,7 +1,7 @@
-import PageFragment from "../PageFragment";
 import { By } from "selenium-webdriver";
-import GitHubEditorPage from "../github-editor/GitHubEditorPage";
 import Element from "../Element";
+import GitHubEditorPage from "../github-editor/GitHubEditorPage";
+import PageFragment from "../PageFragment";
 
 export default class GitHubListItem extends PageFragment {
 

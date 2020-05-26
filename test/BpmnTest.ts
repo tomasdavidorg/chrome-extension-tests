@@ -1,9 +1,9 @@
-import { expect } from "chai";
-import Tools from "./utils/Tools";
-import GitHubListPage from "./framework/github-file-list/GitHubListPage";
-import GitHubListItem from "./framework/github-file-list/GitHubListItem";
 import BpmnEditor from "./framework/editor/bpmn/BpmnEditor";
 import GitHubEditorPage from "./framework/github-editor/GitHubEditorPage";
+import GitHubListItem from "./framework/github-file-list/GitHubListItem";
+import GitHubListPage from "./framework/github-file-list/GitHubListPage";
+import Tools from "./utils/Tools";
+import { expect } from "chai";
 
 describe("BPMN test", () => {
 
