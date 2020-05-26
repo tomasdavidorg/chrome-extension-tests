@@ -1,4 +1,4 @@
-import { WebDriver, WebElement, By, until } from "selenium-webdriver";
+import { WebDriver, WebElement, By } from "selenium-webdriver";
 import WaitOperation from "./WaitOperation";
 import Element from "./Element";
 

@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import Tools from './utils/Tools';
+import Tools from "./utils/Tools";
 import GitHubListPage from "./framework/github-file-list/GitHubListPage";
-import GitHubListItem from './framework/github-file-list/GitHubListItem';
+import GitHubListItem from "./framework/github-file-list/GitHubListItem";
 import BpmnEditor from "./framework/editor/bpmn/BpmnEditor";
 import GitHubEditorPage from "./framework/github-editor/GitHubEditorPage";
 

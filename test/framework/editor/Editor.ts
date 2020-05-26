@@ -1,6 +1,6 @@
 import { By } from "selenium-webdriver";
 import PageFragment from "../PageFragment";
-import SideBar from "./SideBar"
+import SideBar from "./SideBar";
 import Element from "../Element";
 
 export default abstract class Editor extends PageFragment {

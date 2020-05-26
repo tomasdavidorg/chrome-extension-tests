@@ -1,11 +1,11 @@
-import Tools from './utils/Tools';
+import Tools from "./utils/Tools";
 import GitHubListPage from "./framework/github-file-list/GitHubListPage";
-import GitHubListItem from './framework/github-file-list/GitHubListItem';
-import GitHubEditorPage from './framework/github-editor/GitHubEditorPage';
+import GitHubListItem from "./framework/github-file-list/GitHubListItem";
+import GitHubEditorPage from "./framework/github-editor/GitHubEditorPage";
 import DmnEditor from "./framework/editor/dmn/DmnEditor";
 
 import { expect } from "chai";
-import DmnPallette from './framework/editor/dmn/DmnPallette';
+import DmnPallette from "./framework/editor/dmn/DmnPallette";
 
 describe("DMN test", () => {
 
@@ -37,7 +37,7 @@ describe("DMN test", () => {
         const sideBar = await dmnEditor.getSideBar();
         const processProps = await sideBar.openProperties();
         expect(await processProps.getDmnNameFromInput()).equals("Traffic Violation");
-        await sideBar.closeActiveSideBar()
+        await sideBar.closeActiveSideBar();
 
         // move annotation to canvas
         const dmnPalette: DmnPallette = await dmnEditor.getDmnPalette();
@@ -75,7 +75,7 @@ describe("DMN test", () => {
         
         const onlineEditorPage = await editorPage.openOnlineEditor();
         await onlineEditorPage.getDmnEditor();
-    })
+    });
 
     afterEach(async () => {
         await tools.finish("DMN_test");

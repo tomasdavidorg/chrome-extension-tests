@@ -8,9 +8,9 @@ export default class BpmnPalette extends Pallette {
     private static readonly START_ITEM_LOCATOR = By.xpath("//a[@class='kie-palette-item-anchor-spacer'][span[text()='Start']]");
     private static readonly CLOSE_LOCATOR = By.className("kie-palette-flyout__btn-link--close");
 
-    public async dragAndDropStartEventToCanvas() {
+    public async dragAndDropStartEventToCanvas(): Promise<void> {
         // open start events
-        const startEvents: Element = await this.tools.by(BpmnPalette.START_EVENTS_LOCATOR).getElement()
+        const startEvents: Element = await this.tools.by(BpmnPalette.START_EVENTS_LOCATOR).getElement();
         await startEvents.click();
 
         // select start item
@@ -23,5 +23,4 @@ export default class BpmnPalette extends Pallette {
         const closeButton: Element = await this.tools.by(BpmnPalette.CLOSE_LOCATOR).getElement();
         await closeButton.click();
     }
-
 }

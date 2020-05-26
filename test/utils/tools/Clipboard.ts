@@ -1,5 +1,5 @@
 import { WebDriver, WebElement, Key } from "selenium-webdriver";
-import * as os from 'os';
+import * as os from "os";
 
 export default class Clipboard {
 
@@ -15,8 +15,8 @@ export default class Clipboard {
             "return document.getElementsByTagName('body')[0].appendChild(input)";
         const GET_TEXT_FROM_INPUT_CMD: string = "input=document.getElementById('copyPaste');" +
             "text=document.getElementById('copyPaste').value;" +
-           // "input.remove();" +
-            "return text;"
+            // "input.remove();" +
+            "return text;";
 
         // add hepler input to document
         const input: WebElement = await this.driver.executeScript(ADD_HELPER_INPUT_CMD);

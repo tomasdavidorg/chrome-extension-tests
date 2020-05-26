@@ -1,6 +1,6 @@
-import { WebDriver } from "selenium-webdriver"
+import { WebDriver } from "selenium-webdriver";
 import * as fs from "fs";
-import * as path from "path"
+import * as path from "path";
 
 export default class Screenshots {
 
@@ -16,14 +16,14 @@ export default class Screenshots {
         }
     }
 
-    public async takePng(fileName: string) {
+    public async takePng(fileName: string): Promise<void> {
         const pngPath = path.join(this.screenshotsDir, fileName + ".png");
         await this.driver.takeScreenshot().then((image) => {
             fs.writeFileSync(pngPath, image, "base64");
         });
     }
 
-    public async takeHtml(fileName: string) {
+    public async takeHtml(fileName: string): Promise<void> {
         const pageSource = await this.driver.getPageSource();
         const htmlPath = path.join(this.screenshotsDir, fileName + ".html");
         fs.writeFileSync(htmlPath, pageSource, "utf8");
