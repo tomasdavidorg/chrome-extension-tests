@@ -5,7 +5,6 @@ import GitHubEditorPage from './framework/github-editor/GitHubEditorPage';
 import DmnEditor from "./framework/editor/dmn/DmnEditor";
 
 import { expect } from "chai";
-import EditorPage from './framework/editor/EditorPage';
 import DmnPallette from './framework/editor/dmn/DmnPallette';
 
 describe("DMN test", () => {
@@ -66,7 +65,7 @@ describe("DMN test", () => {
         
         // check link to online editor from clipboard
         await editorPage.copyLinkToOnlineEditor();
-        const clipboadText = await tools.clipboard.getContent();
+        const clipboadText = await tools.clipboard().getContent();
         expect(clipboadText).contains(EXPECTED_LINK);
         
         const fullScreenPage = await editorPage.fullScreen();

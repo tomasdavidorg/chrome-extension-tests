@@ -62,7 +62,7 @@ describe("BPMN test", () => {
 
         // check link to online editor from clipboard
         await gitHubEditorPage.copyLinkToOnlineEditor();
-        const clipboadText = await tools.clipboard.getContent();
+        const clipboadText = await tools.clipboard().getContent();
         expect(clipboadText).contains(EXPECTED_LINK);
 
         // open full screen editor

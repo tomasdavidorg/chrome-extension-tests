@@ -6,21 +6,19 @@ import PageFragment from "../framework/PageFragment";
 import Clipboard from "./tools/Clipboard";
 import Driver from "./tools/Driver";
 import Element from "../framework/Element";
+import Window from "./tools/Window";
 
 export default class Tools {
 
     private static readonly SCREENSHOTS_DIR: string = "screenshots";
 
-    public readonly driver: WebDriver;
+    private readonly driver: WebDriver;
 
-    public readonly screenShot: Screenshot;
-
-    public readonly clipboard: Clipboard;
+    private readonly screenShot: Screenshot;
 
     private constructor(driver: WebDriver) {
         this.driver = driver;
         this.screenShot = new Screenshot(this.driver, Tools.SCREENSHOTS_DIR);
-        this.clipboard = new Clipboard(this.driver);
     }
 
     public static async init(): Promise<Tools> {
@@ -42,6 +40,14 @@ export default class Tools {
     public by(by: By): LocatorOperation {
         return new LocatorOperation(this.driver, by);
     }
+
+    public clipboard(): Clipboard {
+        return new Clipboard(this.driver);
+    }
+
+    public window(): Window {
+        return new Window(this.driver);
+    } 
 
     public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {
         await this.driver.get(url);

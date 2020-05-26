@@ -15,4 +15,8 @@ export default abstract class Page {
     }
 
     public abstract async waitUntilLoaded(): Promise<void>;
+
+    public async scrollToTop(): Promise<void> {
+        await this.tools.window().scrollToTop();
+    }
 }

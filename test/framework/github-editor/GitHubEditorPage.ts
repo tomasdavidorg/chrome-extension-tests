@@ -51,14 +51,7 @@ export default class GitHubEditorPage extends EditorPage {
             .untilPresent();
         await onlineEditorButton.click();
 
-        await this.tools.driver.wait(async () => {
-            const windowHandles = await this.tools.driver.getAllWindowHandles();
-            return (windowHandles.length > 1);
-        }, 5000);
-
-        const windowHandles = await this.tools.driver.getAllWindowHandles();
-
-        await this.tools.driver.switchTo().window(windowHandles[1]);
+        await this.tools.window().switchToSecondWindow();
 
         return this.tools.createPage(OnlineEditorPage);
     }
