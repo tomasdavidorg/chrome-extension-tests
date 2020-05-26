@@ -9,10 +9,6 @@ export default class Element {
         this.webElement = webElement;
     }
 
-    public getWebElement(): WebElement {
-        return this.webElement;
-    }
-
     public wait(timeout?: number): ElementWaitOperation {
         return new ElementWaitOperation(this, timeout)
     }
@@ -22,7 +18,7 @@ export default class Element {
 
         // no other way of drag and drop works
         const actions = this.getDriver().actions();
-        await actions.move({ origin: await this.getWebElement(), x, y }).perform();
+        await actions.move({ origin: this.webElement, x, y }).perform();
         await actions.click().perform();
     }
 
@@ -59,6 +55,14 @@ export default class Element {
     public async findElements(by: By): Promise<Element[]> {
         const webElements = await this.webElement.findElements(by);
         return webElements.map(webElement => new Element(webElement))
+    }
+
+    public async enterFrame(): Promise<void> {
+        await this.getDriver().switchTo().frame(this.webElement);
+    }
+
+    public async leaveFrame(): Promise<void> {
+        await this.getDriver().switchTo().defaultContent();
     }
 
     private getDriver(): WebDriver {

@@ -10,11 +10,11 @@ export default abstract class Editor extends PageFragment {
     private static readonly PALLETTE_LOCATOR: By = By.className("kie-palette");
 
     public async enter(): Promise<void> {
-        await this.tools.driver.switchTo().frame(await this.root.getWebElement());
+        await this.root.enterFrame();
     }
 
     public async leave(): Promise<void> {
-        await this.tools.driver.switchTo().defaultContent();
+        await this.root.leaveFrame();
     }
 
     public async getSideBar(): Promise<SideBar> {
