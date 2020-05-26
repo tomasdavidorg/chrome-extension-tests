@@ -2,7 +2,6 @@ import { By } from "selenium-webdriver";
 import Element from "../../Element";
 import Pallette from "../Palette";
 
-
 export default class BpmnPalette extends Pallette {
 
     private static readonly START_EVENTS_LOCATOR = By.xpath("//button[@title='Start Events']");
