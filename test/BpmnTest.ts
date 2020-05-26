@@ -53,10 +53,10 @@ describe("BPMN test", () => {
         // open and check source editor
         expect(await gitHubEditorPage.isSourceVisible()).false;
         expect(await gitHubEditorPage.isEditorVisible()).true;
-        gitHubEditorPage.seeAsSource();
+        await gitHubEditorPage.seeAsSource();
         expect(await gitHubEditorPage.isSourceVisible()).true;
         expect(await gitHubEditorPage.isEditorVisible()).false;
-        gitHubEditorPage.seeAsDiagram();
+        await gitHubEditorPage.seeAsDiagram();
         expect(await gitHubEditorPage.isSourceVisible()).false;
         expect(await gitHubEditorPage.isEditorVisible()).true;
 

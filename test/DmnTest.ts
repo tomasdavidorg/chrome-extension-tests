@@ -57,10 +57,10 @@ describe("DMN test", () => {
         // open and check source editor
         expect(await editorPage.isSourceVisible()).false;
         expect(await editorPage.isEditorVisible()).true;
-        editorPage.seeAsSource();
+        await editorPage.seeAsSource();
         expect(await editorPage.isSourceVisible()).true;
         expect(await editorPage.isEditorVisible()).false;
-        editorPage.seeAsDiagram();
+        await editorPage.seeAsDiagram();
         expect(await editorPage.isSourceVisible()).false;
         expect(await editorPage.isEditorVisible()).true;
         
