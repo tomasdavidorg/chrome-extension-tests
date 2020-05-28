@@ -77,6 +77,6 @@ describe("BPMN test", () => {
     });
 
     afterEach(async () => {
-        await tools.finish("BPMN_test");
+        await tools.finishTest("BPMN_test");
     });
 });

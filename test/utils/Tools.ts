@@ -26,7 +26,7 @@ export default class Tools {
         return new Tools(await Driver.init());
     }
 
-    public async finish(testName: string): Promise<void> {
+    public async finishTest(testName: string): Promise<void> {
         const screenShotName: string = testName + "_screenshot_after_test";
         await this.driver.switchTo().defaultContent();
         await this.screenShot.takeHtml(screenShotName);

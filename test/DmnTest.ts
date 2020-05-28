@@ -77,6 +77,6 @@ describe("DMN test", () => {
     });
 
     afterEach(async () => {
-        await tools.finish("DMN_test");
+        await tools.finishTest("DMN_test");
     });
 });
