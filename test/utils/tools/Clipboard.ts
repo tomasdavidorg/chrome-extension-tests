@@ -9,6 +9,11 @@ export default class Clipboard {
         this.driver = driver;
     }
 
+    /**
+     * Get content of clipboard.
+     * 
+     * Chrome does not allow to get the context directly from clipboard. It must be done through helper input.
+     */
     public async getContent(): Promise<string> {
         const ADD_HELPER_INPUT_CMD: string = "input=document.createElement('input');" +
             "input.setAttribute('id','copyPaste');" +
@@ -31,8 +36,4 @@ export default class Clipboard {
         // get text from input
         return await this.driver.executeScript(GET_TEXT_FROM_INPUT_CMD);
     }
-
-    //await this.tools.driver.executeScript("arguments[0].style.backgroundColor = '#ff0000';", await this.parent.findElement(By.xpath(".//a")))  
-    //await this.tools.wait.pause(2000);
-
 }

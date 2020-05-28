@@ -65,6 +65,10 @@ export default class Element {
         await this.getDriver().switchTo().defaultContent();
     }
 
+    public async markWithRedColor(): Promise<void> {
+        await this.getDriver().executeScript("arguments[0].style.backgroundColor = '#ff0000';", this.webElement);  
+    }
+
     private getDriver(): WebDriver {
         return this.webElement.getDriver();
     }
