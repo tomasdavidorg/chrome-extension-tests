@@ -12,7 +12,7 @@
   "author": "Tomas David",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "mocha --full-trace --no-timeout -r ts-node/register test/**/*Test.ts",
+    "test": "jest --runInBand",
     "lint": "eslint test --ext .ts"
   },
   "directories": {
@@ -22,16 +22,24 @@
     "typescript": "^3.8.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.10",
-    "@types/mocha": "^7.0.2",
+    "@types/jest": "^25.2.3",
     "@types/node": "^13.7.7",
     "@types/selenium-webdriver": "^4.0.9",
     "@typescript-eslint/eslint-plugin": "^3.0.1",
     "@typescript-eslint/parser": "^3.0.1",
-    "chai": "^4.2.0",
     "eslint": "^7.1.0",
-    "mocha": "^7.1.0",
+    "jest": "^26.0.1",
     "selenium-webdriver": "^4.0.0-alpha.7",
+    "ts-jest": "^26.0.0",
     "ts-node": "^8.6.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/*+(Test.ts)"
+    ],
+    "testTimeout": 100000
   }
 }
