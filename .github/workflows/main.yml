@@ -25,17 +25,17 @@ jobs:
         run: /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
       - name: Install project
-        run: npm install
+        run: yarn install
 
       - name: Check code style
         if: always()
-        run: npm run lint
+        run: yarn run lint
 
       - name: Run tests
         env:
           DISPLAY: ":99.0"
           UNZIPPED_CHROME_EXTENSION_PATH: ${{ github.workspace }}/dist
-        run: npm test
+        run: yarn test
 
       - name: Archive png screenshot
         if: always()
