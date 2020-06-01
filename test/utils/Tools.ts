@@ -2,11 +2,11 @@ import { By, WebDriver } from "selenium-webdriver";
 import Clipboard from "./tools/Clipboard";
 import Driver from "./tools/Driver";
 import Element from "../framework/Element";
+import ErrorProcessor from "./tools/ErrorProcessor";
 import LocatorOperation from "../framework/LocatorOperation";
 import Page from "../framework/Page";
 import PageFragment from "../framework/PageFragment";
 import Screenshot from "./tools/ScreenShot";
-
 import Window from "./tools/Window";
 
 export default class Tools {
@@ -51,7 +51,13 @@ export default class Tools {
     } 
 
     public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {
-        await this.driver.get(url);
+        await ErrorProcessor.run(
+            async () => {
+                await this.driver.get(url);
+            },
+            "Error while opening url: " + url
+        );
+       
         return await this.createPage(type);
     }
 

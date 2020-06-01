@@ -1,5 +1,6 @@
 import { By, WebDriver, error, until } from "selenium-webdriver";
 import Element from "./Element";
+import ErrorProcessor from "../utils/tools/ErrorProcessor";
 
 export default class WaitOperation {
 
@@ -33,7 +34,12 @@ export default class WaitOperation {
     }
 
     public async untilPresent(): Promise<Element> {
-        return new Element(await this.driver.wait(until.elementLocated(this.by), this.timeout));
+        return await ErrorProcessor.run(
+            async () => {
+                return new Element(await this.driver.wait(until.elementLocated(this.by), this.timeout));
+            },
+            "Error while waiting until element is present: " + this.by 
+        );
     }
 
     public async isPresent(): Promise<boolean> {

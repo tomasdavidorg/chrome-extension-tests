@@ -1,5 +1,6 @@
 import { By, WebDriver, WebElement, } from "selenium-webdriver";
 import ElementWaitOperation from "./ElementWaitOperation";
+import ErrorProcessor from "../utils/tools/ErrorProcessor";
 
 export default class Element {
 
@@ -45,11 +46,21 @@ export default class Element {
     }
 
     public async getAttribute(attributeName: string): Promise<string> {
-        return await this.webElement.getAttribute(attributeName);
+        return await ErrorProcessor.run(
+            async () => {
+                return await this.webElement.getAttribute(attributeName);
+            },
+            "Error while getting attribute: " + attributeName
+        );
     }
 
     public async findElement(by: By): Promise<Element> {
-        return new Element(await this.webElement.findElement(by));
+        return await ErrorProcessor.run(
+            async () => {
+                return new Element(await this.webElement.findElement(by));
+            },
+            "Error while finding element: " + by
+        );
     }
 
     public async findElements(by: By): Promise<Element[]> {
