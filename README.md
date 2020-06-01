@@ -2,15 +2,15 @@
 Integration tests for Kogito Chrome extrension. Uses selenium to test the kogito plugin in Chrome browser.
 
 ## Installation
-1. Install npm
+1. Install yarn
 
 ```
-sudo dnf install npm -y
+sudo dnf install yarnpkg -y
 ```
 2. Install project dependencies
 ###
 ```
-npm install
+yarn install
 ```
 
 3. Add chrome driver to path
@@ -27,13 +27,13 @@ Tests need UNZIPPED_CHROME_EXTENSION_PATH env. variable to be set to directory w
 ```
 unzip tmp/chrome_extension_kogito_kie_editors_0.4.2.zip
 export UNZIPPED_CHROME_EXTENSION_PATH=dist 
-npm run tests
+yarn run tests
 ```
 
 ## Code style
 Run code style check
 ```
-npm run lint
+yarn run lint
 ```
 
 ## Repository strucure
