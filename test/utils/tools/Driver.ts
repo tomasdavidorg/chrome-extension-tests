@@ -2,7 +2,6 @@ import * as fs from "fs";
 import { Browser, Builder, Capabilities, WebDriver } from "selenium-webdriver";
 import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
 
-
 export default class Driver {
 
     public static async init(): Promise<WebDriver> {

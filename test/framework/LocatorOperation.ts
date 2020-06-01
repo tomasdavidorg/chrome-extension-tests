@@ -1,5 +1,6 @@
 import { By, WebDriver, WebElement } from "selenium-webdriver";
 import Element from "./Element";
+import ErrorProcessor from "../utils/tools/ErrorProcessor";
 import WaitOperation from "./WaitOperation";
 
 export default class LocatorOperation {
@@ -16,13 +17,22 @@ export default class LocatorOperation {
         return new WaitOperation(this.driver, this.by, timeout);
     }
 
-    public async getElement(): Promise<Element> {
-        const webElement: WebElement = await this.driver.findElement(this.by);
-        return new Element(webElement);
+    public async getElements(): Promise<Element[]> {
+        return await ErrorProcessor.run(
+            async () => {
+                const webElements: WebElement[] = await this.driver.findElements(this.by);
+                return webElements.map(webElement => new Element(webElement));
+            },
+            "Error while getting elements: " + this.by
+        );
     }
 
-    public async getElements(): Promise<Element[]> {
-        const webElements: WebElement[] = await this.driver.findElements(this.by);
-        return webElements.map(webElement => new Element(webElement));
+    public async getElement(): Promise<Element> {
+        return await ErrorProcessor.run(
+            async () => {
+                const webElement: WebElement = await this.driver.findElement(this.by);
+                return new Element(webElement);
+            },
+            "Error while getting element: " + this.by);
     }
 }
