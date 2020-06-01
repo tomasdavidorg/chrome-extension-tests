@@ -53,28 +53,25 @@ yarn run lint
 ```typescript
 import Tools from "./utils/Tools";
 
-describe("Test name", () => {
+let tools: Tools;
 
-    let tools: Tools;
-
-    beforeEach(async () => {
-        tools = await Tools.init();
-    });
-
-    it("test method description", async () => {
-
-        // ...
-
-        await tools.openPage(PageClass, "url");
-
-        // ...
-    });
-
-    afterEach(async () => {
-        await tools.finishTest("Test_name");
-    });
+beforeEach(async () => {
+    tools = await Tools.init();
 });
 
+test("BPMN basic operations test", async () => {
+
+    // ...
+
+    await tools.openPage(PageClass, "url");
+
+    // ...
+
+});
+
+afterEach(async () => {
+    await tools.finishTest("BPMN_basic_opepration_test");
+});
 ```
 
 ## Framework

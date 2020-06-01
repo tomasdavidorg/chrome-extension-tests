@@ -77,4 +77,3 @@ test("BPMN basic operations test", async () => {
 afterEach(async () => {
     await tools.finishTest("BPMN_basic_opepration_test");
 });
-
