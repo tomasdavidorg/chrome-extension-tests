@@ -13,7 +13,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "jest --runInBand",
-    "lint": "eslint test --ext .ts"
+    "lint": "eslint test --ext .ts",
+    "clean": "rm -rf yarn.lock dist logs node_modules screenshots"
   },
   "directories": {
     "test": "./test"
