@@ -1,6 +1,6 @@
 import Element from "./Element";
 
-export default class ElementWaitOperation {
+export default class ElementWaitAction {
 
     private readonly element: Element;
     private readonly timeout: number;

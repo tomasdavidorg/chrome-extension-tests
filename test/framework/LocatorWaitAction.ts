@@ -2,7 +2,7 @@ import { By, WebDriver, error, until } from "selenium-webdriver";
 import Element from "./Element";
 import ErrorProcessor from "../utils/tools/ErrorProcessor";
 
-export default class WaitOperation {
+export default class LocatorWaitAction {
 
     private static readonly DEFAULT_TIMEOUT: number = 100;
 
@@ -13,7 +13,7 @@ export default class WaitOperation {
     public constructor(driver: WebDriver, by: By, timeout?: number) {
         this.driver = driver;
         this.by = by;
-        this.timeout = timeout !== undefined ? timeout : WaitOperation.DEFAULT_TIMEOUT;
+        this.timeout = timeout !== undefined ? timeout : LocatorWaitAction.DEFAULT_TIMEOUT;
     }
 
     public async untilAbsent(): Promise<void> {

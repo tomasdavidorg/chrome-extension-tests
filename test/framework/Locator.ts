@@ -1,7 +1,7 @@
 import { By, WebDriver, WebElement } from "selenium-webdriver";
 import Element from "./Element";
 import ErrorProcessor from "../utils/tools/ErrorProcessor";
-import WaitOperation from "./WaitOperation";
+import LocatorWaitAction from "./LocatorWaitAction";
 
 export default class Locator {
 
@@ -13,8 +13,8 @@ export default class Locator {
         this.by = by;
     }
 
-    public wait(timeout?: number): WaitOperation {
-        return new WaitOperation(this.driver, this.by, timeout);
+    public wait(timeout?: number): LocatorWaitAction {
+        return new LocatorWaitAction(this.driver, this.by, timeout);
     }
 
     public async getElements(): Promise<Element[]> {
