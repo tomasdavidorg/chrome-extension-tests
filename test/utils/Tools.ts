@@ -3,7 +3,7 @@ import Clipboard from "./tools/Clipboard";
 import Driver from "./tools/Driver";
 import Element from "../framework/Element";
 import ErrorProcessor from "./tools/ErrorProcessor";
-import LocatorOperation from "../framework/LocatorOperation";
+import Locator from "../framework/Locator";
 import Page from "../framework/Page";
 import PageFragment from "../framework/PageFragment";
 import Screenshot from "./tools/ScreenShot";
@@ -38,8 +38,8 @@ export default class Tools {
         return new Promise(resolve => setTimeout(resolve, timeout));
     }
 
-    public by(by: By): LocatorOperation {
-        return new LocatorOperation(this.driver, by);
+    public by(by: By): Locator {
+        return new Locator(this.driver, by);
     }
 
     public clipboard(): Clipboard {

@@ -3,7 +3,7 @@ import Element from "./Element";
 import ErrorProcessor from "../utils/tools/ErrorProcessor";
 import WaitOperation from "./WaitOperation";
 
-export default class LocatorOperation {
+export default class Locator {
 
     private readonly driver: WebDriver
     private readonly by: By;
