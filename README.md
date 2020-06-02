@@ -1,5 +1,5 @@
 # Kogito Google Chrome extension tests
-Integration tests for Kogito Chrome extrension. Uses selenium to test the kogito plugin in Chrome browser.
+Integration tests for Kogito Chrome extrension. Uses selenium to test the Kogito plugin in Chrome browser.
 
 ## Installation
 1. Install yarn
@@ -7,7 +7,9 @@ Integration tests for Kogito Chrome extrension. Uses selenium to test the kogito
 ```
 sudo dnf install yarnpkg -y
 ```
+
 2. Install project dependencies
+
 ###
 ```
 yarn install
@@ -23,7 +25,7 @@ export PATH=/path/to/chromedriver:$PATH
 
 4. Run tests
 
-Tests need UNZIPPED_CHROME_EXTENSION_PATH env. variable to be set to directory with unzipped Chome Extension.
+Tests need UNZIPPED_CHROME_EXTENSION_PATH environment variable to be set to directory with unzipped Chome Extension.
 ```
 unzip tmp/chrome_extension_kogito_kie_editors_0.4.2.zip
 export UNZIPPED_CHROME_EXTENSION_PATH=dist 
@@ -59,7 +61,7 @@ beforeEach(async () => {
     tools = await Tools.init();
 });
 
-test("BPMN basic operations test", async () => {
+test("Test name", async () => {
 
     // ...
 
@@ -70,7 +72,7 @@ test("BPMN basic operations test", async () => {
 });
 
 afterEach(async () => {
-    await tools.finishTest("BPMN_basic_opepration_test");
+    await tools.finishTest("Test_name");
 });
 ```
 
@@ -84,5 +86,3 @@ After every test `finishTest()` method should be called to quit the driver and c
   - Find by locator: `await tools.by(locatorBy).getElement()`
   - Waiting for element: `await tools.by(locatorBy).wait(1000).untilPresent()`
   - Using parent element: `const parent: Element = await tools.by(parentLocatorBy).getElement(); await parent.find(childLocatorBy)`
-
-
