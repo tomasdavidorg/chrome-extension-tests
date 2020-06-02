@@ -11,11 +11,10 @@ beforeEach(async () => {
 });
 
 test("BPMN basic operations test", async () => {
-
-    const WEB_PAGE = "https://github.com/kiegroup/kie-wb-playground/blob/master/evaluation/src/main/resources/";
-    const EXPECTED_LINK = "/kiegroup/kie-wb-playground/master/evaluation/src/main/resources/evaluation.bpmn";
-    const FILE_NAME = "evaluation.bpmn";
-    const PROCESS_NODES_NAMES = ["Start", "Self Evaluation", "PM Evaluation", "HR Evaluation", "Parallel", "Parallel", "End Terminate"];
+    const WEB_PAGE = "https://github.com/kiegroup/kogito-examples/blob/stable/process-business-rules-quarkus/src/main/resources/org/acme/travels/";
+    const EXPECTED_LINK = "kiegroup/kogito-examples/stable/process-business-rules-quarkus/src/main/resources/org/acme/travels/persons.bpmn";
+    const FILE_NAME = "persons.bpmn";
+    const PROCESS_NODES_NAMES = ["StartProcess", "End Event 1", "End Event 2", "Evaluate Person", "Exclusive Gateway 1", "Special handling for children"];
 
     // check link to online editor in the list
     const gitHubListPage: GitHubListPage = await tools.openPage(GitHubListPage, WEB_PAGE);
@@ -34,17 +33,17 @@ test("BPMN basic operations test", async () => {
     // check process properties
     const sideBar = await bpmnEditor.getSideBar();
     const processProps = await sideBar.openProperties();
-    expect(await processProps.getProcessNameFromInput()).toEqual("Evaluation");
+    expect(await processProps.getProcessNameFromInput()).toEqual("persons");
 
     // check process nodes in explorer
     const explorer = await sideBar.openExplorer();
     expect(await (await explorer.getNodeNames()).sort()).toEqual(PROCESS_NODES_NAMES.concat("Start").sort());
-    expect(await explorer.getProcessName()).toEqual("Evaluation");
+    expect(await explorer.getProcessName()).toEqual("persons");
 
     // check task properties
-    await explorer.selectNode("PM Evaluation");
+    await explorer.selectNode("Evaluate Person");
     const nodeProps = await sideBar.openProperties();
-    expect(await nodeProps.getNameFromTextArea()).toEqual("PM Evaluation");
+    expect(await nodeProps.getNameFromTextArea()).toEqual("Evaluate Person");
 
     await bpmnEditor.leave();
 
