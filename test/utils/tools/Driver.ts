@@ -1,6 +1,7 @@
-import * as fs from "fs";
 import { Browser, Builder, Capabilities, WebDriver } from "selenium-webdriver";
 import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
+import { existsSync, mkdirSync } from "fs";
+import ErrorProcessor from "./ErrorProcessor";
 
 export default class Driver {
 
@@ -18,8 +19,8 @@ export default class Driver {
 
         // init chrome driver log
         const LOGS_DIR = "logs";
-        if (!fs.existsSync(LOGS_DIR)) {
-            fs.mkdirSync(LOGS_DIR);
+        if (!existsSync(LOGS_DIR)) {
+            mkdirSync(LOGS_DIR);
         }
         const chromeServiceBuilder = new ServiceBuilder();
         chromeServiceBuilder.loggingTo(LOGS_DIR + "/chromedriver.log").enableVerboseLogging();
@@ -33,8 +34,31 @@ export default class Driver {
             .build();
 
         // maximize chrome browser window
-        await driver.manage().window().maximize();
+        await ErrorProcessor.run(
+            async() => {
+                await driver.manage().window().maximize();
+            },
+            "Error while maximizing browser window."
+        );
 
         return driver;
+    }
+
+    public static async openUrl(driver: WebDriver, url: string): Promise<void> {
+        await ErrorProcessor.run(
+            async () => {
+                await driver.get(url);
+            },
+            "Error while opening url: " + url
+        );
+    }
+
+    public static async quit(driver: WebDriver): Promise<void> {
+        return await ErrorProcessor.run(
+            async () => {
+                await driver.quit();
+            },
+            "Error while quiting driver."
+        );
     }
 }

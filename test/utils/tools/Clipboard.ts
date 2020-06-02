@@ -1,5 +1,6 @@
-import * as os from "os";
 import { Key, WebDriver, WebElement } from "selenium-webdriver";
+import ErrorProcessor from "./ErrorProcessor";
+import { platform } from "os";
 
 export default class Clipboard {
 
@@ -12,28 +13,51 @@ export default class Clipboard {
     /**
      * Get content of clipboard.
      * 
-     * Chrome does not allow to get the context directly from clipboard. It must be done through helper input.
+     * Chrome does not allow to get the clipboard context directly. It must be done through helper input.
      */
     public async getContent(): Promise<string> {
+        const input: WebElement = await this.addHelperInputToPage();
+        await this.pasteContentToHelperInput(input);
+        return await this.getTextFromHelperInput();
+    }
+
+    private async getTextFromHelperInput(): Promise<string> {
+        const GET_TEXT_FROM_INPUT_CMD: string = "input=document.getElementById('copyPaste');" +
+            "text=document.getElementById('copyPaste').value;" +
+            "input.remove();" +
+            "return text;";
+
+        return await ErrorProcessor.run(
+            async () => {
+                return await this.driver.executeScript(GET_TEXT_FROM_INPUT_CMD);
+            },
+            "Error while getting text from helper input."
+        );
+    }
+
+    private async pasteContentToHelperInput(input: WebElement) {
+        await ErrorProcessor.run(
+            async () => {
+                await input.sendKeys(this.getCtrvKeys());
+            },
+            "Error while pasting contenct from clipboard to helper input by keys: " + this.getCtrvKeys()
+        );
+    }
+
+    private getCtrvKeys() {
+        // "darwin" is  MacOS
+        if (platform() == "darwin") {
+            return Key.SHIFT + Key.INSERT;
+        } else {
+            return Key.CONTROL + "v";
+        }
+    }
+
+    private async addHelperInputToPage(): Promise<WebElement> {
         const ADD_HELPER_INPUT_CMD: string = "input=document.createElement('input');" +
             "input.setAttribute('id','copyPaste');" +
             "return document.getElementsByTagName('body')[0].appendChild(input)";
-        const GET_TEXT_FROM_INPUT_CMD: string = "input=document.getElementById('copyPaste');" +
-            "text=document.getElementById('copyPaste').value;" +
-            // "input.remove();" +
-            "return text;";
 
-        // add hepler input to document
-        const input: WebElement = await this.driver.executeScript(ADD_HELPER_INPUT_CMD);
-
-        // paste content of clipboard to the input
-        if (os.platform() == "darwin") {   // MacOS          
-            await input.sendKeys(Key.SHIFT + Key.INSERT);
-        } else {
-            await input.sendKeys(Key.CONTROL + "v");
-        }
-
-        // get text from input
-        return await this.driver.executeScript(GET_TEXT_FROM_INPUT_CMD);
+        return await this.driver.executeScript(ADD_HELPER_INPUT_CMD);
     }
 }

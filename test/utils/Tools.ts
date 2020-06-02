@@ -2,7 +2,6 @@ import { By, WebDriver } from "selenium-webdriver";
 import Clipboard from "./tools/Clipboard";
 import Driver from "./tools/Driver";
 import Element from "../framework/Element";
-import ErrorProcessor from "./tools/ErrorProcessor";
 import Locator from "../framework/Locator";
 import Page from "../framework/Page";
 import PageFragment from "../framework/PageFragment";
@@ -31,7 +30,7 @@ export default class Tools {
         await this.window().leaveFrame();
         await this.screenShot.takeHtml(screenShotName);
         await this.screenShot.takePng(screenShotName);
-        await this.driver.quit();
+        await Driver.quit(this.driver);
     }
 
     public pause(timeout: number): Promise<void> {
@@ -51,13 +50,7 @@ export default class Tools {
     } 
 
     public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {
-        await ErrorProcessor.run(
-            async () => {
-                await this.driver.get(url);
-            },
-            "Error while opening url: " + url
-        );
-       
+        await Driver.openUrl(this.driver, url);
         return await this.createPage(type);
     }
 

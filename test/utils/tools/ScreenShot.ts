@@ -1,6 +1,7 @@
-import * as fs from "fs";
-import * as path from "path";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+import ErrorProcessor from "./ErrorProcessor";
 import { WebDriver } from "selenium-webdriver";
+import { join } from "path";
 
 export default class Screenshots {
 
@@ -11,21 +12,31 @@ export default class Screenshots {
         this.driver = driver;
         this.screenshotsDir = screenshotsDir;
 
-        if (!fs.existsSync(screenshotsDir)) {
-            fs.mkdirSync(screenshotsDir);
+        if (!existsSync(screenshotsDir)) {
+            mkdirSync(screenshotsDir);
         }
     }
 
     public async takePng(fileName: string): Promise<void> {
-        const pngPath = path.join(this.screenshotsDir, fileName + ".png");
-        await this.driver.takeScreenshot().then((image) => {
-            fs.writeFileSync(pngPath, image, "base64");
-        });
+        const pngPath = join(this.screenshotsDir, fileName + ".png");
+        await ErrorProcessor.run(
+            async () => {
+                await this.driver.takeScreenshot().then((image) => {
+                    writeFileSync(pngPath, image, "base64");
+                });
+            },
+            "Error while taking png screenshot."
+        );
     }
 
     public async takeHtml(fileName: string): Promise<void> {
-        const pageSource = await this.driver.getPageSource();
-        const htmlPath = path.join(this.screenshotsDir, fileName + ".html");
-        fs.writeFileSync(htmlPath, pageSource, "utf8");
+        const pageSource = await ErrorProcessor.run(
+            async () => {
+                return await this.driver.getPageSource();
+            },
+            "Error while getting page source."
+        );
+        const htmlPath = join(this.screenshotsDir, fileName + ".html");
+        writeFileSync(htmlPath, pageSource, "utf8");
     }
 }
