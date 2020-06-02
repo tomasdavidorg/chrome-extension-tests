@@ -14,7 +14,7 @@ export default abstract class Editor extends PageFragment {
     }
 
     public async leave(): Promise<void> {
-        await this.root.leaveFrame();
+        await this.tools.window().leaveFrame();
     }
 
     public async getSideBar(): Promise<SideBar> {

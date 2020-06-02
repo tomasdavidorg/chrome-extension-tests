@@ -15,10 +15,9 @@ export default class Properties extends PageFrament {
     }
 
     private async getValue(type: string, nameAttributeSuffix: string): Promise<string> {
-        const property: Element = await this.tools.by(this.getProperty(type, nameAttributeSuffix))
+        return await this.tools.by(this.getProperty(type, nameAttributeSuffix))
             .wait(2000)
             .untilHasValue();
-        return await property.getAttribute("value");
     }
 
     public async getNameFromTextArea(): Promise<string> {

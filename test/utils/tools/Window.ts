@@ -8,6 +8,10 @@ export default class Window {
         this.driver = driver;
     }
 
+    public async leaveFrame(): Promise<void> {
+        await this.driver.switchTo().defaultContent();
+    }
+
     public async scrollToTop(): Promise<void> {
         await this.driver.executeScript("window.scrollTo(0, 0);");
     }
