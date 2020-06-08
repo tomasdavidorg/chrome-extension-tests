@@ -55,13 +55,15 @@ yarn run lint
 ```typescript
 import Tools from "./utils/Tools";
 
+const TEST_NAME = "Simple_test"
+
 let tools: Tools;
 
 beforeEach(async () => {
     tools = await Tools.init();
 });
 
-test("Test name", async () => {
+test(TEST_NAME, async () => {
 
     // ...
 
@@ -72,7 +74,7 @@ test("Test name", async () => {
 });
 
 afterEach(async () => {
-    await tools.finishTest("Test_name");
+    await tools.finishTest(TEST_NAME);
 });
 ```
 

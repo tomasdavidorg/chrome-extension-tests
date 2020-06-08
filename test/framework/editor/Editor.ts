@@ -7,7 +7,7 @@ export default abstract class Editor extends PageFragment {
 
     protected static readonly SIDE_BAR_LOCATOR: By = By.className("qe-docks-bar-E");
     private static readonly CANVAS_LOCATOR: By = By.className("canvas-panel");
-    private static readonly PALLETTE_LOCATOR: By = By.className("kie-palette");
+    private static readonly PALETTE_LOCATOR: By = By.className("kie-palette");
 
     public async enter(): Promise<void> {
         await this.root.enterFrame();
@@ -24,7 +24,7 @@ export default abstract class Editor extends PageFragment {
     }
 
     protected async getPalette(): Promise<Element> {
-        return await this.tools.by(Editor.PALLETTE_LOCATOR).getElement();
+        return await this.tools.by(Editor.PALETTE_LOCATOR).getElement();
     }
 
     protected async clickToCanvas(): Promise<void> {
