@@ -120,4 +120,18 @@ export default class LocatorWaitAction {
             }
         }
     }
+
+    private async enabled(): Promise<Element> {
+        const webElement = await this.driver.findElement(this.by);
+        return new Element(await this.driver.wait(until.elementIsEnabled(webElement), this.timeout));
+    }
+
+    public async untilEnabled(): Promise<Element> {
+        return await ErrorProcessor.run(
+            async () => {
+                return await this.enabled();
+            },
+            "Error while waiting until enabled: " + this.by
+        );
+    }
 }
