@@ -9,8 +9,7 @@ export default class FullscreenPage extends EditorPage {
 
     public async exitFullscreen(): Promise<GitHubEditorPage> {
         const exitButton: Element = await this.tools.by(FullscreenPage.EXIT_BUTTON_LOCATOR).getElement();
-        // regular click does not work
-        await exitButton.clickJs();
+        await exitButton.click();
         return this.tools.createPage(GitHubEditorPage);
     }
 

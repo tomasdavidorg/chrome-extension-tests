@@ -9,9 +9,15 @@ export default class GitHubPrPage extends EditorPage {
     private static readonly ORIGINAL_BUTTON_LOCATOR = By.xpath("//button[text()='Original']");
     private static readonly CHANGES_BUTTON_LOCATOR = By.xpath("//button[text()='Changes']");
     private static readonly RAW_CONTENT_LOCATOR = By.className("js-file-content");
+    private static readonly PR_TAB_PANEL_LOCATOR = By.className("tabnav-pr");
 
     public async waitUntilLoaded(): Promise<void> {
         await this.tools.by(GitHubPrPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).wait(1000).untilPresent();
+    }
+
+    public async scrollToPrTabPanel(): Promise<void> {
+        const panel: Element = await this.tools.by(GitHubPrPage.PR_TAB_PANEL_LOCATOR).getElement();
+        await panel.scroll();
     }
 
     public async isSourceOpened(): Promise<boolean> {
@@ -34,14 +40,14 @@ export default class GitHubPrPage extends EditorPage {
 
     public async original(): Promise<void> {
         const originalButton: Element = await this.tools.by(GitHubPrPage.ORIGINAL_BUTTON_LOCATOR).getElement();
-        await originalButton.clickJs();
-        await this.tools.by(GitHubPrPage.CHANGES_BUTTON_LOCATOR).wait(2500).untilEnabled();
+        await originalButton.click();
+        await this.tools.by(GitHubPrPage.CHANGES_BUTTON_LOCATOR).wait(1000).untilEnabled();
     }
 
     public async changes(): Promise<void> {
         const changesButton: Element = await this.tools.by(GitHubPrPage.CHANGES_BUTTON_LOCATOR).getElement();
-        await changesButton.clickJs();
-        await this.tools.by(GitHubPrPage.ORIGINAL_BUTTON_LOCATOR).wait(2500).untilEnabled();
+        await changesButton.click();
+        await this.tools.by(GitHubPrPage.ORIGINAL_BUTTON_LOCATOR).wait(1000).untilEnabled();
 
     }
 }
