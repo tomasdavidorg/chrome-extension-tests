@@ -11,7 +11,6 @@ export default abstract class EditorPage extends Page {
         const frame: Element = await this.tools.by(EditorPage.FRAME_LOCATOR)
             .wait(2000)
             .untilPresent();
-        await frame.scroll();
         return frame;
     }
 
