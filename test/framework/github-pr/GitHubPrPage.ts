@@ -35,10 +35,13 @@ export default class GitHubPrPage extends EditorPage {
     public async original(): Promise<void> {
         const originalButton: Element = await this.tools.by(GitHubPrPage.ORIGINAL_BUTTON_LOCATOR).getElement();
         await originalButton.click();
+        await this.tools.by(GitHubPrPage.CHANGES_BUTTON_LOCATOR).wait(2500).untilEnabled();
     }
 
     public async changes(): Promise<void> {
         const changesButton: Element = await this.tools.by(GitHubPrPage.CHANGES_BUTTON_LOCATOR).getElement();
         await changesButton.click();
+        await this.tools.by(GitHubPrPage.ORIGINAL_BUTTON_LOCATOR).wait(2500).untilEnabled();
+
     }
 }
