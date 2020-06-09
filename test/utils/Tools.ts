@@ -26,7 +26,7 @@ export default class Tools {
     }
 
     public async finishTest(testName: string): Promise<void> {
-        const screenShotName: string = testName + "_screenshot_after_test";
+        const screenShotName: string = "screenshot_after_" + testName;
         await this.window().leaveFrame();
         await this.screenShot.takeHtml(screenShotName);
         await this.screenShot.takePng(screenShotName);
@@ -47,7 +47,7 @@ export default class Tools {
 
     public window(): Window {
         return new Window(this.driver);
-    } 
+    }
 
     public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {
         await Driver.openUrl(this.driver, url);

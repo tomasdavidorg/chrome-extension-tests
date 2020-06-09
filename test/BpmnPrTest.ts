@@ -4,7 +4,7 @@ import GitHubPrPage from "./framework/github-pr/GitHubPrPage";
 import SideBar from "./framework/editor/SideBar";
 import Tools from "./utils/Tools";
 
-const TEST_NAME = "BPMN_pull_request";
+const TEST_NAME = "BPMN_pull_request_test";
 
 let tools: Tools;
 

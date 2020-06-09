@@ -4,7 +4,7 @@ import DmnSideBar from "./framework/editor/dmn/DmnSideBar";
 import GitHubPrPage from "./framework/github-pr/GitHubPrPage";
 import Tools from "./utils/Tools";
 
-const TEST_NAME = "DMN_pull_request";
+const TEST_NAME = "DMN_pull_request_test";
 
 let tools: Tools;
 

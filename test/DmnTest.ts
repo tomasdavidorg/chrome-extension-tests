@@ -9,7 +9,7 @@ import OnlineEditorPage from "./framework/online-editor/OnlineEditorPage";
 import Properties from "./framework/editor/Properties";
 import Tools from "./utils/Tools";
 
-const TEST_NAME = "DMN_basic_operation";
+const TEST_NAME = "DMN_basic_operation_test";
 
 let tools: Tools;
 

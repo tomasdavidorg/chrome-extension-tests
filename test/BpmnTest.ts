@@ -9,7 +9,7 @@ import Properties from "./framework/editor/Properties";
 import SideBar from "./framework/editor/SideBar";
 import Tools from "./utils/Tools";
 
-const TEST_NAME = "BPMN_basic_operation";
+const TEST_NAME = "BPMN_basic_operation_test";
 
 let tools: Tools;
 
