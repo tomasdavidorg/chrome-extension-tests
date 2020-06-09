@@ -15,6 +15,7 @@ export default class SideBar extends PageFragment {
     }
 
     protected async openSideBar(byIcon: Element): Promise<Element> {
+        await byIcon.scroll();
         await byIcon.click();
         const expandedBar = this.tools.by(SideBar.EXPANDED_BAR_LOCATOR);
         await expandedBar.wait(2000).untilPresent();
