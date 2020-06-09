@@ -15,7 +15,8 @@ export default class SideBar extends PageFragment {
     }
 
     protected async openSideBar(byIcon: Element): Promise<Element> {
-        await byIcon.click();
+        // side bar icons are sometimes hidden under .diff-view panel
+        await byIcon.clickJs();
         const expandedBar = this.tools.by(SideBar.EXPANDED_BAR_LOCATOR);
         await expandedBar.wait(2000).untilPresent();
         return await expandedBar.getElement();
@@ -29,8 +30,8 @@ export default class SideBar extends PageFragment {
 
     public async closeActiveSideBar(): Promise<void> {
         const activeSideBar: Element = await this.root.findElement(By.className("active"));
-        //const activeSideBar: WebElement = await this.tools.webElement(this.root.getWebElement()).withTimeout(1000).find(By.className("active"));
-        await activeSideBar.click();
+        // side bar icons are sometimes hidden under .diff-view panel
+        await activeSideBar.clickJs();
     }
 
     public async openProperties(): Promise<Properties> {
