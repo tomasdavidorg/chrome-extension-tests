@@ -40,6 +40,7 @@ export default class Element {
     public async clickJs(): Promise<void> {
         await ErrorProcessor.run(
             async () => {
+                // there is an issue that after using js click, sometimes regular click does not work
                 await this.webElement.getDriver().executeScript("arguments[0].click();", this.webElement);
             },
             "Error while clicking by JavaScript on element."
