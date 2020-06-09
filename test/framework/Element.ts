@@ -40,7 +40,7 @@ export default class Element {
     public async clickJs(): Promise<void> {
         await ErrorProcessor.run(
             async () => {
-                await this.webElement.getDriver().executeScript("arguments[0].click();", await this.webElement);
+                await this.webElement.getDriver().executeScript("arguments[0].click();", this.webElement);
             },
             "Error while clicking by JavaScript on element."
         );
@@ -59,7 +59,7 @@ export default class Element {
         await ErrorProcessor.run(
             async () => {
                 const actions = this.webElement.getDriver().actions();
-                await actions.move({ origin: await this.webElement, x, y }).perform();
+                await actions.move({ origin: this.webElement, x, y }).perform();
                 await actions.click().perform();
             },
             "Error while clicking on element by offset: x=" + x + " ,y=" + y
