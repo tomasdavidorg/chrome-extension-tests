@@ -16,6 +16,7 @@ export default class GitHubPrPage extends EditorPage {
     }
 
     public async scrollToPrTabPanel(): Promise<void> {
+        // this is workaround if it is scrolled to low on the pr page the side bar icons are hidden
         const panel: Element = await this.tools.by(GitHubPrPage.PR_TAB_PANEL_LOCATOR).getElement();
         await panel.scroll();
     }

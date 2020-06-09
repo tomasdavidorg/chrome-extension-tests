@@ -29,6 +29,7 @@ test(TEST_NAME, async () => {
 
     // check editor with changes
     const changesEditor: DmnEditor = await gitHubPrPage.getDmnEditor();
+    await gitHubPrPage.scrollToPrTabPanel();
     await changesEditor.enter();
     const sideBar: DmnSideBar = await changesEditor.getSideBar();
     const navigator: DecisionNavigator = await sideBar.openDecisionNavigator();
@@ -39,6 +40,7 @@ test(TEST_NAME, async () => {
     // check editor with original
     await gitHubPrPage.original();
     const originalEditor: DmnEditor = await gitHubPrPage.getDmnEditor();
+    await gitHubPrPage.scrollToPrTabPanel();
     await originalEditor.enter();
     const originalSideBar: DmnSideBar = await originalEditor.getSideBar();
     const originalNavigator: DecisionNavigator = await originalSideBar.openDecisionNavigator();

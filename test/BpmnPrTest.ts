@@ -29,6 +29,7 @@ test(TEST_NAME, async () => {
 
     // check editor with changes
     const changesEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
+    await gitHubPrPage.scrollToPrTabPanel();
     await changesEditor.enter();
     const sideBar: SideBar = await changesEditor.getSideBar();
     const exlorer: Explorer = await sideBar.openExplorer();
@@ -39,6 +40,7 @@ test(TEST_NAME, async () => {
     // check editor with original
     await gitHubPrPage.original();
     const originalEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
+    await gitHubPrPage.scrollToPrTabPanel();
     await originalEditor.enter();
     const originalSideBar: SideBar = await originalEditor.getSideBar();
     const originalExlorer: Explorer = await originalSideBar.openExplorer();
