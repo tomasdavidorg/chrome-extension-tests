@@ -16,17 +16,16 @@ export default class Tools {
 
     private readonly screenShot: Screenshot;
 
-    private constructor(driver: WebDriver) {
+    private readonly testName: string;
+
+    private constructor(driver: WebDriver, testName: string) {
         this.driver = driver;
         this.screenShot = new Screenshot(this.driver, Tools.SCREENSHOTS_DIR);
+        this.testName = testName;
     }
 
-    public static async init(): Promise<Tools> {
-        return new Tools(await Driver.init());
-    }
-
-    public async finishTest(testName: string): Promise<void> {
-        const screenShotName: string = "screenshot_after_" + testName;
+    public async finishTest(): Promise<void> {
+        const screenShotName: string = "screenshot_after_" + this.testName;
         await this.window().leaveFrame();
         await this.screenShot.takeHtml(screenShotName);
         await this.screenShot.takePng(screenShotName);
@@ -49,16 +48,20 @@ export default class Tools {
         return new Window(this.driver);
     }
 
-    public async openPage<T extends Page>(type: { new(tools: Tools): T }, url: string): Promise<T> {
+    public async openPage<T extends Page>(type: new (tools: Tools) => T, url: string): Promise<T> {
         await Driver.openUrl(this.driver, url);
         return await this.createPage(type);
     }
 
-    public async createPage<T extends Page>(type: { new(tools: Tools): T }): Promise<T> {
+    public async createPage<T extends Page>(type: new (tools: Tools) => T): Promise<T> {
         return Page.create(type, this);
     }
 
-    public async createPageFragment<T extends PageFragment>(type: { new(tools: Tools, root: Element): T }, root: Element): Promise<T> {
+    public async createPageFragment<T extends PageFragment>(type: new (tools: Tools, root: Element) => T, root: Element): Promise<T> {
         return PageFragment.create(type, this, root);
+    }
+
+    public static async init(testName: string): Promise<Tools> {
+        return new Tools(await Driver.init(), testName);
     }
 }

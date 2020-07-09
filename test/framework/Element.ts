@@ -56,16 +56,6 @@ export default class Element {
         );
     }
 
-    public async offsetMove(x: number, y: number): Promise<void> {
-        await ErrorProcessor.run(
-            async () => {
-                const actions = this.webElement.getDriver().actions();
-                await actions.move({ origin: this.webElement, x, y }).perform();
-            },
-            "Error while moving from element by offset: x=" + x + " ,y=" + y
-        );
-    }
-
     public async offsetClick(x: number, y: number): Promise<void> {
         await ErrorProcessor.run(
             async () => {
@@ -74,6 +64,16 @@ export default class Element {
                 await actions.click().perform();
             },
             "Error while clicking on element by offset: x=" + x + " ,y=" + y
+        );
+    }
+
+    public async offsetMove(x: number, y: number): Promise<void> {
+        await ErrorProcessor.run(
+            async () => {
+                const actions = this.webElement.getDriver().actions();
+                await actions.move({ origin: this.webElement, x, y }).perform();
+            },
+            "Error while moving from element by offset: x=" + x + " ,y=" + y
         );
     }
 

@@ -46,7 +46,7 @@ export default class Clipboard {
 
     private getCtrvKeys() {
         // "darwin" is  MacOS
-        if (platform() == "darwin") {
+        if (platform() === "darwin") {
             return Key.SHIFT + Key.INSERT;
         } else {
             return Key.CONTROL + "v";

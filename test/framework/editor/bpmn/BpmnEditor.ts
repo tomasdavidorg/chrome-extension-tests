@@ -1,4 +1,3 @@
-
 import BpmnPalette from "./BpmnPalette";
 import { By } from "selenium-webdriver";
 import Editor from "../Editor";
@@ -7,10 +6,12 @@ import Element from "../../Element";
 export default class BpmnEditor extends Editor {
 
     private static readonly EXPLORE_ICON_LOCATOR: By = By.className("fa-eye");
+    private static readonly LOADING_POPUP_LOCATOR: By = By.className("pf-l-bullseye");
 
     public async waitUntilLoaded(): Promise<void> {
         await this.enter();
-        await this.tools.by(BpmnEditor.EXPLORE_ICON_LOCATOR).wait(10000).untilPresent();
+        await this.tools.by(BpmnEditor.EXPLORE_ICON_LOCATOR).wait(15000).untilPresent();
+        await this.tools.by(BpmnEditor.LOADING_POPUP_LOCATOR).wait(5000).untilAbsent();
         await this.leave();
     }
 

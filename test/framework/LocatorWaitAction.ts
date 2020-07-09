@@ -17,7 +17,7 @@ export default class LocatorWaitAction {
     }
 
     private async absent(): Promise<void> {
-        await this.driver.wait(async () => (await this.driver.findElements(this.by)).length == 0, this.timeout);
+        await this.driver.wait(async () => (await this.driver.findElements(this.by)).length === 0, this.timeout);
     }
 
     public async untilAbsent(): Promise<void> {
@@ -48,7 +48,7 @@ export default class LocatorWaitAction {
 
     public async untilPresent(): Promise<Element> {
         return await ErrorProcessor.run(
-            async () => this.present(),
+            async () => await this.present(),
             "Error while waiting until present: " + this.by
         );
     }

@@ -8,15 +8,15 @@ export default abstract class Page {
         this.tools = tools;
     }
 
-    public static async create<T extends Page>(type: { new(tools: Tools): T }, tools: Tools ): Promise<T> {
-        const page: T = new type(tools);
-        await page.waitUntilLoaded();
-        return page;
-    }
-
     public abstract async waitUntilLoaded(): Promise<void>;
 
     public async scrollToTop(): Promise<void> {
         await this.tools.window().scrollToTop();
+    }
+
+    public static async create<T extends Page>(type: new (tools: Tools) => T, tools: Tools): Promise<T> {
+        const page: T = new type(tools);
+        await page.waitUntilLoaded();
+        return page;
     }
 }

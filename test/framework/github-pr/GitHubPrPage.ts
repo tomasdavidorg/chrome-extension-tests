@@ -9,15 +9,15 @@ export default class GitHubPrPage extends EditorPage {
     private static readonly ORIGINAL_BUTTON_LOCATOR = By.xpath("//button[text()='Original']");
     private static readonly CHANGES_BUTTON_LOCATOR = By.xpath("//button[text()='Changes']");
     private static readonly RAW_CONTENT_LOCATOR = By.className("js-file-content");
-    private static readonly PR_TAB_PANEL_LOCATOR = By.className("tabnav-pr");
+    private static readonly PR_HEADER_LOCATOR = By.className("gh-header-meta");
 
     public async waitUntilLoaded(): Promise<void> {
         await this.tools.by(GitHubPrPage.SEE_AS_DIAGRAM_BUTTON_LOCATOR).wait(1000).untilPresent();
     }
 
-    public async scrollToPrTabPanel(): Promise<void> {
+    public async scrollToPrHeader(): Promise<void> {
         // this is workaround if it is scrolled to low on the pr page the side bar icons are hidden
-        const panel: Element = await this.tools.by(GitHubPrPage.PR_TAB_PANEL_LOCATOR).getElement();
+        const panel: Element = await this.tools.by(GitHubPrPage.PR_HEADER_LOCATOR).getElement();
         await panel.scroll();
     }
 

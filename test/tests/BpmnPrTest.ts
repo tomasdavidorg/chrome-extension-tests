@@ -1,21 +1,19 @@
-import BpmnEditor from "./framework/editor/bpmn/BpmnEditor";
-import Explorer from "./framework/editor/Explorer";
-import GitHubPrPage from "./framework/github-pr/GitHubPrPage";
-import SideBar from "./framework/editor/SideBar";
-import Tools from "./utils/Tools";
+import BpmnEditor from "../framework/editor/bpmn/BpmnEditor";
+import Explorer from "../framework/editor/Explorer";
+import GitHubPrPage from "../framework/github-pr/GitHubPrPage";
+import SideBar from "../framework/editor/SideBar";
+import Tools from "../utils/Tools";
 
-const TEST_NAME = "BPMN_pull_request_test";
+const TEST_NAME = "BpmnPrTest";
 
 let tools: Tools;
 
 beforeEach(async () => {
-    tools = await Tools.init();
+    tools = await Tools.init(TEST_NAME);
 });
 
 test(TEST_NAME, async () => {
     const PR_WEB_PAGE = "https://github.com/tomasdavidorg/chrome-extension-pr-test/pull/2/files";
-    const CHANGES_NODES = ["Start", "Task", "End", "Intermediate Timer"];
-    const ORIGINAL_NODES = ["Start", "Task", "End"];
 
     // open PR and check that source is opened
     const gitHubPrPage: GitHubPrPage = await tools.openPage(GitHubPrPage, PR_WEB_PAGE);
@@ -29,22 +27,23 @@ test(TEST_NAME, async () => {
 
     // check editor with changes
     const changesEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
-    await gitHubPrPage.scrollToPrTabPanel();
+    await gitHubPrPage.scrollToPrHeader();
     await changesEditor.enter();
     const sideBar: SideBar = await changesEditor.getSideBar();
     const exlorer: Explorer = await sideBar.openExplorer();
-    expect((await exlorer.getNodeNames()).sort()).toEqual(CHANGES_NODES.sort());
+    expect((await exlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End", "Intermediate Timer"].sort());
     await sideBar.closeActiveSideBar();
     await changesEditor.leave();
 
     // check editor with original
     await gitHubPrPage.original();
     const originalEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
-    await gitHubPrPage.scrollToPrTabPanel();
+    await gitHubPrPage.scrollToPrHeader();
     await originalEditor.enter();
     const originalSideBar: SideBar = await originalEditor.getSideBar();
+    await originalSideBar.openProperties();
     const originalExlorer: Explorer = await originalSideBar.openExplorer();
-    expect((await originalExlorer.getNodeNames()).sort()).toEqual(ORIGINAL_NODES.sort());
+    expect((await originalExlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End"].sort());
     await sideBar.closeActiveSideBar();
     await originalEditor.leave();
 
@@ -55,5 +54,5 @@ test(TEST_NAME, async () => {
 });
 
 afterEach(async () => {
-    await tools.finishTest(TEST_NAME);
+    await tools.finishTest();
 });

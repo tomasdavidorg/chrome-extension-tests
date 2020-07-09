@@ -1,20 +1,18 @@
-import BpmnEditor from "./framework/editor/bpmn/BpmnEditor";
-import Explorer from "./framework/editor/Explorer";
-import FullscreenPage from "./framework/fullscreen-editor/FullscreenPage";
-import GitHubEditorPage from "./framework/github-editor/GitHubEditorPage";
-import GitHubListItem from "./framework/github-file-list/GitHubListItem";
-import GitHubListPage from "./framework/github-file-list/GitHubListPage";
-import OnlineEditorPage from "./framework/online-editor/OnlineEditorPage";
-import Properties from "./framework/editor/Properties";
-import SideBar from "./framework/editor/SideBar";
-import Tools from "./utils/Tools";
+import BpmnEditor from "../framework/editor/bpmn/BpmnEditor";
+import Explorer from "../framework/editor/Explorer";
+import GitHubEditorPage from "../framework/github-editor/GitHubEditorPage";
+import GitHubListItem from "../framework/github-file-list/GitHubListItem";
+import GitHubListPage from "../framework/github-file-list/GitHubListPage";
+import Properties from "../framework/editor/Properties";
+import SideBar from "../framework/editor/SideBar";
+import Tools from "../utils/Tools";
 
-const TEST_NAME = "BPMN_basic_operation_test";
+const TEST_NAME = "BpmnTest";
 
 let tools: Tools;
 
 beforeEach(async () => {
-    tools = await Tools.init();
+    tools = await Tools.init(TEST_NAME);
 });
 
 test(TEST_NAME, async () => {
@@ -22,8 +20,6 @@ test(TEST_NAME, async () => {
     const EXPECTED_LINK = "kiegroup/kogito-examples/stable/process-business-rules-quarkus/src/main/resources/org/acme/travels/persons.bpmn";
     const PROCESS_NAME = "persons";
     const FILE_NAME = PROCESS_NAME + ".bpmn";
-    const PROCESS_NODES_NAMES = ["StartProcess", "End Event 1", "End Event 2", "Evaluate Person", "Exclusive Gateway 1", "Special handling for children"];
-    const START_NODE_NAME = "Start";
     const EVALUATE_NODE_NAME = "Evaluate Person";
 
     // check link to online editor in the list
@@ -33,7 +29,7 @@ test(TEST_NAME, async () => {
     expect(linkText).toContain(EXPECTED_LINK);
 
     // open BPMN editor
-    let editorPage: GitHubEditorPage = await gitHubFile.open();
+    const editorPage: GitHubEditorPage = await gitHubFile.open();
     const bpmnEditor: BpmnEditor = await editorPage.getBpmnEditor();
 
     // move startEvent to canvas
@@ -47,7 +43,8 @@ test(TEST_NAME, async () => {
 
     // check process nodes in explorer
     const explorer: Explorer = await sideBar.openExplorer();
-    expect((await explorer.getNodeNames()).sort()).toEqual(PROCESS_NODES_NAMES.concat(START_NODE_NAME).sort());
+    expect((await explorer.getNodeNames()).sort())
+        .toEqual(["StartProcess", "End Event 1", "End Event 2", "Evaluate Person", "Exclusive Gateway 1", "Special handling for children", "Start"].sort());
     expect(await explorer.getProcessName()).toEqual(PROCESS_NAME);
 
     // check task properties
@@ -71,28 +68,8 @@ test(TEST_NAME, async () => {
     await editorPage.copyLinkToOnlineEditor();
     const clipboadText: string = await tools.clipboard().getContent();
     expect(clipboadText).toContain(EXPECTED_LINK);
-
-    // open and check full screen editor
-    const fullScreenPage: FullscreenPage = await editorPage.fullScreen();
-    const fullScreenEditor: BpmnEditor = await fullScreenPage.getBpmnEditor();
-    await fullScreenEditor.enter();
-    const fullScreenSideBar: SideBar = await fullScreenEditor.getSideBar();
-    const fullScreenExplorer: Explorer = await fullScreenSideBar.openExplorer();
-    expect((await fullScreenExplorer.getNodeNames()).sort()).toEqual(PROCESS_NODES_NAMES.sort());
-    await fullScreenEditor.leave();
-    await fullScreenPage.scrollToTop();
-    editorPage = await fullScreenPage.exitFullscreen();
-
-    // open and check online editor
-    const onlineEditorPage: OnlineEditorPage = await editorPage.openOnlineEditor();
-    expect(await onlineEditorPage.getFileName()).toEqual(FILE_NAME);
-    const onlineEditor: BpmnEditor = await onlineEditorPage.getBpmnEditor();
-    await onlineEditor.enter();
-    const onlineEditorSideBar: SideBar = await onlineEditor.getSideBar();
-    const onlineEditorExplorer: Explorer = await onlineEditorSideBar.openExplorer();
-    expect((await onlineEditorExplorer.getNodeNames()).sort()).toEqual(PROCESS_NODES_NAMES.sort());
 });
 
 afterEach(async () => {
-    await tools.finishTest(TEST_NAME);
+    await tools.finishTest();
 });

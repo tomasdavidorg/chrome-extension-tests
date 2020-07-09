@@ -4,11 +4,11 @@ import PageFragment from "../../PageFragment";
 
 export default class DecisionNavigator extends PageFragment {
 
-    private static readonly DECISION_GRAPH_LOCATOR: By = By.id("decision-graphs-content");
+    private static readonly DECISION_GRAPH_LOCATOR: By = By.xpath("//div[@data-i18n-prefix='DecisionNavigatorTreeView.']");
     private static readonly ITEM_LOCATOR: By = By.xpath("//li[@data-field='item']");
 
     public async waitUntilLoaded(): Promise<void> {
-        await this.tools.by(DecisionNavigator.DECISION_GRAPH_LOCATOR).wait(1000).untilPresent();
+        await this.tools.by(DecisionNavigator.DECISION_GRAPH_LOCATOR).wait(5000).untilPresent();
     }
 
     private async getItems(): Promise<Element[]> {
