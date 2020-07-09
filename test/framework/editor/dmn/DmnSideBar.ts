@@ -6,7 +6,7 @@ import SideBar from "../SideBar";
 
 export default class DmnSideBar extends SideBar {
 
-    private static readonly NAVIGATOR_BUTTON_LOCATOR: By = By.xpath("//div[./button[@data-title='Decision Navigator']]");
+    private static readonly NAVIGATOR_BUTTON_LOCATOR: By = By.className("fa-map");
 
     public async openDecisionNavigator(): Promise<DecisionNavigator> {
         const navigatorButton: Element = await this.tools.by(DmnSideBar.NAVIGATOR_BUTTON_LOCATOR).wait(2000).untilPresent();
