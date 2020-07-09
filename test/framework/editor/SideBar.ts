@@ -1,9 +1,9 @@
 import { By } from "selenium-webdriver";
 import Element from "../Element";
 import Explorer from "./Explorer";
+import Locator from "../Locator";
 import PageFragment from "../PageFragment";
 import Properties from "./Properties";
-import Locator from "../Locator";
 
 export default class SideBar extends PageFragment {
 
