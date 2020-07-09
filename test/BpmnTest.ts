@@ -17,7 +17,7 @@ beforeEach(async () => {
     tools = await Tools.init();
 });
 
-test(TEST_NAME, async () => {
+test.skip(TEST_NAME, async () => {
     const WEB_PAGE = "https://github.com/kiegroup/kogito-examples/blob/stable/process-business-rules-quarkus/src/main/resources/org/acme/travels/";
     const EXPECTED_LINK = "kiegroup/kogito-examples/stable/process-business-rules-quarkus/src/main/resources/org/acme/travels/persons.bpmn";
     const PROCESS_NAME = "persons";

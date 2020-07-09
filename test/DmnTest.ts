@@ -17,7 +17,7 @@ beforeEach(async () => {
     tools = await Tools.init();
 });
 
-test(TEST_NAME, async () => {
+test.skip(TEST_NAME, async () => {
     const WEB_PAGE = "https://github.com/kiegroup/kogito-examples/blob/stable/dmn-quarkus-example/src/main/resources";
     const EXPECTED_LINK = "kiegroup/kogito-examples/stable/dmn-quarkus-example/src/main/resources/Traffic%20Violation.dmn";
     const DMN_NAME = "Traffic Violation";

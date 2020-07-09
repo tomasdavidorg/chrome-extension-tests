@@ -5,14 +5,14 @@ import Page from "../Page";
 
 export default class GitHubListPage extends Page {
 
-    private static readonly ITEM_LOCATOR: By = By.xpath("//tr[@class='js-navigation-item']");
+    private static readonly DOUBLE_DOT_LOCATOR: By = By.xpath("//a[@title='Go to parent directory']");
 
     public async waitUntilLoaded(): Promise<void> {
-        await this.tools.by(GitHubListPage.ITEM_LOCATOR).wait(1000).untilPresent();
+        await this.tools.by(GitHubListPage.DOUBLE_DOT_LOCATOR).wait(1000).untilPresent();
     }
 
     public async getFile(name: string): Promise<GitHubListItem> {
-        const item: Element = await this.tools.by(By.xpath(`//tr[.//a[text()='${name}']]`))
+        const item: Element = await this.tools.by(By.xpath(`//div[@role="rowheader"]/span[.//a[text()='${name}']]`))
             .wait(5000)
             .untilPresent();
         return this.tools.createPageFragment(GitHubListItem, item);
