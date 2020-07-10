@@ -10,7 +10,7 @@ export default class FullscreenPage extends EditorPage {
     public async exitFullscreen(): Promise<GitHubEditorPage> {
         const exitButton: Element = await this.tools.by(FullscreenPage.EXIT_BUTTON_LOCATOR).getElement();
 
-        // regular click does not work
+        // regular click does not work, clickJs() breaks other tests, sendKeys() does not work on Mac
         await exitButton.sendKeys(Key.ENTER);
         return this.tools.createPage(GitHubEditorPage);
     }
