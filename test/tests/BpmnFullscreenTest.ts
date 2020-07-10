@@ -4,6 +4,7 @@ import FullscreenPage from "../framework/fullscreen-editor/FullscreenPage";
 import GitHubEditorPage from "../framework/github-editor/GitHubEditorPage";
 import SideBar from "../framework/editor/SideBar";
 import Tools from "../utils/Tools";
+import { platform } from "os";
 
 const TEST_NAME = "BpmnFullScreenTest";
 
@@ -14,8 +15,9 @@ beforeEach(async () => {
 });
 
 test(TEST_NAME, async () => {
-    let bpmnPage: GitHubEditorPage = await tools.openPage(GitHubEditorPage, "https://github.com/kiegroup/" +
-        "kogito-examples/blob/stable/process-business-rules-quarkus/src/main/resources/org/acme/travels/persons.bpmn");
+    const processUrl: string = "https://github.com/kiegroup/" +
+        "kogito-examples/blob/stable/process-business-rules-quarkus/src/main/resources/org/acme/travels/persons.bpmn";
+    let bpmnPage: GitHubEditorPage = await tools.openPage(GitHubEditorPage, processUrl);
     const fullScreenPage: FullscreenPage = await bpmnPage.fullScreen();
     const fullScreenEditor: BpmnEditor = await fullScreenPage.getBpmnEditor();
     await fullScreenEditor.enter();
@@ -31,10 +33,16 @@ test(TEST_NAME, async () => {
             "Special handling for children"
         ].sort());
     await fullScreenEditor.leave();
-    await fullScreenPage.scrollToTop();
-    bpmnPage = await fullScreenPage.exitFullscreen();
-    expect(await bpmnPage.isEditorVisible()).toBe(true);
-    expect(await bpmnPage.isSourceVisible()).toBe(false);
+
+    expect(await fullScreenPage.getExitFullscreenUrl()).toBe(processUrl + "#");
+
+    // pushing the exit button causes that other buttons does not work on Mac
+    if (platform() === "darwin") {
+        await fullScreenPage.scrollToTop();
+        bpmnPage = await fullScreenPage.exitFullscreen();
+        expect(await bpmnPage.isEditorVisible()).toBe(true);
+        expect(await bpmnPage.isSourceVisible()).toBe(false);
+    }
 });
 
 afterEach(async () => {

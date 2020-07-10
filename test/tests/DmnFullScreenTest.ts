@@ -4,6 +4,7 @@ import DmnSideBar from "../framework/editor/dmn/DmnSideBar";
 import FullscreenPage from "../framework/fullscreen-editor/FullscreenPage";
 import GitHubEditorPage from "../framework/github-editor/GitHubEditorPage";
 import Tools from "../utils/Tools";
+import { platform } from "os";
 
 const TEST_NAME = "DmnFullScreenTest";
 
@@ -14,7 +15,9 @@ beforeEach(async () => {
 });
 
 test(TEST_NAME, async () => {
-    let dmnPage: GitHubEditorPage = await tools.openPage(GitHubEditorPage, "https://github.com/kiegroup/kogito-examples/blob/stable/dmn-quarkus-example/src/main/resources/Traffic%20Violation.dmn");
+    const dmnUrl: string = "https://github.com/kiegroup/" + 
+        "kogito-examples/blob/stable/dmn-quarkus-example/src/main/resources/Traffic%20Violation.dmn";
+    let dmnPage: GitHubEditorPage = await tools.openPage(GitHubEditorPage, dmnUrl);
     // open and check full screen editor
     const fullScreenPage: FullscreenPage = await dmnPage.fullScreen();
     const fullScreenEditor: DmnEditor = await fullScreenPage.getDmnEditor();
@@ -22,13 +25,25 @@ test(TEST_NAME, async () => {
     const fullScreenSideBar: DmnSideBar = await fullScreenEditor.getSideBar();
     const fullScreenExplorer: DecisionNavigator = await fullScreenSideBar.openDecisionNavigator();
     expect((await fullScreenExplorer.getNodeNames()).sort())
-        .toEqual(["Driver", "Fine", "Decision Table", "Should the driver be suspended?", "Context", "Violation"].sort());
+        .toEqual([
+            "Driver",
+            "Fine",
+            "Decision Table",
+            "Should the driver be suspended?",
+            "Context",
+            "Violation"
+        ].sort());
     await fullScreenEditor.leave();
 
-    await fullScreenPage.scrollToTop();
-    dmnPage = await fullScreenPage.exitFullscreen();
-    expect(await dmnPage.isEditorVisible()).toBe(true);
-    expect(await dmnPage.isSourceVisible()).toBe(false);
+    expect(await fullScreenPage.getExitFullscreenUrl()).toBe(dmnUrl + "#");
+
+    // pushing the exit button causes that other buttons does not work on Mac
+    if (platform() === "darwin") {
+        await fullScreenPage.scrollToTop();
+        dmnPage = await fullScreenPage.exitFullscreen();
+        expect(await dmnPage.isEditorVisible()).toBe(true);
+        expect(await dmnPage.isSourceVisible()).toBe(false);
+    }
 });
 
 afterEach(async () => {
