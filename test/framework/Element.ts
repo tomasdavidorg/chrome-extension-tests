@@ -1,4 +1,4 @@
-import { By, WebElement, } from "selenium-webdriver";
+import { By, WebElement } from "selenium-webdriver";
 import ElementWaitAction from "./ElementWaitAction";
 import ErrorProcessor from "../utils/tools/ErrorProcessor";
 
@@ -25,6 +25,15 @@ export default class Element {
                 await actions.click().perform();
             },
             "Error while drag and drop element to: x=" + x + " y=" + y
+        );
+    }
+
+    public async sendKeys(keys: string): Promise<void> {
+        return await ErrorProcessor.run(
+            async () => {
+                await this.webElement.sendKeys(keys);
+            },
+            "Error while sending keys " + keys
         );
     }
 

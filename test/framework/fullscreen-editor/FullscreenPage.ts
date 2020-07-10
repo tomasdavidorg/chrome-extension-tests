@@ -1,4 +1,4 @@
-import { By } from "selenium-webdriver";
+import { By, Key } from "selenium-webdriver";
 import EditorPage from "../editor/EditorPage";
 import Element from "../Element";
 import GitHubEditorPage from "../github-editor/GitHubEditorPage";
@@ -9,8 +9,9 @@ export default class FullscreenPage extends EditorPage {
 
     public async exitFullscreen(): Promise<GitHubEditorPage> {
         const exitButton: Element = await this.tools.by(FullscreenPage.EXIT_BUTTON_LOCATOR).getElement();
+
         // regular click does not work
-        await exitButton.click();
+        exitButton.sendKeys(Key.ENTER);
         return this.tools.createPage(GitHubEditorPage);
     }
 
