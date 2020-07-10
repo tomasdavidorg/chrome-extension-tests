@@ -25,11 +25,15 @@ export default class Tools {
     }
 
     public async finishTest(): Promise<void> {
-        const screenShotName: string = "screenshot_after_" + this.testName;
+        const screenshotName: string = "screenshot_after_" + this.testName;
         await this.window().leaveFrame();
-        await this.screenShot.takeHtml(screenShotName);
-        await this.screenShot.takePng(screenShotName);
+        await this.makeScreenshots(screenshotName)
         await Driver.quit(this.driver);
+    }
+
+    public async makeScreenshots(screenshotNamePrefix: string): Promise<void> {
+        await this.screenShot.takeHtml(screenshotNamePrefix);
+        await this.screenShot.takePng(screenshotNamePrefix);
     }
 
     public pause(timeout: number): Promise<void> {

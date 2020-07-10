@@ -4,6 +4,7 @@ import Explorer from "./Explorer";
 import Locator from "../Locator";
 import PageFragment from "../PageFragment";
 import Properties from "./Properties";
+import { getRandomString } from "selenium-webdriver/safari";
 
 export default class SideBar extends PageFragment {
 
@@ -16,12 +17,15 @@ export default class SideBar extends PageFragment {
     }
 
     protected async openSideBar(byIcon: Element): Promise<Element> {
+        const a = getRandomString();
         const expandedBar: Locator = this.tools.by(SideBar.EXPANDED_BAR_LOCATOR);
-        console.log("##A## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
+        console.log(a + "##A## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
+        await this.tools.makeScreenshots(a + "##A##");
         await byIcon.click();
 
         await expandedBar.wait(5000).untilVisible();
-        console.log("##B## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
+        console.log(a + "##B## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
+        await this.tools.makeScreenshots(a + "##B##");
         // move to make the tooltip diappear 
         await byIcon.offsetMove(-200, 0);
         return await expandedBar.getElement();
