@@ -4,7 +4,6 @@ import Explorer from "./Explorer";
 import Locator from "../Locator";
 import PageFragment from "../PageFragment";
 import Properties from "./Properties";
-import { getRandomString } from "selenium-webdriver/safari";
 
 export default class SideBar extends PageFragment {
 
@@ -17,7 +16,7 @@ export default class SideBar extends PageFragment {
     }
 
     protected async openSideBar(byIcon: Element): Promise<Element> {
-        const a = getRandomString();
+        const a = Math.random();
         const expandedBar: Locator = this.tools.by(SideBar.EXPANDED_BAR_LOCATOR);
         console.log(a + "##A## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
         await this.tools.makeScreenshots(a + "##A##");
