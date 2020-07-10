@@ -11,7 +11,7 @@ export default class FullscreenPage extends EditorPage {
         const exitButton: Element = await this.tools.by(FullscreenPage.EXIT_BUTTON_LOCATOR).getElement();
 
         // regular click does not work
-        exitButton.sendKeys(Key.ENTER);
+        await exitButton.sendKeys(Key.ENTER);
         return this.tools.createPage(GitHubEditorPage);
     }
 

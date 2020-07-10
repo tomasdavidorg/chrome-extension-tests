@@ -3,6 +3,7 @@ import DmnEditor from "../framework/editor/dmn/DmnEditor";
 import DmnSideBar from "../framework/editor/dmn/DmnSideBar";
 import FullscreenPage from "../framework/fullscreen-editor/FullscreenPage";
 import GitHubEditorPage from "../framework/github-editor/GitHubEditorPage";
+import { platform } from "os";
 import Tools from "../utils/Tools";
 
 const TEST_NAME = "DmnFullScreenTest";
@@ -24,10 +25,15 @@ test(TEST_NAME, async () => {
     expect((await fullScreenExplorer.getNodeNames()).sort())
         .toEqual(["Driver", "Fine", "Decision Table", "Should the driver be suspended?", "Context", "Violation"].sort());
     await fullScreenEditor.leave();
+
+
+    // clicking the exit button breaks the tests on mac
+    //if (platform() !== "darwin") {
     await fullScreenPage.scrollToTop();
     dmnPage = await fullScreenPage.exitFullscreen();
     expect(await dmnPage.isEditorVisible()).toBe(true);
     expect(await dmnPage.isSourceVisible()).toBe(false);
+    //}
 });
 
 afterEach(async () => {
