@@ -27,7 +27,7 @@ export default class Tools {
     public async finishTest(): Promise<void> {
         const screenshotName: string = "screenshot_after_" + this.testName;
         await this.window().leaveFrame();
-        await this.makeScreenshots(screenshotName)
+        await this.makeScreenshots(screenshotName);
         await Driver.quit(this.driver);
     }
 
