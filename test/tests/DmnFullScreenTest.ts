@@ -3,7 +3,7 @@ import DmnEditor from "../framework/editor/dmn/DmnEditor";
 import DmnSideBar from "../framework/editor/dmn/DmnSideBar";
 import FullscreenPage from "../framework/fullscreen-editor/FullscreenPage";
 import GitHubEditorPage from "../framework/github-editor/GitHubEditorPage";
-import { platform } from "os";
+//import { platform } from "os";
 import Tools from "../utils/Tools";
 
 const TEST_NAME = "DmnFullScreenTest";
