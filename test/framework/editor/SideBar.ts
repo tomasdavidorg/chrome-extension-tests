@@ -16,15 +16,15 @@ export default class SideBar extends PageFragment {
     }
 
     protected async openSideBar(byIcon: Element): Promise<Element> {
-        const a = Math.random();
+        const randomNumber = Math.random();
         const expandedBar: Locator = this.tools.by(SideBar.EXPANDED_BAR_LOCATOR);
-        console.log(a + "##A## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
-        await this.tools.makeScreenshots(a + "##A##");
+        console.log(randomNumber + "##A## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
+        await this.tools.makeScreenshots(randomNumber + "##A##");
         await byIcon.click();
 
         await expandedBar.wait(5000).untilVisible();
-        console.log(a + "##B## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
-        await this.tools.makeScreenshots(a + "##B##");
+        console.log(randomNumber + "##B## Sidebar is visible: "+ await expandedBar.wait(1000).isVisible());
+        await this.tools.makeScreenshots(randomNumber + "##B##");
         // move to make the tooltip diappear 
         await byIcon.offsetMove(-200, 0);
         return await expandedBar.getElement();
