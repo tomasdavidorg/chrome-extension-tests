@@ -32,7 +32,6 @@ test(TEST_NAME, async () => {
     const sideBar: DmnSideBar = await changesEditor.getSideBar();
     const navigator: DecisionNavigator = await sideBar.openDecisionNavigator();
     expect((await navigator.getNodeNames()).sort()).toEqual(["Annotation", "Decision", "InputData", "Model", "Function"].sort());
-    await sideBar.closeActiveSideBar();
     await changesEditor.leave();
 
     // check editor with original
@@ -43,7 +42,6 @@ test(TEST_NAME, async () => {
     const originalSideBar: DmnSideBar = await originalEditor.getSideBar();
     const originalNavigator: DecisionNavigator = await originalSideBar.openDecisionNavigator();
     expect((await originalNavigator.getNodeNames()).sort()).toEqual(["Decision", "InputData", "Model", "Function"].sort());
-    await sideBar.closeActiveSideBar();
     await originalEditor.leave();
 
     // close diagram and check that source is opened 

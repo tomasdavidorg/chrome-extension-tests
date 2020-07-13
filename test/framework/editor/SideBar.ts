@@ -49,11 +49,6 @@ export default class SideBar extends PageFragment {
         return this.tools.createPageFragment(Explorer, sideBar);
     }
 
-    public async closeActiveSideBar(): Promise<void> {
-        const activeSideBar: Element = await this.root.findElement(By.className("active"));
-        await activeSideBar.click();
-    }
-
     public async openProperties(): Promise<Properties> {
         const propButton = await this.tools.by(SideBar.PROP_BUTTON_LOCATOR).getElement();
         const sideBar = await this.openSideBar(propButton, "Properties");

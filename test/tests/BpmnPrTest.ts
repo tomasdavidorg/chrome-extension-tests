@@ -33,7 +33,6 @@ test(TEST_NAME, async () => {
     const sideBar: SideBar = await changesEditor.getSideBar();
     const exlorer: Explorer = await sideBar.openExplorer();
     expect((await exlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End", "Intermediate Timer"].sort());
-    await sideBar.closeActiveSideBar();
     await changesEditor.leave();
     console.debug("## Changes end");
 
@@ -46,7 +45,6 @@ test(TEST_NAME, async () => {
     const originalSideBar: SideBar = await originalEditor.getSideBar();
     const originalExlorer: Explorer = await originalSideBar.openExplorer();
     expect((await originalExlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End"].sort());
-    await sideBar.closeActiveSideBar();
     await originalEditor.leave();
     console.debug("## Original End");
 
