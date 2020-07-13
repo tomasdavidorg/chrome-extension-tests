@@ -10,9 +10,10 @@ export default class BpmnEditor extends Editor {
 
     public async waitUntilLoaded(): Promise<void> {
         await this.enter();
-        await this.tools.by(BpmnEditor.LOADING_POPUP_LOCATOR).wait(5000).untilPresent();
-        await this.tools.by(BpmnEditor.EXPLORE_ICON_LOCATOR).wait(15000).untilPresent();
-        await this.tools.by(BpmnEditor.LOADING_POPUP_LOCATOR).wait(5000).untilAbsent();
+        if (await this.tools.by(BpmnEditor.LOADING_POPUP_LOCATOR).wait(5000).isPresent()) {
+            await this.tools.by(BpmnEditor.LOADING_POPUP_LOCATOR).wait(15000).untilAbsent();
+        }
+        await this.tools.by(BpmnEditor.EXPLORE_ICON_LOCATOR).wait(5000).untilPresent();
         await this.leave();
     }
 

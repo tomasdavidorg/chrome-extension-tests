@@ -17,9 +17,10 @@ export default class DmnEditor extends Editor {
 
     public async waitUntilLoaded(): Promise<void> {
         await this.enter();
-        await this.tools.by(DmnEditor.LOADING_POPUP_LOCATOR).wait(5000).untilPresent();
-        await this.tools.by(DmnEditor.NAV_BAR_LOCATOR).wait(15000).untilPresent();
-        await this.tools.by(DmnEditor.LOADING_POPUP_LOCATOR).wait(5000).untilAbsent();
+        if (await this.tools.by(DmnEditor.LOADING_POPUP_LOCATOR).wait(5000).isPresent()) {
+            await this.tools.by(DmnEditor.LOADING_POPUP_LOCATOR).wait(15000).untilAbsent();
+        }
+        await this.tools.by(DmnEditor.NAV_BAR_LOCATOR).wait(5000).untilPresent();
         await this.leave();
     }
 
