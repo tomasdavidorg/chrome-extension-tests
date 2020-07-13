@@ -12,6 +12,7 @@ export default class Driver {
         let chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
             chromeExtensionPath = join("dist");
+            console.debug("### Path to chrome extension:" + chromeExtensionPath);
 
             if (!existsSync(chromeExtensionPath)) {
                 throw new Error("Please set UNZIPPED_CHROME_EXTENSION_PATH variable to unziped Chrome extension directory." +
