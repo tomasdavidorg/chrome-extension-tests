@@ -17,7 +17,7 @@ export default class Explorer extends PageFragment {
 
     private async getNodes(): Promise<Element[]> {
         const items: Element[] = await this.getItems();
-        items.shift();
+        items.shift(); // remove asset name
         return items;
     }
 
