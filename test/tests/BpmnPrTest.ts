@@ -26,6 +26,7 @@ test(TEST_NAME, async () => {
     expect(await gitHubPrPage.isDiagramOpened()).toBe(true);
 
     // check editor with changes
+    console.debug("## Changes start");
     const changesEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
     await gitHubPrPage.scrollToPrHeader();
     await changesEditor.enter();
@@ -34,18 +35,20 @@ test(TEST_NAME, async () => {
     expect((await exlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End", "Intermediate Timer"].sort());
     await sideBar.closeActiveSideBar();
     await changesEditor.leave();
+    console.debug("## Changes end");
 
     // check editor with original
+    console.debug("## Original start");
     await gitHubPrPage.original();
     const originalEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
     await gitHubPrPage.scrollToPrHeader();
     await originalEditor.enter();
     const originalSideBar: SideBar = await originalEditor.getSideBar();
-    await originalSideBar.openProperties();
     const originalExlorer: Explorer = await originalSideBar.openExplorer();
     expect((await originalExlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End"].sort());
     await sideBar.closeActiveSideBar();
     await originalEditor.leave();
+    console.debug("## Original End");
 
     // close diagram and check that source is opened 
     await gitHubPrPage.closeDiagram();
