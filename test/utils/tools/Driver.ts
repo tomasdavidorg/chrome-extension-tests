@@ -2,7 +2,7 @@ import { Browser, Builder, Capabilities, WebDriver } from "selenium-webdriver";
 import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
 import { existsSync, mkdirSync } from "fs";
 import ErrorProcessor from "./ErrorProcessor";
-import { join } from "path";
+import { resolve } from "path";
 
 
 export default class Driver {
@@ -11,7 +11,7 @@ export default class Driver {
         // get path to unzipped extension
         let chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
-            chromeExtensionPath = join("dist");
+            chromeExtensionPath = resolve("dist");
             console.debug("### Path to chrome extension:" + chromeExtensionPath);
 
             if (!existsSync(chromeExtensionPath)) {
