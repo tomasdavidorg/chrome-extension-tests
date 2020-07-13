@@ -2,7 +2,6 @@ import { Browser, Builder, Capabilities, WebDriver } from "selenium-webdriver";
 import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
 import { existsSync, mkdirSync } from "fs";
 import ErrorProcessor from "./ErrorProcessor";
-import { join } from "path";
 
 export default class Driver {
 
@@ -10,7 +9,7 @@ export default class Driver {
         // get path to unzipped extension
         let chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
-            chromeExtensionPath = join(__dirname, "..", "..", "..", "..", "chrome-extension-pack-kogito-kie-editors", "dist");
+            chromeExtensionPath = "dist";
 
             if (!existsSync(chromeExtensionPath)) {
                 throw new Error("Please set UNZIPPED_CHROME_EXTENSION_PATH variable to unziped Chrome extension directory." +
