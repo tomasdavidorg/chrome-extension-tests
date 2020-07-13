@@ -22,11 +22,11 @@ export default class GitHubPrPage extends EditorPage {
     }
 
     public async isSourceOpened(): Promise<boolean> {
-        return await this.tools.by(GitHubPrPage.RAW_CONTENT_LOCATOR).wait(2000).isVisible();
+        return await this.tools.by(GitHubPrPage.RAW_CONTENT_LOCATOR).wait(5000).isVisible();
     }
 
     public async isDiagramOpened(): Promise<boolean> {
-        return await this.tools.by(EditorPage.FRAME_LOCATOR).wait(2000).isPresent();
+        return await this.tools.by(EditorPage.FRAME_LOCATOR).wait(5000).isPresent();
     }
 
     public async seeAsDiagram(): Promise<void> {
