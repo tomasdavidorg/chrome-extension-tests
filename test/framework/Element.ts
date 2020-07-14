@@ -1,5 +1,4 @@
 import { By, WebElement } from "selenium-webdriver";
-import ElementWaitAction from "./ElementWaitAction";
 import ErrorProcessor from "../utils/tools/ErrorProcessor";
 
 export default class Element {
@@ -8,10 +7,6 @@ export default class Element {
 
     constructor(webElement: WebElement) {
         this.webElement = webElement;
-    }
-
-    public wait(timeout?: number): ElementWaitAction {
-        return new ElementWaitAction(this, timeout);
     }
 
     public async dragAndDrop(x: number, y: number): Promise<void> {
@@ -46,6 +41,7 @@ export default class Element {
         );
     }
 
+    // do not use, it might break tests, regular click sometimes does not work then 
     public async clickJs(): Promise<void> {
         await ErrorProcessor.run(
             async () => {

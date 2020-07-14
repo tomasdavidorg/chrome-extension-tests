@@ -12,7 +12,8 @@ beforeEach(async () => {
     tools = await Tools.init(TEST_NAME);
 });
 
-test(TEST_NAME, async () => {
+test.skip(TEST_NAME, async () => {
+    // TODO create PR in kiegroup
     const PR_WEB_PAGE = "https://github.com/tomasdavidorg/chrome-extension-pr-test/pull/3/files";
 
     // open PR and check that source is opened

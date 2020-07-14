@@ -9,9 +9,11 @@ export default class DmnEditor extends Editor {
 
     private static readonly NAV_BAR_LOCATOR: By = By.className("kie-palette");
     private static readonly LOADING_POPUP_LOCATOR: By = By.className("pf-l-bullseye");
+    private static readonly PALETTE_LOCATOR: By = By.className("kie-palette");
+
 
     public async getDmnPalette(): Promise<DmnPalette> {
-        const palette: Element = await this.getPalette();
+        const palette: Element = await this.tools.by(DmnEditor.PALETTE_LOCATOR).getElement();
         return this.tools.createPageFragment(DmnPalette, palette);
     }
 

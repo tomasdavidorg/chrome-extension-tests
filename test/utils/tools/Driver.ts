@@ -4,7 +4,6 @@ import { existsSync, mkdirSync } from "fs";
 import ErrorProcessor from "./ErrorProcessor";
 import { resolve } from "path";
 
-
 export default class Driver {
 
     public static async init(): Promise<WebDriver> {
@@ -12,7 +11,6 @@ export default class Driver {
         let chromeExtensionPath = process.env.UNZIPPED_CHROME_EXTENSION_PATH;
         if (!chromeExtensionPath) {
             chromeExtensionPath = resolve("dist");
-            console.debug("### Path to chrome extension:" + chromeExtensionPath);
 
             if (!existsSync(chromeExtensionPath)) {
                 throw new Error("Please set UNZIPPED_CHROME_EXTENSION_PATH variable to unziped Chrome extension directory." +

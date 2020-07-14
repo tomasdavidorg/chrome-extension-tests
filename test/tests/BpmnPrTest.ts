@@ -12,7 +12,8 @@ beforeEach(async () => {
     tools = await Tools.init(TEST_NAME);
 });
 
-test(TEST_NAME, async () => {
+test.skip(TEST_NAME, async () => {
+    // TODO create PR in kiegroup
     const PR_WEB_PAGE = "https://github.com/tomasdavidorg/chrome-extension-pr-test/pull/2/files";
 
     // open PR and check that source is opened
@@ -26,7 +27,6 @@ test(TEST_NAME, async () => {
     expect(await gitHubPrPage.isDiagramOpened()).toBe(true);
 
     // check editor with changes
-    console.debug("## Changes start");
     const changesEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
     await gitHubPrPage.scrollToPrHeader();
     await changesEditor.enter();
@@ -34,10 +34,8 @@ test(TEST_NAME, async () => {
     const exlorer: Explorer = await sideBar.openExplorer();
     expect((await exlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End", "Intermediate Timer"].sort());
     await changesEditor.leave();
-    console.debug("## Changes end");
 
     // check editor with original
-    console.debug("## Original start");
     await gitHubPrPage.original();
     const originalEditor: BpmnEditor = await gitHubPrPage.getBpmnEditor();
     await gitHubPrPage.scrollToPrHeader();
@@ -46,7 +44,6 @@ test(TEST_NAME, async () => {
     const originalExlorer: Explorer = await originalSideBar.openExplorer();
     expect((await originalExlorer.getNodeNames()).sort()).toEqual(["Start", "Task", "End"].sort());
     await originalEditor.leave();
-    console.debug("## Original End");
 
     // close diagram and check that source is opened 
     await gitHubPrPage.closeDiagram();
