@@ -2,8 +2,8 @@ import BpmnPalette from "./BpmnPalette";
 import { By } from "selenium-webdriver";
 import Editor from "../Editor";
 import Element from "../../Element";
-import SideBar from "../SideBar";
 import Locator from "../../Locator";
+import SideBar from "../SideBar";
 
 export default class BpmnEditor extends Editor {
 
