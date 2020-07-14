@@ -7,20 +7,9 @@ import SideBar from "../SideBar";
 
 export default class BpmnEditor extends Editor {
 
-    private static readonly EXPLORE_ICON_LOCATOR: By = By.className("fa-eye");
-    private static readonly LOADING_POPUP_LOCATOR: By = By.className("pf-l-bullseye");
     private static readonly CANVAS_LOCATOR: By = By.className("canvas-panel");
     private static readonly PALETTE_LOCATOR: By = By.className("kie-palette");
     private static readonly SIDE_BAR_LOCATOR: By = By.className("qe-docks-bar-E");
-
-    public async waitUntilLoaded(): Promise<void> {
-        await this.enter();
-        if (await this.tools.by(BpmnEditor.LOADING_POPUP_LOCATOR).wait(5000).isPresent()) {
-            await this.tools.by(BpmnEditor.LOADING_POPUP_LOCATOR).wait(15000).untilAbsent();
-        }
-        await this.tools.by(BpmnEditor.EXPLORE_ICON_LOCATOR).wait(5000).untilPresent();
-        await this.leave();
-    }
 
     public async dragAndDropStartEventToCanvas(): Promise<void> {
         const bpmnPalette: BpmnPalette = await this.getBpmnPalette();
