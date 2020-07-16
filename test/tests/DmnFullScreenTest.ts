@@ -38,7 +38,7 @@ test(TEST_NAME, async () => {
     expect(await fullScreenPage.getExitFullscreenUrl()).toBe(dmnUrl + "#");
 
     // pushing the exit button causes that other buttons does not work on Mac
-    if (platform() === "darwin") {
+    if (platform() !== "darwin") {
         await fullScreenPage.scrollToTop();
         dmnPage = await fullScreenPage.exitFullscreen();
         expect(await dmnPage.isEditorVisible()).toBe(true);
