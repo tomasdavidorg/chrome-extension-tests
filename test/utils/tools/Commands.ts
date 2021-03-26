@@ -19,14 +19,17 @@ export default class Commands {
 
   public async loadEditor(): Promise<void> {
     const byLoadingDialogLocator = By.className("pf-l-bullseye");
-    await this.tools
-      .find(byLoadingDialogLocator)
-      .wait(15000)
-      .untilPresent();
-    await this.tools
-      .find(byLoadingDialogLocator)
-      .wait(60000)
-      .untilAbsent();
+    if (
+      this.tools
+        .find(byLoadingDialogLocator)
+        .wait(5000)
+        .isPresent()
+    ) {
+      await this.tools
+        .find(byLoadingDialogLocator)
+        .wait(30000)
+        .untilAbsent();
+    }
   }
 
   public async checkSourceVisible(isSourceVisible: boolean): Promise<void> {
