@@ -70,6 +70,7 @@ test(TEST_NAME, async () => {
   const explorerDiagramLocator = await tools.find(
     By.css("[data-ouia-component-id='docks-item-ProjectDiagramExplorerScreen']")
   );
+  await explorerDiagramLocator.wait(2000).untilVisible();
   const explorerDiagramButton = await explorerDiagramLocator.getElement();
   await explorerDiagramButton.click();
 
