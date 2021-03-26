@@ -53,7 +53,6 @@ test(TEST_NAME, async () => {
   // scroll to pr header
   const header = await tools.find(By.className("gh-header-meta")).getElement();
   await header.scroll();
-  await iframe.enterFrame();
 
   // click original button
   const originalButton = await tools.find(By.xpath("//button[text()='Original']")).getElement();
