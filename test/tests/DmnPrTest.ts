@@ -111,8 +111,11 @@ test(TEST_NAME, async () => {
     "Function"
   ]);
 
-  // click close diagram button
+  // scroll to pr header
   await tools.window().leaveFrame();
+  await header.scroll();
+
+  // click close diagram button
   const closeDiagramButton = await tools.find(By.xpath("//button[text()='Close diagram']")).getElement();
   await closeDiagramButton.click();
 
