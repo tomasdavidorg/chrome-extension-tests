@@ -22,12 +22,12 @@ export default class Commands {
     if (
       this.tools
         .find(byLoadingDialogLocator)
-        .wait(5000)
+        .wait(15000)
         .isPresent()
     ) {
       await this.tools
         .find(byLoadingDialogLocator)
-        .wait(30000)
+        .wait(60000)
         .untilAbsent();
     }
     await this.tools.find(By.css("[data-title='Properties']")).wait(5000).untilPresent();
