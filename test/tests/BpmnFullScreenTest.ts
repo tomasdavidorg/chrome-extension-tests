@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { By, Key } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import Tools from "../utils/Tools";
 
-const TEST_NAME = "DmnFullScreenTest";
+const TEST_NAME = "BpmnFullScreenTest";
 
 let tools: Tools;
 
@@ -30,14 +30,28 @@ afterEach(async () => {
 });
 
 test(TEST_NAME, async () => {
-  // open sample dmn
+  // open sample bpmn
   await tools.open(
-    "https://github.com/kiegroup/kogito-tooling/blob/master/packages/chrome-extension-pack-kogito-kie-editors/it-tests/samples/test.dmn"
+    "https://github.com/kiegroup/kogito-tooling/tree/master/packages/chrome-extension-pack-kogito-kie-editors/it-tests/samples/test.bpmn"
   );
 
   // click full screen button
   const fullScreenButton = await tools.find(By.css("[data-testid='go-fullscreen-button']")).getElement();
   await fullScreenButton.click();
+
+  // check full screen editor is visible
+  expect(
+    await tools
+      .find(By.css(".kogito-iframe.not-fullscreen > #kogito-iframe"))
+      .wait(2000)
+      .isPresent()
+  ).toEqual(false);
+  expect(
+    await tools
+      .find(By.css(".kogito-iframe.fullscreen > #kogito-iframe"))
+      .wait(2000)
+      .isVisible()
+  ).toEqual(true);
 
   // wait and get kogito iframe
   await tools.command().getEditor();
@@ -45,25 +59,25 @@ test(TEST_NAME, async () => {
   // wait util loading dialog disappears
   await tools.command().loadEditor();
 
-  // test basic dmn editor functions
-  await tools.command().testSampleDmnInEditor();
+  // test basic bpmn editor functions
+  await tools.command().testSampleBpmnInEditor();
 
   // exit full screen
   await tools.window().leaveFrame();
   const exitButton = await tools.find(By.css("[data-testid='exit-fullscreen-button']")).getElement();
   await exitButton.click();
 
-  // check full screen is closed
+  // check normal editor is visible
   expect(
     await tools
       .find(By.css(".kogito-iframe.not-fullscreen > #kogito-iframe"))
-      .wait(1000)
+      .wait(2000)
       .isVisible()
   ).toEqual(true);
   expect(
     await tools
       .find(By.css(".kogito-iframe.fullscreen > #kogito-iframe"))
-      .wait(1000)
+      .wait(2000)
       .isPresent()
   ).toEqual(false);
 });

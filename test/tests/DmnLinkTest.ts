@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { By, Key } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import Tools from "../utils/Tools";
 
-const TEST_NAME = "DmnFullScreenTest";
+const TEST_NAME = "DmnLinkTest";
 
 let tools: Tools;
 
@@ -30,40 +30,34 @@ afterEach(async () => {
 });
 
 test(TEST_NAME, async () => {
-  // open sample dmn
+  // open github samples list
   await tools.open(
-    "https://github.com/kiegroup/kogito-tooling/blob/master/packages/chrome-extension-pack-kogito-kie-editors/it-tests/samples/test.dmn"
+    "https://github.com/kiegroup/kogito-tooling/tree/master/packages/chrome-extension-pack-kogito-kie-editors/it-tests/samples"
   );
 
-  // click full screen button
-  const fullScreenButton = await tools.find(By.css("[data-testid='go-fullscreen-button']")).getElement();
-  await fullScreenButton.click();
+  // open dmn sample by link to online editor
+  const dmnSampleLink = await tools.find(By.css("a[title='test.dmn'] + a")).getElement();
+  expect(await dmnSampleLink.getAttribute("title")).toEqual("Open in Online Editor");
+  await dmnSampleLink.click();
+  await tools.window().switchToSecondWindow();
 
   // wait and get kogito iframe
-  await tools.command().getEditor();
+  const iframe = await tools.command().getEditor();
 
   // wait util loading dialog disappears
   await tools.command().loadEditor();
+  await tools.window().leaveFrame();
+
+  // close tour
+  const closeTourButton = await tools.find(By.xpath("//button[@data-kgt-close]")).getElement();
+  await closeTourButton.click();
+  await iframe.enterFrame();
 
   // test basic dmn editor functions
   await tools.command().testSampleDmnInEditor();
 
-  // exit full screen
+  // check dmn name on the top
   await tools.window().leaveFrame();
-  const exitButton = await tools.find(By.css("[data-testid='exit-fullscreen-button']")).getElement();
-  await exitButton.click();
-
-  // check full screen is closed
-  expect(
-    await tools
-      .find(By.css(".kogito-iframe.not-fullscreen > #kogito-iframe"))
-      .wait(1000)
-      .isVisible()
-  ).toEqual(true);
-  expect(
-    await tools
-      .find(By.css(".kogito-iframe.fullscreen > #kogito-iframe"))
-      .wait(1000)
-      .isPresent()
-  ).toEqual(false);
+  const titleName = await tools.find(By.css("[data-testid='toolbar-title'] > input")).getElement();
+  expect(await titleName.getAttribute("value")).toEqual("test");
 });
