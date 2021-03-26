@@ -30,6 +30,7 @@ export default class Commands {
         .wait(30000)
         .untilAbsent();
     }
+    await this.tools.find(By.css("[data-title='Properties']")).wait(5000).untilPresent();
   }
 
   public async checkSourceVisible(isSourceVisible: boolean): Promise<void> {
