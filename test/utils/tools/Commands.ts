@@ -1,6 +1,6 @@
 import { By } from "selenium-webdriver";
-import Tools from "../Tools";
 import Element from "./Element";
+import Tools from "../Tools";
 
 export default class Commands {
   constructor(private readonly tools: Tools) {}

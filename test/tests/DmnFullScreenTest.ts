@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { By, Key } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import Tools from "../utils/Tools";
 
 const TEST_NAME = "DmnFullScreenTest";
