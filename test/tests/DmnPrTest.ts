@@ -44,34 +44,36 @@ test(TEST_NAME, async () => {
   await tools.command().checkSourceVisible(false);
 
   // wait and get kogito iframe
-  await tools.command().getEditor();
+  const iframe = await tools.command().getEditor();
 
   // wait util loading dialog disappears
   await tools.command().loadEditor();
   await tools.window().leaveFrame();
+
+  // scroll to pr header
+  const header = await tools.find(By.className("gh-header-meta")).getElement();
+  await header.scroll();
+  await iframe.enterFrame();
 
   // click original button
   const originalButton = await tools.find(By.xpath("//button[text()='Original']")).getElement();
   await originalButton.click();
 
   // wait and get kogito iframe
-  const iframe = await tools.command().getEditor();
+  await tools.command().getEditor();
 
   // wait util loading dialog disappears
   await tools.command().loadEditor();
+  await tools.window().leaveFrame();
 
   // scroll to pr header
-  await tools.window().leaveFrame();
-  const header = await tools.find(By.className("gh-header-show")).getElement();
   await header.scroll();
   await iframe.enterFrame();
 
   // open decision navigator
-  const decisionNavigatorLocator = await tools.find(
-    By.css("[data-ouia-component-id='docks-item-org.kie.dmn.decision.navigator']")
-  );
-  await decisionNavigatorLocator.wait(2000).untilVisible();
-  const decisionNavigatorButton = await decisionNavigatorLocator.getElement();
+  const decisionNavigatorButton = await tools
+    .find(By.css("[data-ouia-component-id='docks-item-org.kie.dmn.decision.navigator']"))
+    .getElement();
   await decisionNavigatorButton.click();
 
   // check dmn nodes
