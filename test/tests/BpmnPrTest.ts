@@ -44,33 +44,35 @@ test(TEST_NAME, async () => {
   await tools.command().checkSourceVisible(false);
 
   // wait and get kogito iframe
-  await tools.command().getEditor();
+  const iframe = await tools.command().getEditor();
 
   // wait util loading dialog disappears
   await tools.command().loadEditor();
   await tools.window().leaveFrame();
+
+  // scroll to pr header
+  const header = await tools.find(By.className("gh-header-meta")).getElement();
+  await header.scroll();
 
   // click original button
   const originalButton = await tools.find(By.xpath("//button[text()='Original']")).getElement();
   await originalButton.click();
 
   // wait and get kogito iframe
-  const iframe = await tools.command().getEditor();
+  await tools.command().getEditor();
 
   // wait util loading dialog disappears
   await tools.command().loadEditor();
 
   // scroll to pr header
   await tools.window().leaveFrame();
-  const header = await tools.find(By.className("gh-header-show")).getElement();
   await header.scroll();
   await iframe.enterFrame();
 
   // open explorer panel
-  const explorerDiagramLocator = await tools.find(
-    By.css("[data-ouia-component-id='docks-item-ProjectDiagramExplorerScreen']")
-  );
-  const explorerDiagramButton = await explorerDiagramLocator.getElement();
+  const explorerDiagramButton = await tools
+    .find(By.css("[data-ouia-component-id='docks-item-ProjectDiagramExplorerScreen']"))
+    .getElement();
   await explorerDiagramButton.click();
 
   // check node names
@@ -103,8 +105,11 @@ test(TEST_NAME, async () => {
     "Intermediate Timer"
   ]);
 
-  // click close diagram button
+  // scroll to pr header
   await tools.window().leaveFrame();
+  await header.scroll();
+
+  // click close diagram button
   const closeDiagramButton = await tools.find(By.xpath("//button[text()='Close diagram']")).getElement();
   await closeDiagramButton.click();
 
