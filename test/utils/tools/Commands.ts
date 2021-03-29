@@ -19,7 +19,7 @@ export default class Commands {
 
   public async loadEditor(): Promise<void> {
     const byLoadingDialogLocator = By.className("pf-l-bullseye");
-    this.tools
+    await this.tools
       .find(byLoadingDialogLocator)
       .wait(15000)
       .untilPresent();
